@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g3Light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8F7F4" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="380" fill="url(#g3Light)" stroke="#E7E1D8" stroke-width="1" />
+  <circle cx="480" cy="300" r="120" fill="#EFEAE2" />
+  <!-- Search Mock Visual -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="480" height="260" rx="14" stroke="#E7E1D8" fill="#FFFFFF" />
+    <!-- Search Bar Mock -->
+    <rect x="40" y="35" width="400" height="40" rx="20" fill="#F8F7F4" stroke="#E7E1D8" stroke-width="1.5" />
+    <circle cx="68" cy="55" r="6" fill="none" stroke="#C47B45" stroke-width="2" />
+    <line x1="72" y1="59" x2="79" y2="66" stroke="#C47B45" stroke-width="2" />
+    <text x="96" y="59" fill="#252525" font-family="Inter, sans-serif" font-size="13" font-weight="500">digital marketing consultant strategy</text>
+    <!-- Keyword Clusters -->
+    <circle cx="120" cy="160" r="36" fill="#F8F7F4" stroke="#C47B45" stroke-width="1.5" />
+    <text x="120" y="164" fill="#252525" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Authority</text>
+    
+    <circle cx="240" cy="180" r="46" fill="#F4EAE1" stroke="#C47B45" stroke-width="2" />
+    <text x="240" y="184" fill="#C47B45" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Intent Core</text>
+
+    <circle cx="360" cy="150" r="36" fill="#F8F7F4" stroke="#D9A77C" stroke-width="1.5" />
+    <text x="360" y="154" fill="#252525" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Revenue</text>
+
+    <!-- Connectors -->
+    <line x1="156" y1="165" x2="194" y2="175" stroke="#DCD5C9" stroke-dasharray="4,4" />
+    <line x1="286" y1="175" x2="324" y2="155" stroke="#DCD5C9" stroke-dasharray="4,4" />
+  </g>
+</svg>
