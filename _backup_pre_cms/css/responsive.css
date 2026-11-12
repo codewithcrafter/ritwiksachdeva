@@ -1,0 +1,250 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN & ADAPTIVE LAYOUTS
+   Multi-device compatibility: Desktop, Laptop, iPad/Tablet, Mobile (iOS/Android)
+   ========================================================================== */
+
+/* --- Medium Laptops & Desktops (max-width: 1200px) --- */
+@media (max-width: 1200px) {
+  :root {
+    --container-max: 1040px;
+    --section-spacing: 100px;
+  }
+
+  .hero-grid {
+    gap: 40px;
+  }
+
+  .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .methodology-timeline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .methodology-timeline::before {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+/* --- Tablets & Small Laptops (max-width: 992px) --- */
+@media (max-width: 992px) {
+  :root {
+    --header-height: 76px;
+    --section-spacing: 84px;
+  }
+
+  /* Navigation adjustments */
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: left;
+  }
+
+  .hero-visual-card {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-visual-img {
+    height: 420px;
+  }
+
+  .hero-card-floating-1 {
+    left: -10px;
+  }
+
+  .hero-card-floating-2 {
+    right: -10px;
+  }
+
+  /* About Preview */
+  .about-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .about-preview-image-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .about-preview-img {
+    height: 440px;
+  }
+
+  /* Services Preview */
+  .services-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Metrics */
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* Insights */
+  .insights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contact layout */
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+/* --- Mobile Landscape & Large Phones (max-width: 768px) --- */
+@media (max-width: 768px) {
+  :root {
+    --section-spacing: 70px;
+  }
+
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Typography scaling for mobile */
+  h1 {
+    font-size: 2.1rem;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    line-height: 1.22;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-kpis {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .hero-kpi-val {
+    font-size: 1.55rem;
+  }
+
+  .expertise-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .methodology-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .cta-box {
+    padding: 44px 24px;
+  }
+
+  .about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-slide {
+    padding: 36px 24px;
+  }
+
+  .testimonial-quote-text {
+    font-size: 1.15rem;
+  }
+
+  .testimonial-author-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .about-badge-experience {
+    right: 10px;
+    bottom: -15px;
+    padding: 12px 18px;
+  }
+
+  .about-badge-exp-num {
+    font-size: 1.6rem;
+  }
+}
+
+/* --- Small Phones (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  .service-card-extended {
+    padding: 28px 20px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .hero-card-floating-1,
+  .hero-card-floating-2 {
+    display: none; /* Hide floating chips on ultra-narrow screens to prevent overlap */
+  }
+
+  .hero-visual-img {
+    height: 340px;
+  }
+}
+

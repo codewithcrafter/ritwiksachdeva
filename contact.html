@@ -96,7 +96,76 @@
         <ul class="nav-links">
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+          <li class="nav-item nav-item-has-dropdown">
+            <a href="services.html" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+              Services
+              <svg class="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <div class="nav-dropdown-menu" role="menu">
+              <div class="nav-dropdown-header">
+                <span class="dropdown-header-title">Consulting Practices</span>
+                <span class="dropdown-header-tag">7 Practices</span>
+              </div>
+              <div class="nav-dropdown-list">
+                <a href="service-fractional-cmo.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">01</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">Fractional CMO Advisory</div>
+                    <div class="dropdown-item-desc">Strategic Leadership &amp; Commercial Roadmaps</div>
+                  </div>
+                </a>
+                <a href="service-brand-strategy.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">02</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">Brand Strategy &amp; Positioning</div>
+                    <div class="dropdown-item-desc">Category Leadership &amp; Value Narrative</div>
+                  </div>
+                </a>
+                <a href="service-performance-marketing.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">03</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">Performance Marketing</div>
+                    <div class="dropdown-item-desc">Paid Acquisition (Google, Meta &amp; LinkedIn)</div>
+                  </div>
+                </a>
+                <a href="service-seo-consulting.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">04</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">SEO &amp; Organic Authority</div>
+                    <div class="dropdown-item-desc">Technical Architecture &amp; Compounding Moat</div>
+                  </div>
+                </a>
+                <a href="service-b2b-lead-generation.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">05</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">B2B Lead Generation &amp; CRO</div>
+                    <div class="dropdown-item-desc">Funnel Architecture &amp; Conversion Optimization</div>
+                  </div>
+                </a>
+                <a href="service-content-marketing.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">06</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">Editorial Content Marketing</div>
+                    <div class="dropdown-item-desc">Thought Leadership &amp; Owned Audience Assets</div>
+                  </div>
+                </a>
+                <a href="service-marketing-analytics.html" class="nav-dropdown-item" role="menuitem">
+                  <span class="dropdown-item-num">07</span>
+                  <div class="dropdown-item-body">
+                    <div class="dropdown-item-title">Analytics &amp; Attribution</div>
+                    <div class="dropdown-item-desc">GA4, Looker Studio &amp; Multi-Touch Modeling</div>
+                  </div>
+                </a>
+              </div>
+              <div class="nav-dropdown-footer">
+                <a href="services.html" class="dropdown-view-all">
+                  <span>View All Services &amp; Engagement Models</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
         </ul>
         <div class="nav-actions">
@@ -122,7 +191,24 @@
     <div class="mobile-links">
       <a href="index.html" class="mobile-link">Home</a>
       <a href="about.html" class="mobile-link">About</a>
-      <a href="services.html" class="mobile-link">Services</a>
+      <div class="mobile-nav-item-dropdown">
+        <div class="mobile-dropdown-header-row">
+          <a href="services.html" class="mobile-link">Services</a>
+          <button class="mobile-submenu-btn" aria-label="Toggle Services submenu" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+        <div class="mobile-submenu">
+          <a href="service-fractional-cmo.html" class="mobile-sublink">01. Fractional CMO Advisory</a>
+          <a href="service-brand-strategy.html" class="mobile-sublink">02. Brand Strategy &amp; Positioning</a>
+          <a href="service-performance-marketing.html" class="mobile-sublink">03. Performance Marketing</a>
+          <a href="service-seo-consulting.html" class="mobile-sublink">04. SEO &amp; Organic Authority</a>
+          <a href="service-b2b-lead-generation.html" class="mobile-sublink">05. B2B Lead Generation &amp; CRO</a>
+          <a href="service-content-marketing.html" class="mobile-sublink">06. Editorial Content Marketing</a>
+          <a href="service-marketing-analytics.html" class="mobile-sublink">07. Analytics &amp; Attribution</a>
+        </div>
+      </div>
+      <a href="blog.html" class="mobile-link">Blog</a>
       <a href="contact.html" class="mobile-link active">Contact</a>
     </div>
     <div class="mobile-drawer-footer">
@@ -473,6 +559,7 @@
             <li><a href="index.html" class="footer-link">Home</a></li>
             <li><a href="about.html" class="footer-link">About Consultant</a></li>
             <li><a href="services.html" class="footer-link">Digital Marketing Services</a></li>
+            <li><a href="blog.html" class="footer-link">Insights &amp; Blog</a></li>
             <li><a href="contact.html" class="footer-link">Contact &amp; Consultation</a></li>
           </ul>
         </div>
@@ -480,10 +567,13 @@
         <div>
           <h4 class="footer-heading">Core Practices</h4>
           <ul class="footer-links">
-            <li><a href="services.html#fractional-cmo" class="footer-link">Digital Marketing Consulting</a></li>
-            <li><a href="services.html#performance-marketing" class="footer-link">Performance Marketing</a></li>
-            <li><a href="services.html#seo" class="footer-link">SEO Consulting &amp; Authority</a></li>
-            <li><a href="services.html#lead-generation" class="footer-link">Lead Generation Services</a></li>
+            <li><a href="service-fractional-cmo.html" class="footer-link">Fractional CMO Advisory</a></li>
+            <li><a href="service-brand-strategy.html" class="footer-link">Brand Strategy &amp; Positioning</a></li>
+            <li><a href="service-performance-marketing.html" class="footer-link">Performance Marketing</a></li>
+            <li><a href="service-seo-consulting.html" class="footer-link">SEO Architecture</a></li>
+            <li><a href="service-b2b-lead-generation.html" class="footer-link">B2B Lead Generation &amp; CRO</a></li>
+            <li><a href="service-content-marketing.html" class="footer-link">Editorial Content Marketing</a></li>
+            <li><a href="service-marketing-analytics.html" class="footer-link">Analytics &amp; Attribution</a></li>
           </ul>
         </div>
 

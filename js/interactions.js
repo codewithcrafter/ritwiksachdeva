@@ -355,32 +355,72 @@ function initContactForm() {
       `*Message:* ${formData.message}`
     );
 
-    // Update modal action links
-    const mailtoBtn = document.getElementById('modal-mailto-btn');
-    const whatsappBtn = document.getElementById('modal-whatsapp-btn');
-    const summaryClientName = document.getElementById('modal-client-name');
-
-    if (summaryClientName) {
-      summaryClientName.textContent = formData.name;
+    // Disable submit button during dispatch
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Submitting Strategic Inquiry...';
     }
 
-    if (mailtoBtn) {
-      mailtoBtn.href = `mailto:consult@ritwiksachdeva.com?subject=${subject}&body=${emailBody}`;
-    }
+    // Submit asynchronously to CRM backend
+    fetch('api/contact.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone === 'Not provided' ? '' : formData.phone,
+        company: formData.company === 'Not provided' ? '' : formData.company,
+        service: formData.service,
+        budget: formData.budget === 'To be discussed' ? '' : formData.budget,
+        message: formData.message
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      // In either case, show the modal with mailto & whatsapp fallback
+      showConfirmationModal();
+    })
+    .catch(err => {
+      console.warn('CRM sync notice (fallback to client modal):', err);
+      showConfirmationModal();
+    })
+    .finally(() => {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+      contactForm.reset();
+    });
 
-    if (whatsappBtn) {
-      // Editable WhatsApp placeholder number
-      whatsappBtn.href = `https://wa.me/919876543210?text=${waText}`;
-    }
+    function showConfirmationModal() {
+      // Update modal action links
+      const mailtoBtn = document.getElementById('modal-mailto-btn');
+      const whatsappBtn = document.getElementById('modal-whatsapp-btn');
+      const summaryClientName = document.getElementById('modal-client-name');
 
-    // Show confirmation modal
-    if (modalOverlay) {
-      modalOverlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
+      if (summaryClientName) {
+        summaryClientName.textContent = formData.name;
+      }
 
-    // Reset form
-    contactForm.reset();
+      if (mailtoBtn) {
+        mailtoBtn.href = `mailto:consult@ritwiksachdeva.com?subject=${subject}&body=${emailBody}`;
+      }
+
+      if (whatsappBtn) {
+        // Editable WhatsApp placeholder number
+        whatsappBtn.href = `https://wa.me/919876543210?text=${waText}`;
+      }
+
+      // Show confirmation modal
+      if (modalOverlay) {
+        modalOverlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
   });
 
   // Modal close handlers
