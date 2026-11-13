@@ -19,7 +19,15 @@ RewriteBase /
 # Protect database directory
 RewriteRule ^database/ - [F,L]
 
-# 2. Clean URLs for Blog CMS
+# 2. 301 Redirects for Legacy Service URLs
+RewriteRule ^service-fractional-cmo\.html$ service-best-marketing-consultant.html [R=301,L]
+RewriteRule ^service-brand-strategy\.html$ service-graphic-designer.html [R=301,L]
+RewriteRule ^service-seo-consulting\.html$ service-seo-expert.html [R=301,L]
+RewriteRule ^service-b2b-lead-generation\.html$ service-performance-marketing.html [R=301,L]
+RewriteRule ^service-content-marketing\.html$ service-smo-services.html [R=301,L]
+RewriteRule ^service-marketing-analytics\.html$ service-performance-marketing.html [R=301,L]
+
+# 3. Clean URLs for Blog CMS
 # /blog -> blog.php
 RewriteRule ^blog/?$ blog.php [L,QSA]
 
@@ -28,11 +36,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog-detail.php?slug=$1 [L,QSA]
 
-# 3. Clean URLs for Admin Portal
+# 4. Clean URLs for Admin Portal
 # /admin -> admin/index.php
 RewriteRule ^admin/?$ admin/index.php [L,QSA]
 
-# 4. Security Headers (where supported)
+# 5. Security Headers (where supported)
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
@@ -40,6 +48,5 @@ RewriteRule ^admin/?$ admin/index.php [L,QSA]
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# 5. UTF-8 Encoding
+# 6. UTF-8 Encoding
 AddDefaultCharset UTF-8
-
