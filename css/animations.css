@@ -1,98 +1,151 @@
 /* ==========================================================================
-   ANIMATIONS & MOTION SYSTEM
-   Crafted with high-performance CSS GPU-accelerated transforms
-   Includes prefers-reduced-motion accessibility support
+   CREATIVE GROWTH LAB — MOTION DESIGN ENGINE
+   Awwwards / FWA Inspired Fluid Motion, Marquee, Floating Cards, SVG Dynamics
    ========================================================================== */
 
-/* --- Keyframe Animations --- */
+/* Ambient Graphic Breathing */
+@keyframes studio-ambient-breathe {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.08;
+  }
+  50% {
+    transform: scale(1.15) rotate(4deg);
+    opacity: 0.15;
+  }
+}
 
-/* Gentle Floating Effect for Floating Badges & Cards */
-@keyframes float-gentle {
+.ambient-glow-1 {
+  animation: studio-ambient-breathe 16s ease-in-out infinite alternate;
+}
+
+.ambient-glow-2 {
+  animation: studio-ambient-breathe 20s ease-in-out infinite alternate-reverse;
+}
+
+/* Kinetic Gradient Typography */
+@keyframes studio-kinetic-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(90deg, #244BFF, #171717, #FF765C, #244BFF);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: studio-kinetic-shimmer 8s ease infinite;
+  display: inline-block;
+}
+
+/* Floating Analytics Dashboard Widgets */
+@keyframes studio-float-1 {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-12px) rotate(0.8deg);
+    transform: translateY(-10px) rotate(0.8deg);
   }
 }
 
-/* Pulse Glow for Status Dot */
-@keyframes pulse-dot {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(196, 123, 69, 0.7);
+@keyframes studio-float-2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
   }
-  70% {
-    transform: scale(1.15);
-    box-shadow: 0 0 0 8px rgba(196, 123, 69, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(196, 123, 69, 0);
+  50% {
+    transform: translateY(-8px) rotate(-1deg);
   }
 }
 
-/* Infinite Marquee Ticker */
-@keyframes scroll-marquee {
+.floating-widget-1 {
+  animation: studio-float-1 6s ease-in-out infinite;
+}
+
+.floating-widget-2 {
+  animation: studio-float-2 7.5s ease-in-out infinite 1s;
+}
+
+/* Marquee / Infinite Ticker Ribbon */
+@keyframes marquee-scroll {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-50%);
   }
 }
 
-/* Subtle Shimmer for High-Priority Buttons & Badges */
-@keyframes shimmer {
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 24s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Growth Chart Sparkline SVG Draw */
+@keyframes sparkline-draw {
   0% {
-    background-position: -200% 0;
+    stroke-dashoffset: 240;
   }
   100% {
-    background-position: 200% 0;
+    stroke-dashoffset: 0;
   }
 }
 
-/* Ambient Radial Pulse */
-@keyframes ambient-pulse {
+.animated-sparkline {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: sparkline-draw 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Live Status Pulse Dot */
+@keyframes pulse-live {
   0%, 100% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0.18;
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    transform: scale(1.08) translate(20px, -15px);
-    opacity: 0.26;
+    transform: scale(1.4);
+    opacity: 0.6;
   }
 }
 
-.ambient-glow-1 {
-  animation: ambient-pulse 14s ease-in-out infinite alternate;
+.status-dot-live {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-live 1.8s ease-in-out infinite;
 }
 
-.ambient-glow-2 {
-  animation: ambient-pulse 18s ease-in-out infinite alternate-reverse;
-}
-
-/* --- Scroll Reveal States (Used by IntersectionObserver in JS) --- */
-
-/* Base hidden state for scroll-animated elements */
+/* Scroll-Triggered Reveals */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-/* Visible active state */
 .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Directional reveal modifiers */
 .reveal-from-left {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-36px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-from-left.is-visible {
   opacity: 1;
@@ -101,71 +154,15 @@
 
 .reveal-from-right {
   opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(36px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-from-right.is-visible {
   opacity: 1;
   transform: translateX(0);
 }
 
-.reveal-scale-up {
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal-scale-up.is-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* --- Stagger Delays --- */
-.delay-100 { transition-delay: 100ms; }
-.delay-200 { transition-delay: 200ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-400 { transition-delay: 400ms; }
-.delay-500 { transition-delay: 500ms; }
-.delay-600 { transition-delay: 600ms; }
-
-/* --- Hero Entrance Specifics --- */
-.hero-stagger-1 {
-  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.hero-stagger-2 {
-  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-  opacity: 0;
-}
-.hero-stagger-3 {
-  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-  opacity: 0;
-}
-.hero-stagger-4 {
-  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
-  opacity: 0;
-}
-
-@keyframes hero-fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- Interactive Hover Micro-motions --- */
-.btn, .card, .slider-btn, .social-icon-btn {
-  will-change: transform;
-}
-
-/* Magnetic transition styling */
-.magnetic-target {
-  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* --- Accessibility: prefers-reduced-motion --- */
+/* Respect motion settings */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -173,22 +170,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
-  .reveal-on-scroll,
-  .reveal-from-left,
-  .reveal-from-right,
-  .reveal-scale-up,
-  .hero-stagger-1,
-  .hero-stagger-2,
-  .hero-stagger-3,
-  .hero-stagger-4 {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .marquee-track {
-    animation: none !important;
-    transform: none !important;
-  }
 }
-

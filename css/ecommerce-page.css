@@ -1,0 +1,79 @@
+/* ==========================================================================
+   E-COMMERCE MANAGEMENT PAGE STYLES (Creative Growth Lab)
+   Predominantly White Canvas (#FFFFFF), Cobalt Blue (#244BFF), Acid Lime (#D5FF45)
+   ========================================================================== */
+
+.ecom-page-wrapper {
+  width: 100%;
+  max-width: var(--container-max, 1240px);
+  margin: 0 auto;
+  padding-left: clamp(20px, 3.8vw, 36px);
+  padding-right: clamp(20px, 3.8vw, 36px);
+  box-sizing: border-box;
+}
+
+.rs-ecom-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rs-ecom-hero {
+  width: 100%;
+  padding: calc(var(--header-height, 84px) + 36px) 0 60px;
+  background: transparent;
+  border-bottom: 2px solid var(--border-strong);
+}
+
+.rs-ecom-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.rs-ecom-card {
+  background: #FFFFFF;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: 6px 6px 0px #171717;
+}
+
+.rs-ecom-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+  font-weight: 700;
+  line-height: 1.16;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.rs-ecom-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.72;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.rs-ecom-desc {
+  font-size: 1.04rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.rs-ecom-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.rs-ecom-section {
+  padding: 68px 0;
+  background: transparent;
+  border-bottom: 1px solid var(--border-color);
+}
