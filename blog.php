@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Blog Listing Page - Ritwik Sachdeva
  * Editorial Business & Digital Marketing Insights
@@ -421,7 +421,7 @@ if ($currentCategory !== '') {
           </div>
           <div class="featured-blog-content">
             <div style="display: flex; gap: 8px; align-items: center;">
-              <span class="blog-badge featured-badge">★ Featured Analysis</span>
+              <span class="blog-badge featured-badge">~. Featured Analysis</span>
               <?php if (!empty($featuredBlog['category_name'])): ?>
                 <span class="blog-badge"><?= e($featuredBlog['category_name']) ?></span>
               <?php endif; ?>
@@ -739,4 +739,6 @@ if ($currentCategory !== '') {
   <script src="js/blog-enhancements.js"></script>
 </body>
 </html>
+
+
 

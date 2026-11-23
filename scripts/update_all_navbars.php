@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * UPDATE NAVBAR DROPDOWN, MOBILE SUBMENU, AND FOOTER LINKS IN ALL PAGES
  */
@@ -174,4 +174,5 @@ foreach ($files as $f) {
 }
 
 echo "All navigation and footers updated successfully!\n";
+
 

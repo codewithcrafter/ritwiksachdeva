@@ -1,8 +1,8 @@
-TITLE: E-Commerce Management Services in Delhi | Ritwik Sachdeva
+﻿TITLE: E-Commerce Management Services in Delhi | Ritwik Sachdeva
 DESC: E-commerce management services in Delhi for Amazon, Flipkart &amp; Shopify sellers. Ritwik Sachdeva grows your store. Book a free consultation today!
 
 HEADINGS:
-h1: E-Commerce Management Services in Delhi — Amazon, Flipkart &amp; Shopify | Ritwik Sachdeva
+h1: E-Commerce Management Services in Delhi �?" Amazon, Flipkart &amp; Shopify | Ritwik Sachdeva
 h2: What End-to-End E-Commerce Account Management Includes
 h2: Multi-Channel E-Commerce Management
 h2: Amazon &amp; Flipkart Account Management Services
@@ -44,3 +44,4 @@ Richer product pages built to improve conversion, not just meet minimum listing 
 Setup and management support for registered brands, including the added protection and content tools it unlocks
 
 Accurate, search-optimized listings structured to perform on Amazon&#8217;s A9/A10 algorithm
+

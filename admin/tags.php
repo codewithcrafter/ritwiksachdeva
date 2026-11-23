@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Tags Management
  */
@@ -140,4 +140,5 @@ $tags = $pdo->query("
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

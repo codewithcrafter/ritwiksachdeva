@@ -1,4 +1,4 @@
-/**
+﻿/**
  * PREMIUM DIGITAL MARKETING CONSULTANT PORTFOLIO - MAIN SCRIPT
  * Handles header transitions, mobile navigation drawer, scroll progress bar, active link state,
  * consultation popup with session management, and floating contact actions (WhatsApp & Call).
@@ -24,6 +24,8 @@ const SITE_CONTACT_CONFIG = {
 };
 
 function initAllAppFeatures() {
+  document.querySelectorAll('.mobile-drawer:not(#mobile-drawer)').forEach((drawer) => drawer.remove());
+  document.querySelectorAll('body > a.mobile-link, body > .mobile-actions').forEach((node) => node.remove());
   applySharedContactDetails();
   initNavbar();
   initHeaderTopBar();
@@ -40,6 +42,7 @@ function initAllAppFeatures() {
   initServiceHeroLeadForm();
   initServiceCardDetails();
   initArticleTagsPosition();
+  initArticleConsultationPlacement();
   initFloatingContactActions();
   initConstellationCanvas();
   initGentleTiltAndSpotlight();
@@ -48,6 +51,17 @@ function initAllAppFeatures() {
   initHomeServiceEffects();
   initMagneticButtons();
   initClickRipples();
+}
+
+function initArticleConsultationPlacement() {
+  document.querySelectorAll('.toc-consultation, .toc-sidebar > div').forEach((form) => {
+    if (!form.classList.contains('toc-consultation') && !/Need Custom Implementation/i.test(form.textContent)) return;
+    form.classList.add('toc-consultation');
+    const header = document.querySelector('.article-header > .container');
+    if (!header || form.classList.contains('article-header-consultation')) return;
+    form.classList.add('article-header-consultation');
+    header.appendChild(form);
+  });
 }
 
 function initServiceCardDetails() {
@@ -164,7 +178,8 @@ function initHomeServiceEffects() {
 
 function initServiceHeroLeadForm() {
   const pageName = (window.location.pathname.split('/').pop() || '').toLowerCase();
-  if (!pageName.startsWith('service-')) return;
+  const isCleanServiceRoute = /^\/services\/[a-z0-9-]+\/?$/i.test(window.location.pathname);
+  if (!pageName.startsWith('service-') && !isCleanServiceRoute) return;
   const hero = document.querySelector('.service-detail-header-wrap');
   const legacyHero = document.querySelector('.marketing-hero-wrap');
   if ((!hero && !legacyHero) || document.querySelector('.service-hero-inquiry')) return;
@@ -390,7 +405,7 @@ function initBackToTop() {
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     if (docHeight <= 0) return;
     const progress = Math.min(1, Math.max(0, scrollTop / docHeight));
-    // 2 * PI * 15 ≈ 94.25
+    // 2 * PI * 15 —^ 94.25
     const offset = 94.25 - (progress * 94.25);
     if (ringFill) {
       ringFill.style.strokeDashoffset = `${offset}`;
@@ -699,9 +714,9 @@ function initConsultationPopup() {
 
           <!-- 3. Number — required -->
           <div class="consultation-form-group">
-            <label for="popup-client-phone" class="consultation-form-label">Number <span class="required-mark">*</span></label>
-            <input type="tel" id="popup-client-phone" name="phone" class="consultation-form-input" placeholder="000000" required autocomplete="tel">
-            <div class="consultation-field-error" id="err-popup-phone">Please enter a valid contact phone number (at least 7 digits).</div>
+            <label for="popup-client-phone" class="consultation-form-label">Mobile Number <span class="required-mark">*</span></label>
+            <input type="tel" id="popup-client-phone" name="phone" class="consultation-form-input" placeholder="e.g. +91 9876543210" inputmode="tel" minlength="10" required autocomplete="tel">
+            <div class="consultation-field-error" id="err-popup-phone">Please enter a valid 10-digit mobile number.</div>
           </div>
 
           <!-- 4. Message — optional -->
@@ -720,7 +735,7 @@ function initConsultationPopup() {
           </button>
 
           <div class="consultation-popup-footer-note">
-            🔒 Strictly confidential. Your information is never shared.
+            Y"' Strictly confidential. Your information is never shared.
           </div>
         </form>
 
@@ -909,11 +924,11 @@ function initConsultationPopup() {
 
       // 3. Number validation (required, >= 7 digits)
       const cleanPhone = phoneVal.replace(/[^0-9]/g, '');
-      if (cleanPhone.length < 7) {
+        if (cleanPhone.length < 10) {
         isValid = false;
         if (phoneInput) phoneInput.classList.add('is-invalid');
         if (errPhone) {
-          errPhone.textContent = 'Please enter a valid contact phone number (at least 7 digits).';
+          errPhone.textContent = 'Please enter a valid 10-digit mobile number.';
           errPhone.style.display = 'block';
         }
       }
@@ -1396,3 +1411,5 @@ function initClickRipples() {
     }, 460);
   });
 }
+
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Website & Consulting Settings
  */
@@ -110,4 +110,5 @@ $settingsRaw = $pdo->query("SELECT setting_key, setting_value FROM website_setti
 </div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

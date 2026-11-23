@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $services = [
     'ecommerce' => 'https://ritwiksachdeva.in/e-commerce-management-services-in-delhi/',
     'graphic_design' => 'https://ritwiksachdeva.in/freelance-graphic-designer-in-delhi/',
@@ -70,4 +70,5 @@ foreach ($services as $key => $url) {
 
 file_put_contents('scripts/scraped_services.json', json_encode($data, JSON_PRETTY_PRINT));
 echo "Saved all scraped data to scripts/scraped_services.json\n";
+
 

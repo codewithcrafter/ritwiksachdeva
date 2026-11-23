@@ -1,4 +1,4 @@
-/* Lightweight editorial interactions shared by the listing and static article readers. */
+﻿/* Lightweight editorial interactions shared by the listing and static article readers. */
 document.addEventListener('DOMContentLoaded', () => {
   // Reveal animation on scroll
   document.querySelectorAll('.blog-hero h1, .featured-blog-title, .article-title, .article-prose h2, .article-author-card, .blog-card').forEach((item) => item.classList.add('blog-reveal'));
@@ -82,3 +82,4 @@ document.addEventListener('DOMContentLoaded', () => {
     headings.forEach((heading) => spy.observe(heading));
   }
 });
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_home_body.html');
 
 // Let's inspect the sections
@@ -13,4 +13,5 @@ foreach ($sections as $s) {
     echo "ID: #" . $s->getAttribute('id') . "\n";
     // Check if there are outer elementor containers
 }
+
 

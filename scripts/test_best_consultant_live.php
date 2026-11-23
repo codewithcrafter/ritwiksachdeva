@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $ch = curl_init('http://localhost:8000/service-best-marketing-consultant.html');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -28,4 +28,5 @@ $checks = [
 foreach ($checks as $item) {
     echo "$item: " . (strpos($response, $item) !== false ? 'PASS' : 'FAIL') . "\n";
 }
+
 

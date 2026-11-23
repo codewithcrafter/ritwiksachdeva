@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_home_body.html');
 
 $doc = new DOMDocument();
@@ -32,4 +32,5 @@ foreach ($sections as $s) {
 
 file_put_contents(__DIR__ . '/clean_home_main.html', $outputHtml);
 echo "Generated clean_home_main.html (" . strlen($outputHtml) . " bytes)\n";
+
 

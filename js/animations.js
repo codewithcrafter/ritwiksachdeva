@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ANIMATIONS & SCROLL REVEAL ENGINE
  * Utilizes modern IntersectionObserver for high performance 60fps animations.
  * Features customizable animated number counters and respects reduced-motion.
@@ -170,4 +170,5 @@ function initAnimatedCounters() {
 
   counterElements.forEach(counter => counterObserver.observe(counter));
 }
+
 

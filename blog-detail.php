@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Single Blog Article Detail View - Ritwik Sachdeva
  * Dynamic Article with Markdown parsing, Table of Contents, Schema & Sharing
@@ -850,4 +850,5 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
   </script>
 </body>
 </html>
+
 

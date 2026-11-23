@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    BLOG CMS & EDITORIAL STYLES (Creative Growth Lab)
    Predominantly White Canvas (#FFFFFF), Royal Blue (#1D4ED8), Acid Lime (#D4F542)
    Geometric Sans Typography, Crisp 1.5px Borders, Hard Neo-Brutalist Shadows
@@ -435,6 +435,85 @@ main > .container {
   border-bottom: 2px solid var(--blog-ink);
 }
 
+/* Article hero: editorial heading on the left, consultation form on the right. */
+@media (min-width: 900px) {
+  .article-header > .container { position: relative; }
+  .article-header > .container .article-header-consultation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(340px, 32%);
+    margin: 0;
+  }
+  .article-header > .container { padding-right: min(380px, 35%); }
+}
+
+/* Final article sidebar treatment: one TOC card + vertical hero form. */
+.toc-sidebar:has(> .toc-list) {
+  display: block !important;
+  padding-top: 0;
+  width: 100% !important;
+}
+@media (min-width: 900px) {
+  .article-layout-grid > .toc-sidebar { margin-top: 28px; }
+}
+.toc-sidebar:has(> .toc-list) > .toc-title,
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  width: 100% !important;
+  box-sizing: border-box;
+  background: #fff;
+  border-left: 2px solid var(--blog-ink);
+  border-right: 2px solid var(--blog-ink);
+  box-shadow: 4px 0 0 var(--blog-ink);
+}
+.toc-sidebar:has(> .toc-list) > .toc-title {
+  padding: 18px 20px 8px;
+  border-top: 2px solid var(--blog-ink);
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+}
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  padding: 4px 10px 16px;
+  border-top: 0;
+  border-bottom: 2px solid var(--blog-ink);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+}
+.article-header-consultation {
+  display: block;
+  padding: 22px;
+  background: #fff;
+  border: 2px solid var(--blog-ink);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+}
+.article-header-consultation input,
+.article-header-consultation select,
+.article-header-consultation textarea { width: 100%; box-sizing: border-box; }
+
+/* Hard override: TOC heading and links must share one uninterrupted card. */
+.toc-sidebar:has(> .toc-list) {
+  display: block !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  background: #fff !important;
+  border: 2px solid var(--blog-ink) !important;
+  border-radius: 18px !important;
+  box-shadow: 4px 4px 0 var(--blog-ink) !important;
+  overflow: hidden;
+}
+.toc-sidebar:has(> .toc-list) > .toc-title,
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  width: 100% !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.toc-sidebar:has(> .toc-list) > .toc-title { padding: 18px 20px 10px !important; }
+.toc-sidebar:has(> .toc-list) > .toc-list { padding: 4px 10px 16px !important; }
+
 .article-breadcrumbs {
   display: flex;
   align-items: center;
@@ -580,6 +659,21 @@ main > .container {
   gap: 48px;
   align-items: start;
 }
+.article-header-consultation { display: block; }
+.toc-sidebar > .toc-consultation { display: none; }
+@media (max-width: 899px) {
+  .article-header-consultation {
+    position: relative;
+    width: 100%;
+    margin-top: 28px;
+  }
+  .article-header > .container { padding-right: 24px; }
+}
+
+/* Prevent the merged TOC card from collapsing into a narrow vertical strip. */
+.toc-sidebar:has(> .toc-list) { width: 100%; min-width: 0; }
+.toc-sidebar:has(> .toc-list) > .toc-title,
+.toc-sidebar:has(> .toc-list) > .toc-list { min-width: 0; width: 100%; }
 
 .article-prose {
   color: #334155;
@@ -702,6 +796,33 @@ main > .container {
   gap: 20px;
 }
 
+/* Keep the TOC title and links inside one continuous card. */
+.toc-sidebar {
+  padding-top: 18px;
+}
+.toc-sidebar > .toc-title,
+.toc-sidebar > .toc-list {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.toc-sidebar > .toc-title {
+  margin: 0;
+  padding: 18px 20px 8px;
+}
+.toc-sidebar > .toc-list {
+  margin: 0;
+  padding: 4px 10px 14px;
+}
+.toc-sidebar:has(> .toc-list) {
+  background: #fff;
+  border: 2px solid var(--blog-ink);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+  gap: 0;
+}
+
 .toc-sidebar > :first-child,
 .toc-list {
   background: #FFFFFF;
@@ -785,6 +906,116 @@ main > .container {
   margin-bottom: 10px;
   background: #FFFFFF;
   box-sizing: border-box;
+}
+
+/* Final TOC card grouping override. */
+.toc-sidebar:has(> .toc-list) {
+  padding-top: 18px;
+  gap: 0;
+  background: #fff;
+  border: 2px solid var(--blog-ink);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+}
+.toc-sidebar:has(> .toc-list) > .toc-title,
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Merge TOC heading and links into one card; consultation remains its own card. */
+.toc-sidebar:has(> .toc-list) {
+  padding-top: 28px;
+  gap: 28px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.toc-sidebar:has(> .toc-list) > .toc-title,
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.toc-sidebar:has(> .toc-list) > .toc-title {
+  margin: 0;
+  padding: 18px 20px 8px;
+  border: 2px solid var(--blog-ink);
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 4px 0 0 var(--blog-ink);
+}
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  margin: 0;
+  padding: 4px 10px 14px;
+  border: 2px solid var(--blog-ink);
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+}
+
+/* Keep the consultation form beside the TOC on desktop instead of below it. */
+@media (min-width: 900px) {
+  .toc-sidebar:has(> .toc-list) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-template-columns: none;
+  }
+  .toc-sidebar:has(> .toc-list) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, .95fr);
+    align-items: start;
+    column-gap: 24px;
+  }
+  .toc-sidebar:has(> .toc-list) > .toc-consultation {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin: 0;
+  }
+  .toc-sidebar:has(> .toc-list) > .toc-title,
+  .toc-sidebar:has(> .toc-list) > .toc-list,
+  .toc-sidebar:has(> .toc-list) > div:not(.toc-consultation) {
+    grid-column: 1;
+  }
+}
+.toc-sidebar:has(> .toc-list) > .toc-title { padding: 0 20px 8px; }
+.toc-sidebar:has(> .toc-list) > .toc-list { padding: 4px 10px 14px; }
+
+@media (min-width: 900px) {
+  .toc-sidebar:has(> .toc-list) {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+  }
+}
+
+/* Two-card sidebar: separate TOC and consultation cards with clear spacing. */
+.toc-sidebar:has(> .toc-list) {
+  padding-top: 28px;
+  gap: 28px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.toc-sidebar:has(> .toc-list) > .toc-title {
+  background: #fff;
+  border: 2px solid var(--blog-ink);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+  padding: 18px 20px;
+}
+.toc-sidebar:has(> .toc-list) > .toc-list {
+  background: #fff;
+  border: 2px solid var(--blog-ink);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--blog-ink);
+  padding: 10px;
 }
 
 .toc-consultation input:focus,
@@ -926,6 +1157,23 @@ main > .container {
   }
 }
 
+@media (max-width: 899px) {
+  .article-layout-grid { display: block; width: 100%; }
+  .toc-sidebar,
+  .toc-sidebar:has(> .toc-list) {
+    display: block;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0;
+    margin: 28px 0 0;
+  }
+  .toc-sidebar:has(> .toc-list) > .toc-title,
+  .toc-sidebar:has(> .toc-list) > .toc-list {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
 @media (max-width: 480px) {
   .share-btn {
     padding: 7px 11px;
@@ -965,3 +1213,4 @@ main > .container {
   border-bottom: 1px solid var(--border-subtle, #e2e8f0);
 }
 .article-prose-column > .article-tags-wrap .article-tag-item { margin: 0; }
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/../index.html');
 
 $map = [
@@ -35,4 +35,5 @@ foreach ($map as $title => $url) {
 
 file_put_contents(__DIR__ . '/../index.html', $html);
 echo "index.html updated with service card links.\n";
+
 

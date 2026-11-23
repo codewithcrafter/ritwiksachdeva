@@ -1,4 +1,4 @@
-/**
+﻿/**
  * PREMIUM DIGITAL MARKETING CONSULTANT PORTFOLIO - MAIN SCRIPT
  * Handles header transitions, mobile navigation drawer, scroll progress bar, and active link state.
  */
@@ -136,4 +136,5 @@ function highlightActiveNav() {
     }
   });
 }
+
 

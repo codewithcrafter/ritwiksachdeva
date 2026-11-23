@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 $doc = new DOMDocument();
@@ -44,4 +44,5 @@ $buttons = $xpath->query('//a[contains(@class, "elementor-button") or contains(@
 foreach ($buttons as $b) {
     echo "Button: " . trim($b->textContent) . " -> " . $b->getAttribute('href') . "\n";
 }
+
 

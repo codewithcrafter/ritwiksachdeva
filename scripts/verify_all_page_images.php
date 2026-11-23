@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/../service-best-marketing-consultant.html');
 preg_match_all('/<img[^>]+src="([^">]+)"/i', $html, $matches);
 
@@ -31,4 +31,5 @@ if ($allPassed) {
 } else {
     echo "\n>>> WARNING: Some images failed to load! <<<\n";
 }
+
 

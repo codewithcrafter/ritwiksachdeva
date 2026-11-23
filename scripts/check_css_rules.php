@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $css = file_get_contents(__DIR__ . '/../css/best-consultant-live.css');
 $checkClasses = [
     'service-box',
@@ -13,4 +13,5 @@ foreach ($checkClasses as $cls) {
     echo "Class '$cls': " . (strpos($css, $cls) !== false ? 'FOUND' : 'MISSING') . "\n";
 }
 echo "Total CSS size: " . strlen($css) . " bytes\n";
+
 

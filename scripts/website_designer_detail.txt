@@ -1,8 +1,8 @@
-TITLE: Website Designer in Delhi | Custom Websites – Ritwik Sachdeva
+﻿TITLE: Website Designer in Delhi | Custom Websites �?" Ritwik Sachdeva
 DESC: Looking for a website designer in Delhi? Ritwik Sachdeva builds fast, SEO-friendly websites that turn visitors into customers. Get a free consultation today!
 
 HEADINGS:
-h1: Website Designer in Delhi | Web Development Services — Ritwik Sachdeva
+h1: Website Designer in Delhi | Web Development Services �?" Ritwik Sachdeva
 h2: What Good Web Design Actually Does for a Business
 h2: Web Development Services in Delhi
 h3: Custom Web Development
@@ -27,7 +27,7 @@ E-Commerce Management Graphic Designer Performance Marketing Consultant in Delhi
 
 About UsBest Digital Marketing Consultant in Delhibest marketing consultantBlogsCase Study
 
-Ritwik Sachdeva designs and develops websites in Delhi that are built to do more than look good — every layout, page structure, and CTA placement is planned with conversion and SEO in mind from the start, not added on afterward. This is web design built by someone who also works across SEO, PPC, and digital marketing strategy — so the site isn't just handed off looking finished; it's built to actually perform once it's live.
+Ritwik Sachdeva designs and develops websites in Delhi that are built to do more than look good �?" every layout, page structure, and CTA placement is planned with conversion and SEO in mind from the start, not added on afterward. This is web design built by someone who also works across SEO, PPC, and digital marketing strategy �?" so the site isn't just handed off looking finished; it's built to actually perform once it's live.
 
 Speed: 99/100 What Good Web Design Actually Does for a Business A website that only looks good but doesn&#8217;t convert is a common, expensive mistake &#8211; visually polished, technically slow, structured around what looks nice in a mockup instead of how a real visitor actually decides to act. Good web design starts with UI/UX design &amp; prototyping built around the actual user journey: what a visitor needs to see first, what&#8217;s stopping them from converting, and how the layout guides them toward a decision instead of just displaying information.
 
@@ -42,3 +42,4 @@ Full-stack web development using HTML5, CSS3, JavaScript, and modern frameworks 
 Focused, single-purpose landing pages built for lead generation and campaign traffic, where every element exists to support one conversion goal.
 
 For businesses with an existing site that&#8217;s outdated, slow, or simply not converting &#8211; redesign work that keeps what&#8217;s working and fixes what isn&#8217;t, plus ongoing maintenance so the site doesn&#8217;t quietly degrade over time.
+

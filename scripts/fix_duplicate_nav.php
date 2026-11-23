@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $files = ['index.html', 'about.html', 'contact.html', 'blog.html', 'blog-detail.php', 'blog.php'];
 foreach ($files as $f) {
     $path = __DIR__ . '/../' . $f;
@@ -13,4 +13,5 @@ foreach ($files as $f) {
         echo "Cleaned duplicate in $f\n";
     }
 }
+
 

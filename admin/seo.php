@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin SEO & Dynamic Sitemap Manager
  */
@@ -159,4 +159,5 @@ $sitemapTime = $sitemapExists ? filemtime($sitemapPath) : 0;
 </div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

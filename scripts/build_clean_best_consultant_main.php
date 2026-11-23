@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 
 // 1. Remove all <noscript>...</noscript> tags
@@ -73,4 +73,5 @@ $html = preg_replace('/(data-to-value="98"[^>]*>)\s*0\s*(<\/span>)/i', '$198$2',
 
 file_put_contents(__DIR__ . '/clean_best_consultant_main.html', $html);
 echo "Successfully generated clean_best_consultant_main.html (" . strlen($html) . " bytes)\n";
+
 

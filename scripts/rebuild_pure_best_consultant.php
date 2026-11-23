@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $rawBody = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 $indexHtml = file_get_contents(__DIR__ . '/../index.html');
 $originalPage = file_get_contents(__DIR__ . '/../service-best-marketing-consultant.html');
@@ -101,7 +101,7 @@ $sec4 = str_replace('https://ritwiksachdeva.in/wp-content/uploads/2026/01/printe
 $sec4 = str_replace('https://ritwiksachdeva.in/wp-content/uploads/2026/01/download.jpg', 'assets/images/brand-logo-5.jpg', $sec4);
 
 // -----------------------------------------------------------------------------
-// SECTION 5: 🚀 OUR RESULTS
+// SECTION 5: Ys? OUR RESULTS
 // -----------------------------------------------------------------------------
 $sec5 = extractSection('/<section class="slider-section">/i', '/<\/section>/i', $rawBody);
 $sec5 = preg_replace('/<noscript\b[^>]*>.*?<\/noscript>/is', '', $sec5);
@@ -300,4 +300,6 @@ $finalHtml = $topPart . "\n  <main id=\"main-content\" class=\"best-consultant-m
 
 file_put_contents(__DIR__ . '/../service-best-marketing-consultant.html', $finalHtml);
 echo "Successfully rebuilt pure service-best-marketing-consultant.html (" . strlen($finalHtml) . " bytes)\n";
+
+
 

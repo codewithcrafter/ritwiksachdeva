@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Public Contact Form API Endpoint
  * Handles consultation inquiries, validates input, and records CRM leads.
@@ -126,4 +126,5 @@ try {
         'error' => 'An error occurred while saving your inquiry. Please try again or reach out directly.'
     ]);
 }
+
 

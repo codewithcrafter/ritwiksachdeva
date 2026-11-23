@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * RITWIK SACHDEVA - MARKDOWN MANAGEMENT & GENERATION MODULE
  * Generates and synchronizes Markdown files with complete YAML frontmatter from MySQL.
@@ -224,4 +224,5 @@ class MarkdownManager {
         return $result;
     }
 }
+
 

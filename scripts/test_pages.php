@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $pages = [
   'services.html',
   'service-fractional-cmo.html',
@@ -15,4 +15,5 @@ foreach ($pages as $p) {
   $status = $http_response_header[0] ?? 'UNKNOWN';
   echo "$p => $status (" . strlen($content) . " bytes)\n";
 }
+
 

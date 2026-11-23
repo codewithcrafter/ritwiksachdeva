@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Sidebar Navigation
  */
@@ -87,4 +87,5 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </a>
   </div>
 </aside>
+
 

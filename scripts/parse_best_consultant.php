@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_best_consultant.html');
 
 $doc = new DOMDocument();
@@ -26,4 +26,5 @@ foreach ($images as $img) {
         echo "IMG: " . $src . "\n";
     }
 }
+
 

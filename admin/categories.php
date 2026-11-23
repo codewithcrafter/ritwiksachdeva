@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Categories Management
  */
@@ -152,4 +152,5 @@ $categories = $pdo->query("
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

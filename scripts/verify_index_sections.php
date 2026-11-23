@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/../index.html');
 
 $doc = new DOMDocument();
@@ -34,4 +34,5 @@ foreach ($sections as $sId) {
         echo " [FAIL] #$sId NOT FOUND!\n";
     }
 }
+
 

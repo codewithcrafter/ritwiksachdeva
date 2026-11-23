@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * RITWIK SACHDEVA - APPLICATION CONFIGURATION
  * Environment-aware configuration, session security, and constants.
@@ -93,3 +93,4 @@ function calculate_reading_time(string $content, int $wpm = 200): int {
     $wordCount = str_word_count($cleanText);
     return max(1, (int)ceil($wordCount / $wpm));
 }
+

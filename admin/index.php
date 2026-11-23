@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Dashboard - Ritwik Sachdeva CMS
  * Real database metrics, visual trends, recent inquiries & articles
@@ -310,4 +310,5 @@ $statusStatsRaw = $statusStatsStmt->fetchAll(PDO::FETCH_KEY_PAIR);
 </div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

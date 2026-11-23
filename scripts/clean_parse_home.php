@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 // Remove scripts, styles, noscripts
@@ -99,4 +99,5 @@ if ($s9->length > 0) {
         echo "  CTA ITEM [" . $it->nodeName . "]: " . trim($it->textContent) . "\n";
     }
 }
+
 

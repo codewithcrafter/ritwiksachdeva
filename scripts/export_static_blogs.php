@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $slugs = [
     'digital-transformation-strategies' => 'blog-digital-transformation-strategies.html',
     'business-growth-strategy' => 'blog-business-growth-strategy.html',
@@ -25,4 +25,5 @@ foreach ($slugs as $slug => $filename) {
     file_put_contents($filename, $html);
     echo "Exported $filename (" . strlen($html) . " bytes)\n";
 }
+
 

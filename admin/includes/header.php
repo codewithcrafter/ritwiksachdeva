@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Layout Header
  */
@@ -92,3 +92,4 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
           <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;font-weight:bold;color:inherit;">&times;</button>
         </div>
       <?php endif; ?>
+

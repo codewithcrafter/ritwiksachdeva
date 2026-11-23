@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * VERIFY ALL PAGES, HTTP STATUS, AND SERVICES INTEGRATION
  */
@@ -83,4 +83,5 @@ foreach ($services as $file) {
 }
 
 echo "\nVerification complete!\n";
+
 

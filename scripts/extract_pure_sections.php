@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 
 // 1. Services section pure markup
@@ -32,4 +32,5 @@ echo "Growth CTA matched: " . (!empty($mGrowth) ? strlen($mGrowth[0]) : "NO") . 
 // 5. About section pure markup
 preg_match('/<section[^>]*class="[^"]*about-section[^"]*"[^>]*>.*?<\/section>/is', $html, $mAbout);
 echo "About section matched: " . (!empty($mAbout) ? strlen($mAbout[0]) : "NO") . "\n";
+
 

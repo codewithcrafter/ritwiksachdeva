@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * RITWIK SACHDEVA - AUTHENTICATION & SECURITY MODULE
  * Production-grade RBAC, CSRF protection, rate limiting, and session management.
@@ -197,3 +197,4 @@ function auth_logout(): void {
         session_destroy();
     }
 }
+

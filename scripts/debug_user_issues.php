@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/../service-best-marketing-consultant.html');
 
 function printSec($name, $start, $len = 1000) {
@@ -16,4 +16,5 @@ printSec('PROVEN DIGITAL IMPACT', 'Proven Digital Impact');
 printSec('SPEAK FOR THEMSELVES', 'Digital Marketing Results That Speak for Themselves');
 printSec('SCHEDULE STRATEGY', 'Schedule Your Free Strategy Call Today');
 printSec('FOOTER', '<footer');
+
 

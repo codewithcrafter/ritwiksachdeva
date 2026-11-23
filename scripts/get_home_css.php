@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 $pos = strpos($html, '.dm-service-card');
 if ($pos !== false) {
@@ -9,4 +9,5 @@ if ($pos !== false) {
 } else {
     echo "not found";
 }
+
 

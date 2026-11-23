@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Blog Management
  * Search, filter, duplicate, and delete blog articles
@@ -208,7 +208,7 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
               <td>
                 <div style="display: flex; align-items: center; gap: 10px;">
                   <?php if ($b['is_featured']): ?>
-                    <span title="Featured Article" style="color: #F59E0B; font-size: 14px;">★</span>
+                    <span title="Featured Article" style="color: #F59E0B; font-size: 14px;">â˜…</span>
                   <?php endif; ?>
                   <div>
                     <a href="blog-edit.php?id=<?= $b['id'] ?>" style="font-weight: 600; color: var(--admin-text-main); text-decoration: none; font-size: 14px;">
@@ -289,4 +289,5 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
 <?php endif; ?>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

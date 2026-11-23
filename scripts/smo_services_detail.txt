@@ -1,8 +1,8 @@
-TITLE: SMO Services in Delhi | Social Media Optimization – Ritwik Sachdeva
-DESC: SMO Services in Delhi — Ritwik Sachdeva optimizes your social profiles for better visibility, engagement &amp; organic reach. Get a free consultation today!
+﻿TITLE: SMO Services in Delhi | Social Media Optimization �?" Ritwik Sachdeva
+DESC: SMO Services in Delhi �?" Ritwik Sachdeva optimizes your social profiles for better visibility, engagement &amp; organic reach. Get a free consultation today!
 
 HEADINGS:
-h1: SMO Services in Delhi — Social Media Optimization Consultant | Ritwik Sachdeva
+h1: SMO Services in Delhi �?" Social Media Optimization Consultant | Ritwik Sachdeva
 h2: What SMO Actually Means (And How It&#8217;s Different From SMM)
 h2: How Social Media Optimization Helps SEO Ranking
 h2: SMO Services in Delhi &#8211; Platform by Platform
@@ -40,3 +40,4 @@ Instagram Profile branding, grid layout and visual aesthetics, bio optimization 
 Facebook Business page setup and optimization, page categorization, CTA buttons, and content structure for organic reach
 
 LinkedIn Company page optimization and personal branding &#8211; especially relevant for B2B social media consulting and founder-led brand building
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_best_consultant.html');
 
 // Let's find sections or elementor containers
@@ -21,4 +21,5 @@ if ($posStart !== false && $posEnd !== false) {
 } else {
     echo "Could not find slice boundaries\n";
 }
+
 

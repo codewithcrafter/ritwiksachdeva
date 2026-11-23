@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $url = 'https://ritwiksachdeva.in/wp-content/uploads/2026/08/Best-Digital-Marketing-Consultant-in-Delhi.webp';
 $dest = __DIR__ . '/../assets/images/Best-Digital-Marketing-Consultant-in-Delhi.webp';
 
@@ -16,4 +16,5 @@ if ($code == 200 && strlen($data) > 1000) {
 } else {
     echo "Failed to download image (HTTP $code, " . strlen($data) . " bytes)\n";
 }
+
 

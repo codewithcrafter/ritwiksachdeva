@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/generate_all_services.php';
 
 $desktopDropdown = render_desktop_dropdown('');
@@ -31,4 +31,5 @@ foreach ($blogFiles as $bf) {
     file_put_contents($bf, $c);
     echo "Updated static blog: " . basename($bf) . "\n";
 }
+
 

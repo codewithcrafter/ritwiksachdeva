@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Export Contact Leads to CSV
  */
@@ -73,4 +73,5 @@ foreach ($leads as $l) {
 
 fclose($output);
 exit;
+
 

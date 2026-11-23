@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $data = json_decode(file_get_contents('scripts/scraped_services.json'), true);
 foreach ($data as $k => $v) {
     file_put_contents("scripts/{$k}_detail.txt", 
@@ -9,4 +9,5 @@ foreach ($data as $k => $v) {
     );
 }
 echo "Exported detail files for all 11 services.\n";
+
 

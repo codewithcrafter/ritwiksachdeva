@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Users & RBAC Management
  * Restricted to SUPER_ADMIN
@@ -203,3 +203,4 @@ $users = $pdo->query("SELECT * FROM admins ORDER BY id ASC")->fetchAll();
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+

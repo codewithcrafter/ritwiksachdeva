@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $images = [
     'stage-photo.jpg' => 'https://ritwiksachdeva.in/wp-content/uploads/2026/01/Untitled-design-3.jpg',
     'brand-logo-1.png' => 'https://ritwiksachdeva.in/wp-content/uploads/2026/01/logo-1.png',
@@ -37,4 +37,5 @@ foreach ($images as $localName => $remoteUrl) {
         echo "Failed $localName (HTTP $code)\n";
     }
 }
+
 

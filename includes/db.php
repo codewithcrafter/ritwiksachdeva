@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * RITWIK SACHDEVA - DATABASE CONNECTION MODULE
  * Robust PDO Singleton with Prepared Statements and Error Handling.
@@ -60,3 +60,4 @@ class Database {
 function get_db(): PDO {
     return Database::getConnection();
 }
+

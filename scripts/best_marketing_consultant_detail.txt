@@ -1,4 +1,4 @@
-TITLE: Delhi’s Most Trusted &amp; Best Digital Marketing Consultant
+﻿TITLE: Delhi�?Ts Most Trusted &amp; Best Digital Marketing Consultant
 DESC: Looking for the best digital marketing consultant in Delhi? Ritwik Sachdeva delivers data-driven SEO, PPC &amp; social media strategies. Book a free consultation
 
 HEADINGS:
@@ -12,7 +12,7 @@ h3: Video Production &amp; Editing
 h3: Performance Marketing
 h3: SEO Services
 h2: Trusted by Leading Brands
-h2: 🚀 Our Results
+h2: �Ys? Our Results
 h2: Digital Marketing Results That Speak for Themselves
 h2: Let's Build a Winning Digital Growth Strategy
 h2: About Ritwik Sachdeva
@@ -47,4 +47,5 @@ Performance MarketingData-driven ad campaigns focused on leads, sales, and ROI.
 
 Improve your Google rankings and drive organic traffic with proven SEO strategies.
 
-I help brands grow through data-driven digital marketing strategies focused on visibility, leads, and revenue. Every campaign is optimized for performance, scalability, and long-term success—because numbers matter more than promises.
+I help brands grow through data-driven digital marketing strategies focused on visibility, leads, and revenue. Every campaign is optimized for performance, scalability, and long-term success�?"because numbers matter more than promises.
+

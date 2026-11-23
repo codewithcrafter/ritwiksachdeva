@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin CRM - Inquiries & Lead Management
  * Status updates, internal notes, activities audit log, and details modal
@@ -344,7 +344,7 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
 <script>
   function openLeadModal(lead) {
     document.getElementById('m_note_lead_id').value = lead.id;
-    document.getElementById('leadModalTitle').textContent = 'Inquiry Brief #' + lead.id + ' — ' + lead.full_name;
+    document.getElementById('leadModalTitle').textContent = 'Inquiry Brief #' + lead.id + ' â€” ' + lead.full_name;
     document.getElementById('m_name').textContent = lead.full_name;
     document.getElementById('m_company').textContent = lead.company || 'Not specified';
     document.getElementById('m_email').textContent = lead.email;
@@ -361,4 +361,5 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

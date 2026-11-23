@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ADVANCED INTERACTIONS & MICRO-EXPERIENCES
  * - Custom desktop cursor with magnetic interaction
  * - Premium testimonial slider carousel
@@ -407,3 +407,4 @@ function initContactForm() {
     });
   }
 }
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $files = glob(__DIR__ . '/../*.html');
 $missing = [];
 foreach ($files as $file) {
@@ -16,4 +16,5 @@ if (!empty($missing)) {
 } else {
     echo "ALL HTML files include service-best-marketing-consultant.html in their Services dropdown!\n";
 }
+
 

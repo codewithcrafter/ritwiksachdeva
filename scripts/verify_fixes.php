@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/../service-best-marketing-consultant.html');
 
 echo "=== VERIFICATION OF ALL USER FIXES ===\n\n";
@@ -39,4 +39,5 @@ echo "   Opening <main>: " . substr_count($html, '<main') . "\n";
 echo "   Closing </main>: " . substr_count($html, '</main>') . "\n";
 echo "   Opening <body>: " . substr_count($html, '<body') . "\n";
 echo "   Closing </body>: " . substr_count($html, '</body>') . "\n";
+
 

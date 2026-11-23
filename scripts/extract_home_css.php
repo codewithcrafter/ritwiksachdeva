@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 // Let's find all styles that have #trusted-businesses-searching or .dm-service-card or #dm-faq
@@ -13,4 +13,5 @@ if ($pos !== false) {
 } else {
     echo "not found";
 }
+
 

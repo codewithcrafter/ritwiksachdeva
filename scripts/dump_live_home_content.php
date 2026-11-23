@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 $doc = new DOMDocument();
@@ -36,4 +36,5 @@ foreach ($headings as $h) {
         }
     }
 }
+
 

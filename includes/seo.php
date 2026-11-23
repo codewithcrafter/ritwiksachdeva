@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * RITWIK SACHDEVA - SEO & SCHEMA AUTOMATION MODULE
  * Dynamic JSON-LD structured data, Open Graph generator, and sitemap automation.
@@ -122,4 +122,5 @@ class SeoManager {
         return json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 }
+
 

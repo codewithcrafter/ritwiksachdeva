@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 $pos1 = strpos($html, '#hero');
@@ -11,4 +11,5 @@ if ($pos1 !== false && $pos2 !== false) {
 } else {
     echo "Could not find slice boundaries\n";
 }
+
 

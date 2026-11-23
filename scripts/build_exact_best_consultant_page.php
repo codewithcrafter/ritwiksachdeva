@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $original = file_get_contents(__DIR__ . '/../service-best-marketing-consultant.html');
 $cleanBody = file_get_contents(__DIR__ . '/clean_best_consultant_main.html');
 
@@ -104,4 +104,5 @@ $fullPage = $headPart . "\n" . $navPart . "\n  <main id=\"main-content\" class=\
 
 file_put_contents(__DIR__ . '/../service-best-marketing-consultant.html', $fullPage);
 echo "Updated service-best-marketing-consultant.html (" . strlen($fullPage) . " bytes)\n";
+
 

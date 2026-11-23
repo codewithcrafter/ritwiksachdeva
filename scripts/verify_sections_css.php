@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $css = file_get_contents(__DIR__ . '/../css/best-consultant-live.css');
 $body = file_get_contents(__DIR__ . '/clean_best_consultant_main.html');
 
@@ -38,4 +38,5 @@ foreach ($keyClasses as $c) {
     $inBody = strpos($body, $c) !== false ? 'YES' : 'NO';
     echo sprintf("%-25s | In CSS: %-4s | In Body: %-4s\n", $c, $inCss, $inBody);
 }
+
 

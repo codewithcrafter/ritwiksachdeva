@@ -1,8 +1,8 @@
-TITLE: Freelance Graphic Designer in Delhi | Ritwik Sachdeva
+﻿TITLE: Freelance Graphic Designer in Delhi | Ritwik Sachdeva
 DESC: Hire a freelance graphic designer in Delhi for logo design, brand identity &amp; social media creatives. Ritwik Sachdeva. Book a free consultation today!
 
 HEADINGS:
-h1: Freelance Graphic Designer &amp; Branding Design Consultant in Delhi — Ritwik Sachdeva
+h1: Freelance Graphic Designer &amp; Branding Design Consultant in Delhi �?" Ritwik Sachdeva
 h2: Graphic Designer vs. Branding Design Consultant: What&#8217;s the Difference?
 h3: Graphic Designer
 h3: Branding Design Consultant
@@ -31,7 +31,7 @@ E-Commerce Management Graphic Designer Performance Marketing Consultant in Delhi
 
 About UsBest Digital Marketing Consultant in Delhibest marketing consultantBlogsCase Study
 
-Ritwik Sachdeva works as a freelance graphic designer and branding design consultant in Delhi, building brand identities that hold together across every touchpoint — logo, business card, social media creative, and pitch deck all pulling from the same visual system instead of looking like they were designed by different people at different times.
+Ritwik Sachdeva works as a freelance graphic designer and branding design consultant in Delhi, building brand identities that hold together across every touchpoint �?" logo, business card, social media creative, and pitch deck all pulling from the same visual system instead of looking like they were designed by different people at different times.
 
 typically executes individual design pieces &#8211; a logo, a flyer, a social media post.
 
@@ -46,3 +46,4 @@ A documented brand guidelines system covering logo usage, color codes, typograph
 Rebranding &amp; Brand Architecture Rebranding strategy for businesses that have outgrown their original identity or need repositioning against a changed market or competitive landscape.
 
 Creative Direction Overarching creative direction across campaigns and collateral, so new design work stays aligned with brand messaging and visual tone of voice instead of drifting over time.
+

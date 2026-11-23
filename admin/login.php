@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Login Page
  * Secure Authentication with CSRF & Rate Limiting
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label for="password" class="form-label-admin" style="margin-bottom: 0;">Password</label>
         </div>
         <input type="password" id="password" name="password" class="form-control-admin" 
-               placeholder="••••••••••••" required autocomplete="current-password">
+               placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required autocomplete="current-password">
       </div>
 
       <button type="submit" class="btn-admin btn-admin-primary" style="width: 100%; padding: 11px; margin-top: 10px;">
@@ -149,4 +149,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+
 

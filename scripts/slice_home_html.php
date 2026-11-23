@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 $posStart = strpos($html, '<section id="hero"');
@@ -23,4 +23,5 @@ if ($posStart !== false && $posEnd !== false) {
 } else {
     echo "Could not find slice boundaries\n";
 }
+
 

@@ -25,6 +25,8 @@ $redirectMap = [
     '/service-video-editing.html' => '/services/video-editing/',
     '/service-website-designer.html' => '/services/website-designer/',
     '/service-best-marketing-consultant.html' => '/services/',
+    '/services/marketing-consultant/' => '/services/',
+    '/services/marketing-consultant' => '/services/',
     '/service-fractional-cmo.html' => '/services/',
     '/service-brand-strategy.html' => '/services/graphic-designer/',
     '/service-seo-consulting.html' => '/services/seo-expert/',
@@ -68,7 +70,7 @@ $cleanRoutes = [
     '/about/' => 'about.html',
     '/services/' => 'services.html',
     '/contact/' => 'contact.html',
-    '/blog/' => 'blog.php',
+    '/blog/' => 'blog.html',
     '/services/ecommerce-management/' => 'service-ecommerce-management.html',
     '/services/graphic-designer/' => 'service-graphic-designer.html',
     '/services/performance-marketing/' => 'service-performance-marketing.html',
@@ -111,3 +113,4 @@ if (preg_match('#^/blog/([a-z0-9_-]+)/$#i', $normalizedPath, $match)) {
 // 7. Not Found
 http_response_code(404);
 echo '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>404 Page Not Found</title></head><body><h1>404 - Page Not Found</h1><p>The requested URL was not found on this server.</p><p><a href="/">Return to Homepage</a></p></body></html>';
+

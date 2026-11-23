@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_best_consultant.html');
 
 preg_match_all('#<style[^>]*>(.*?)</style>#is', $html, $matches);
@@ -17,4 +17,5 @@ foreach ($matches[1] as $idx => $css) {
 
 file_put_contents(__DIR__ . '/../css/best-consultant-live.css', $savedCss);
 echo "Saved best-consultant-live.css (" . strlen($savedCss) . " bytes)\n";
+
 

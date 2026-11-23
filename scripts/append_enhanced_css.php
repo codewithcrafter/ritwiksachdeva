@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $cssFile = __DIR__ . '/../css/best-consultant-live.css';
 $css = file_get_contents($cssFile);
 
@@ -306,4 +306,5 @@ if (strpos($css, 'ENHANCED STYLES: DIGITAL MARKETING RESULTS') !== false) {
 $css .= "\n" . $customBlock;
 file_put_contents($cssFile, $css);
 echo "Appended enhanced styles to " . basename($cssFile) . " (" . strlen($css) . " bytes)\n";
+
 

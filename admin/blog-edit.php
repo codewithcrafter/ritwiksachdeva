@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Blog Editor
  * Full CRUD, Markdown Sync, Tag Management, Revisions & SEO Fields
@@ -556,4 +556,5 @@ $authors = $pdo->query("SELECT id, name FROM authors ORDER BY name ASC")->fetchA
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

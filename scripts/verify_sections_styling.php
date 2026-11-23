@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $css = file_get_contents(__DIR__ . '/../css/best-consultant-live.css');
 
 $sections = [
@@ -16,3 +16,4 @@ foreach ($sections as $sec) {
     }
     echo "\n";
 }
+

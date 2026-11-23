@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    SERVICES DIRECTORY & DETAIL STYLES (Creative Growth Lab)
    Predominantly White Canvas (#FFFFFF), Cobalt Blue (#244BFF), Acid Lime (#D5FF45)
    Coral (#FF765C) & Ink (#171717)
@@ -1220,7 +1220,7 @@ body:has(.service-detail-hero) .service-page-main {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(300px, 5fr);
   align-items: start;
-  gap: clamp(34px, 5vw, 76px);
+  gap: clamp(22px, 2.8vw, 42px);
   text-align: left;
 }
 
@@ -1233,7 +1233,7 @@ body:has(.service-detail-hero) .service-page-main {
     padding-inline: 24px;
   }
 }
-.service-hero-copy { min-width: 0; }
+.service-hero-copy { min-width: 0; width: 100%; max-width: none; }
 .service-detail-header-wrap .service-eyebrow-row { justify-content: flex-start; }
 .service-detail-header-wrap .service-detail-lead { margin-inline: 0; }
 .service-detail-header-wrap .service-hero-actions { justify-content: flex-start; }
@@ -1343,7 +1343,7 @@ body:has(.service-detail-hero) .service-content-section .section-eyebrow { displ
 }
 .service-card-details > summary::-webkit-details-marker { display: none; }
 .service-card-details > summary::after { content: ' +'; color: #0f172a; }
-.service-card-details[open] > summary::after { content: ' −'; }
+.service-card-details[open] > summary::after { content: ' ^''; }
 .service-card-details[open] .service-breakdown-grid { margin-top: 14px; }
 .service-card-details .service-tools-row { margin-top: 14px; }
 .roi-metric-highlight {
@@ -1366,3 +1366,5 @@ body:has(.service-detail-hero) .service-content-section .section-eyebrow { displ
 
 /* The service filter remains in normal document flow. */
 .services-subnav-sticky { position: relative !important; top: auto !important; }
+
+

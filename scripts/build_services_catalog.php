@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * REBUILD SERVICES.HTML WITH ALL 11 VERIFIED SERVICES
  * Aligned with www.ritwiksachdeva.in offerings and luxury editorial design
@@ -89,7 +89,7 @@ $catalogData = [
         'impact' => [
             'val' => '5.8x',
             'title' => 'Peak Blended ROAS',
-            'desc' => '₹12 Cr+ in profitably managed ad spend with verified attribution and 38% lower customer acquisition cost.'
+            'desc' => ',12 Cr+ in profitably managed ad spend with verified attribution and 38% lower customer acquisition cost.'
         ],
         'tools' => ['Meta Ads Manager', 'Google Ads', 'LinkedIn Ads', 'sGTM / CAPI', 'Triple Whale / GA4']
     ],
@@ -248,11 +248,11 @@ $catalogData = [
         'file' => 'service-best-marketing-consultant.html',
         'num' => '10',
         'tag' => 'STRATEGIC ADVISORY',
-        'title' => 'Delhi’s Best Digital Marketing Consultant',
+        'title' => 'Delhi—Ts Best Digital Marketing Consultant',
         'subtitle' => 'Full-Funnel Commercial Roadmaps & Fractional CMO Advisory',
         'badge' => 'Executive Advisory',
         'desc' => 'Senior marketing consulting for ambitious founders and SMEs needing high-level commercial roadmaps, budget allocation, and unified omnichannel growth.',
-        'problem' => 'Working with generic agencies where junior interns manage your account, SEO doesn’t talk to paid media, and nobody takes accountability for profit.',
+        'problem' => 'Working with generic agencies where junior interns manage your account, SEO doesn—Tt talk to paid media, and nobody takes accountability for profit.',
         'deliverables' => [
             'Full-Funnel Omnichannel Commercial Marketing Roadmaps',
             'Cross-Channel Performance Marketing & Capital Allocation',
@@ -262,7 +262,7 @@ $catalogData = [
             'Fractional CMO Leadership & In-House Team Mentorship'
         ],
         'impact' => [
-            'val' => '₹50 Cr+',
+            'val' => ',50 Cr+',
             'title' => 'Revenue & Pipeline Driven',
             'desc' => '8+ years of battle-tested marketing consulting with a 94% client retention rate.'
         ],
@@ -571,7 +571,7 @@ $servicesFullHtml = <<<HTML
             <div class="metric-strip-label">Specialized Services</div>
           </div>
           <div class="metric-strip-item">
-            <div class="metric-strip-val">₹50 Cr+</div>
+            <div class="metric-strip-val">,50 Cr+</div>
             <div class="metric-strip-label">Pipeline Generated</div>
           </div>
           <div class="metric-strip-item">
@@ -657,7 +657,7 @@ $servicesFullHtml = <<<HTML
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">01</span>
-              <span class="process-phase">Weeks 1–2</span>
+              <span class="process-phase">Weeks 1—2</span>
             </div>
             <h3 class="process-step-title">Forensic Audit &amp; Unit Economics</h3>
             <p class="process-step-text">
@@ -668,7 +668,7 @@ $servicesFullHtml = <<<HTML
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">02</span>
-              <span class="process-phase">Weeks 2–3</span>
+              <span class="process-phase">Weeks 2—3</span>
             </div>
             <h3 class="process-step-title">Architecture &amp; Quick Wins</h3>
             <p class="process-step-text">
@@ -679,7 +679,7 @@ $servicesFullHtml = <<<HTML
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">03</span>
-              <span class="process-phase">Weeks 4–8</span>
+              <span class="process-phase">Weeks 4—8</span>
             </div>
             <h3 class="process-step-title">Execution &amp; Testing Sprints</h3>
             <p class="process-step-text">
@@ -769,7 +769,7 @@ $servicesFullHtml = <<<HTML
             <ul class="breakdown-list" style="margin-bottom: 24px;">
               <li class="breakdown-list-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Clear deliverable timeline (2–4 weeks)</span>
+                <span>Clear deliverable timeline (2—4 weeks)</span>
               </li>
               <li class="breakdown-list-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -888,4 +888,6 @@ HTML;
 
 file_put_contents(__DIR__ . '/../services.html', $servicesFullHtml);
 echo "services.html rebuilt successfully with all 11 services! (" . strlen($servicesFullHtml) . " bytes)\n";
+
+
 

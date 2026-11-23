@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $url = 'http://localhost:8000/index.html';
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -24,4 +24,5 @@ if ($code == 200) {
     echo "Check header navbar: " . (strpos($res, 'class="site-header"') !== false ? 'PASS' : 'FAIL') . "\n";
     echo "Check footer: " . (strpos($res, 'class="site-footer"') !== false ? 'PASS' : 'FAIL') . "\n";
 }
+
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Load raw body and original files
 $rawBody = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 $indexHtml = file_get_contents(__DIR__ . '/../index.html');
@@ -91,7 +91,7 @@ foreach ($serviceLinks as $name => $url) {
 // 6. Extract Section 4: Trusted by Leading Brands (Logos)
 $brandsStart = strpos($rawBody, 'Trusted by Leading Brands');
 $brandsStart = strrpos(substr($rawBody, 0, $brandsStart), '<section');
-$brandsEnd = strpos($rawBody, '🚀 Our Results');
+$brandsEnd = strpos($rawBody, 'Ys? Our Results');
 $brandsEnd = strrpos(substr($rawBody, 0, $brandsEnd), '<section');
 $brandsHtml = substr($rawBody, $brandsStart, $brandsEnd - $brandsStart);
 
@@ -106,7 +106,7 @@ $brandsHtml = str_replace('https://ritwiksachdeva.in/wp-content/uploads/2026/01/
 $brandsHtml = str_replace('https://ritwiksachdeva.in/wp-content/uploads/2026/01/download.jpg', 'assets/images/brand-logo-5.jpg', $brandsHtml);
 
 // 7. Extract Section 5: Our Results Gallery (Screenshots)
-$resultsStart = strpos($rawBody, '🚀 Our Results');
+$resultsStart = strpos($rawBody, 'Ys? Our Results');
 $resultsStart = strrpos(substr($rawBody, 0, $resultsStart), '<section');
 $resultsEnd = strpos($rawBody, 'Digital Marketing Results That Speak for Themselves');
 $resultsEnd = strrpos(substr($rawBody, 0, $resultsEnd), '<div class="elementor-element');
@@ -294,4 +294,6 @@ $finalHtml = $topPart . "\n  <main id=\"main-content\" class=\"best-consultant-m
 
 file_put_contents(__DIR__ . '/../service-best-marketing-consultant.html', $finalHtml);
 echo "Successfully built updated service-best-marketing-consultant.html (" . strlen($finalHtml) . " bytes)\n";
+
+
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $opts = [
     'http' => [
         'method' => 'GET',
@@ -22,4 +22,5 @@ for ($i = 0; $i < count($matches[1]); $i++) {
         echo "$text => $href\n";
     }
 }
+
 

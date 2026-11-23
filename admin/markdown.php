@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Markdown System Manager
  * Inspects, synchronizes, and downloads Markdown files in content/blogs/
@@ -168,4 +168,5 @@ if (is_dir($contentDir)) {
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

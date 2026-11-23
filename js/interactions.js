@@ -1,4 +1,4 @@
-/**
+﻿/**
  * CREATIVE GROWTH LAB — ADVANCED INTERACTION ENGINE
  * - Custom trailing cursor with magnetic reaction and expansion
  * - Physics-based magnetic buttons
@@ -37,60 +37,82 @@ function prefillServiceFromUrl() {
 }
 
 /**
- * 1. Custom Trailing Animated Cursor
+ * 1. Custom Single Unified Cursor (Ring + Centered Dot)
+ * Hides OS mouse and displays the custom circular cursor centered on pointer coordinates.
  */
 function initCustomCursor() {
   if (window.matchMedia('(pointer: coarse)').matches) return;
 
-  const cursorDot = document.createElement('div');
-  const cursorRing = document.createElement('div');
+  // Clean up any existing cursor instances
+  const existingWrapper = document.getElementById('custom-cursor');
+  if (existingWrapper) existingWrapper.remove();
+  document.querySelectorAll('.custom-cursor-dot, .custom-cursor-ring').forEach(el => el.remove());
 
-  cursorDot.className = 'custom-cursor-dot';
+  const cursorWrapper = document.createElement('div');
+  cursorWrapper.id = 'custom-cursor';
+  cursorWrapper.className = 'custom-cursor';
+  cursorWrapper.setAttribute('aria-hidden', 'true');
+
+  const cursorRing = document.createElement('div');
   cursorRing.className = 'custom-cursor-ring';
 
-  document.body.appendChild(cursorDot);
-  document.body.appendChild(cursorRing);
+  const cursorDot = document.createElement('div');
+  cursorDot.className = 'custom-cursor-dot';
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
-  let isMoving = false;
+  cursorWrapper.appendChild(cursorRing);
+  cursorWrapper.appendChild(cursorDot);
+  document.body.appendChild(cursorWrapper);
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let isVisible = false;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    cursorDot.style.opacity = '1';
-    cursorRing.style.opacity = '1';
-    cursorDot.style.left = `${mouseX}px`;
-    cursorDot.style.top = `${mouseY}px`;
+    cursorWrapper.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
-    if (!isMoving) {
-      isMoving = true;
-      requestAnimationFrame(renderCursor);
+    if (!isVisible) {
+      isVisible = true;
+      cursorWrapper.style.opacity = '1';
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => {
+    isVisible = false;
+    cursorWrapper.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', () => {
+    isVisible = true;
+    cursorWrapper.style.opacity = '1';
+  });
+
+  window.addEventListener('mousedown', () => {
+    cursorWrapper.classList.add('cursor-clicking');
+  });
+
+  window.addEventListener('mouseup', () => {
+    cursorWrapper.classList.remove('cursor-clicking');
+  });
+
+  // Delegated hover detection for all interactive and card elements
+  const hoverSelector = 'a, button, input, select, textarea, [role="button"], .card, .arch-ledger-card, .service-premium-card, .hp-service-slab, .faq-question, .hp-visual-composition-frame, .filter-pill, .share-btn, .tag-pill, .blog-card, .floating-btn, .nav-link, .brand-logo';
+
+  document.addEventListener('mouseover', (e) => {
+    if (e.target && e.target.closest && e.target.closest(hoverSelector)) {
+      cursorWrapper.classList.add('cursor-active');
     }
   });
 
-  function renderCursor() {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-
-    cursorRing.style.left = `${ringX}px`;
-    cursorRing.style.top = `${ringY}px`;
-
-    if (Math.abs(mouseX - ringX) > 0.1 || Math.abs(mouseY - ringY) > 0.1) {
-      requestAnimationFrame(renderCursor);
-    } else {
-      isMoving = false;
+  document.addEventListener('mouseout', (e) => {
+    if (e.target && e.target.closest && e.target.closest(hoverSelector)) {
+      const related = e.relatedTarget;
+      if (!related || !related.closest || !related.closest(hoverSelector)) {
+        cursorWrapper.classList.remove('cursor-active');
+      }
     }
-  }
-
-  // Interactive Hover Targets
-  const hoverables = document.querySelectorAll('a, button, input, select, textarea, .card, .arch-ledger-card, .service-premium-card, .hp-service-slab, .faq-question, .hp-visual-composition-frame');
-  hoverables.forEach(el => {
-    el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-active'));
-    el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-active'));
   });
 }
 
@@ -250,3 +272,5 @@ function initContactForm() {
     }
   });
 }
+
+

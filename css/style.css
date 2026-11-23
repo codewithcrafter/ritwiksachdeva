@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    RITWIK SACHDEVA — CREATIVE GROWTH LAB
    Award-Winning Digital Creative Strategy Consultancy
    Visual Identity: White (#FFFFFF), Cobalt Blue (#244BFF), Acid Lime (#D5FF45), 
@@ -1324,49 +1324,97 @@ textarea {
 }
 
 /* ==========================================================================
-   9. CUSTOM ANIMATED CURSOR (CREATIVE GROWTH LAB)
+   9. CUSTOM ANIMATED CURSOR
+   Hide native operating system mouse cursor completely on pointer devices.
+   Only the custom circular cursor (ring + centered dot) is shown.
    ========================================================================== */
-.custom-cursor-dot {
+@media (pointer: fine) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10px;
-  height: 10px;
-  background-color: var(--cobalt-blue);
-  border-radius: 50%;
+  width: 0;
+  height: 0;
   pointer-events: none;
-  z-index: 999999;
-  transform: translate(-50%, -50%);
+  z-index: 9999999;
   opacity: 0;
   transition: opacity 0.2s ease;
+  will-change: transform;
 }
 
 .custom-cursor-ring {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--cobalt-blue);
-  background-color: rgba(36, 75, 255, 0.04);
+  width: 36px;
+  height: 36px;
+  transform: translate(-50%, -50%);
+  border: 2px solid #2563EB;
+  background-color: rgba(37, 99, 235, 0.05);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 999998;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: width 0.26s cubic-bezier(0.16, 1, 0.3, 1),
-    height 0.26s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              transform 0.15s ease;
 }
 
-.custom-cursor-ring.cursor-active {
-  width: 64px;
-  height: 64px;
-  border-color: #0F172A;
-  background-color: var(--acid-lime-light);
-  box-shadow: 0 0 24px rgba(213, 255, 69, 0.45);
+.custom-cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  background-color: #2563EB;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+/* Hover state on interactive elements */
+.custom-cursor.cursor-active .custom-cursor-ring {
+  width: 50px;
+  height: 50px;
+  border-color: #1D4ED8;
+  background-color: rgba(212, 245, 66, 0.25);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+}
+
+.custom-cursor.cursor-active .custom-cursor-dot {
+  background-color: #1D4ED8;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Click state on mouse press */
+.custom-cursor.cursor-clicking .custom-cursor-ring {
+  width: 28px;
+  height: 28px;
+  background-color: rgba(37, 99, 235, 0.2);
+}
+
+.custom-cursor.cursor-clicking .custom-cursor-dot {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Hide custom cursor completely on touch/mobile devices */
+@media (pointer: coarse) {
+  .custom-cursor,
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
 }
 
 /* ==========================================================================
@@ -2492,6 +2540,10 @@ body.modal-open { overflow: hidden; }
   overflow: hidden;
   border-radius: 24px;
   box-shadow: 10px 10px 0 #0F172A;
+  min-height: 0;
+  max-height: min(760px, calc(100vh - 40px));
+  transform-origin: center center;
+  will-change: transform;
 }
 .consultation-popup-header {
   position: relative;
@@ -2511,7 +2563,7 @@ body.modal-open { overflow: hidden; }
 .consultation-popup-badge::before { content: ''; position: absolute; left: 11px; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: #A3E635; transform: translateY(-50%); animation: popup-status-pulse 1.25s ease-in-out infinite; }
 .consultation-popup-close { top: 20px; right: 20px; width: 40px; height: 40px; border: 2px solid #0F172A; border-radius: 12px; box-shadow: 2px 2px 0 #0F172A; }
 .consultation-popup-close svg { transition: transform .28s cubic-bezier(.16, 1, .3, 1); }
-.consultation-popup-close:hover { background: #D4F542; color: #0F172A; transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #0F172A; }
+.consultation-popup-close:hover { background: #D4F542; color: #0F172A; transform: translate(-1px, -1px); box-shadow: 3px 3px 0 #0F172A; }
 .consultation-popup-close:hover svg { transform: scale(1.08); }
 .consultation-form-input, .consultation-form-textarea { min-height: 44px; border: 2px solid #CBD5E1; border-radius: 12px; box-shadow: none; }
 .consultation-form-textarea { min-height: 82px; resize: vertical; }
@@ -3190,6 +3242,10 @@ body.modal-open { overflow: hidden; }
 
 body > a.mobile-link,
 body > .mobile-actions { display: none !important; }
+body > .mobile-drawer:not(#mobile-drawer) { display: none !important; }
+@media (min-width: 1025px) {
+  .mobile-drawer-footer { display: none !important; }
+}
 
 /* Some legacy page copies contain stray drawer links after the closed drawer.
    Keep them out of the desktop flow; the real #mobile-drawer remains usable. */
@@ -3257,3 +3313,5 @@ body > .mobile-actions { display: none !important; }
     padding-inline: 0 !important;
   }
 }
+
+

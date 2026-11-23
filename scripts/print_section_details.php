@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_home_body.html');
 
 $doc = new DOMDocument();
@@ -23,3 +23,4 @@ foreach ($sections as $s) {
         echo "  LINK: " . trim($a->textContent) . " => " . $a->getAttribute('href') . "\n";
     }
 }
+

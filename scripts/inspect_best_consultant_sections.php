@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 
 $doc = new DOMDocument();
@@ -20,4 +20,5 @@ foreach ($images as $img) {
 echo "\n=== SVG ICONS ===\n";
 $svgs = $xpath->query('//svg');
 echo "Total SVGs: " . $svgs->length . "\n";
+
 

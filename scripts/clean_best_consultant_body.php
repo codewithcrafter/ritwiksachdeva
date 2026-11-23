@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 
 // Replace images with local assets
@@ -36,4 +36,5 @@ $html = str_replace('/contact-us/', 'contact.html', $html);
 
 file_put_contents(__DIR__ . '/clean_best_consultant_main.html', $html);
 echo "Cleaned body saved (" . strlen($html) . " bytes)\n";
+
 

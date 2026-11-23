@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 function print_context($html, $searchStr, $chars = 3000)
@@ -18,3 +18,4 @@ function print_context($html, $searchStr, $chars = 3000)
 print_context($html, 'Who This Is For', 2500);
 print_context($html, 'Frequently Asked Questions', 4000);
 print_context($html, 'Digital Marketing Services in Delhi', 3500);
+

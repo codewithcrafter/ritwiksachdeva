@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    HOMEPAGE CREATIVE GROWTH LAB ARCHITECTURE (home-live.css)
    Predominantly White Canvas (#FFFFFF), Cobalt Blue (#244BFF), Acid Lime (#D5FF45)
    Coral (#FF765C) & Ink (#0F172A)
@@ -404,7 +404,7 @@
 }
 /* Legacy footer CTA is replaced by the hover curtain below. */
 #services .arch-ledger-card::after {
-  content: 'EXPLORE PRACTICE  →';
+  content: 'EXPLORE PRACTICE  —'';
   display: block;
   margin-top: 16px;
   padding-top: 12px;
@@ -444,7 +444,7 @@
    action surface. No perspective transform is used on these cards. */
 #services .arch-ledger-card { transform: translateY(0); }
 #services .arch-ledger-card::before {
-  content: 'EXPLORE PRACTICE  →';
+  content: 'EXPLORE PRACTICE  —'';
   position: absolute;
   z-index: 3;
   inset: 0 0 50% 0;
@@ -481,6 +481,13 @@
 #services .sliding-drawer-curtain.is-drawer-open { animation: drawer-curtain-open .62s cubic-bezier(.16,1,.3,1) var(--drawer-delay) both; }
 @keyframes drawer-curtain-open { from { clip-path: inset(0 100% 0 0 round 9px); } to { clip-path: inset(0 0 0 0 round 9px); } }
 #services .arch-ledger-grid::before { content: none; display: none; }
+#services .sliding-drawer-curtain,
+#services .sliding-drawer-curtain.is-drawer-open {
+  animation: none !important;
+  clip-path: inset(0 0 0 0 round 9px) !important;
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) { .staggered-letter-wave .letter-wave-word > span { opacity: 1; transform: none; transition: none; animation: none !important; } #services .arch-ledger-card.conic-border-trace { animation: none; } #services .sliding-drawer-curtain { clip-path: none; transition: none; } }
 
 /* Readability and centered editorial rhythm */
@@ -816,6 +823,24 @@
 }
 #results-focused-marketing .arch-kpi-title { font-size: 1.22rem; line-height: 1.35; }
 #results-focused-marketing .arch-kpi-desc { font-size: 1rem; line-height: 1.72; }
+
+/* Wider editorial reading rails with consistent 4cm desktop gutters. */
+@media (min-width: 1200px) {
+  #choosing-consultant > .hp-container,
+  #authority-demand > .hp-container,
+  #trusted-businesses-searching > .hp-container {
+    width: calc(100% - 8cm);
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+  #choosing-consultant .hp-h2,
+  #authority-demand .hp-h2,
+  #trusted-businesses-searching .hp-h2 { max-width: 1100px; }
+  #choosing-consultant .hp-body,
+  #authority-demand .hp-body,
+  #trusted-businesses-searching .hp-body { max-width: 1100px !important; }
+}
 @media (max-width: 900px) {
   #results-focused-marketing { padding: 72px 0; }
   #results-focused-marketing .arch-kpi-matrix-grid { margin-top: 30px; }
@@ -1056,3 +1081,5 @@
   max-width: 680px;
   margin: 0 auto 38px auto;
 }
+
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Schema Validator & JSON-LD Inspector
  */
@@ -89,4 +89,5 @@ $sampleSchema = $sampleBlog ? SeoManager::getBlogSchema($sampleBlog, [['name' =>
 </div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

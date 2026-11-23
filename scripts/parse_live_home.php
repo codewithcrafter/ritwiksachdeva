@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/live_home.html');
 
 $doc = new DOMDocument();
@@ -23,3 +23,4 @@ foreach ($headings as $h) {
 echo "\n=== ALL SECTIONS / BLOCKS ===\n";
 $sections = $xpath->query('//section | //main | //article | //div[contains(@class, "elementor-section")]');
 echo "Found " . $sections->length . " structural sections\n";
+

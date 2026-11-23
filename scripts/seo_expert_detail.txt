@@ -1,8 +1,8 @@
-TITLE: SEO Expert in Delhi | Technical &amp; Local SEO – Ritwik Sachdeva
+﻿TITLE: SEO Expert in Delhi | Technical &amp; Local SEO �?" Ritwik Sachdeva
 DESC: Hire an SEO expert in Delhi for technical SEO, local SEO &amp; organic growth strategies. Ritwik Sachdeva delivers real results. Book a free consultation today!
 
 HEADINGS:
-h1: SEO Expert in Delhi — Ritwik Sachdeva
+h1: SEO Expert in Delhi �?" Ritwik Sachdeva
 h2: Technical SEO &amp; Auditing
 h3: Crawlability &amp; Indexability
 h3: Site Architecture
@@ -51,3 +51,4 @@ Diagnosing what&#8217;s actually happening &#8211; impressions, click-through ra
 Checking whether a traffic drop lines up with a known Google update or points to something else entirely
 
 Expanded research and topic clustering built around search intent, relevance and volume &#8211; so content targets what people are actually looking for, not just what&#8217;s easy to write.
+

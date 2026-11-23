@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * GENERATE ALL 11 INDIVIDUAL SERVICE PAGES
  * Aligned with real content, headings and meta from www.ritwiksachdeva.in
@@ -171,7 +171,7 @@ $services = [
         'subtitle' => 'Data-driven paid media execution across Meta, Google, and LinkedIn engineered around unit economics, contribution margins, and real revenue.',
         'stats' => [
             ['val' => '5.8x', 'label' => 'Peak Blended ROAS'],
-            ['val' => '₹12 Cr+', 'label' => 'Ad Spend Managed'],
+            ['val' => ',12 Cr+', 'label' => 'Ad Spend Managed'],
             ['val' => '100%', 'label' => 'Server-Side CAPI Setup'],
             ['val' => '-38%', 'label' => 'Customer Acquisition Cost']
         ],
@@ -213,7 +213,7 @@ $services = [
         'faqs' => [
             [
                 'q' => 'What ad budget is required to begin performance marketing consulting?',
-                'a' => 'We typically work with brands deploying at least ₹75,000 to ₹10,00,000+ per month in ad spend, ensuring sufficient data density for statistical testing and algorithmic bidding.'
+                'a' => 'We typically work with brands deploying at least ,75,000 to ,10,00,000+ per month in ad spend, ensuring sufficient data density for statistical testing and algorithmic bidding.'
             ],
             [
                 'q' => 'How do you combat signal loss from iOS 14+ and privacy updates?',
@@ -244,7 +244,7 @@ $services = [
             ['val' => '9.4/10', 'label' => 'Avg. Quality Score'],
             ['val' => '42%', 'label' => 'Lower Cost Per Click'],
             ['val' => 'Zero', 'label' => 'Wasted Search Spend'],
-            ['val' => '₹25 Cr+', 'label' => 'Client Revenue Driven']
+            ['val' => ',25 Cr+', 'label' => 'Client Revenue Driven']
         ],
         'problem_title' => 'What a PPC / Google Ads Consultant Actually Does (vs. An Agency)',
         'problem_lead' => 'Most generic agencies turn on smart campaigns, add broad-match keywords, and let Google spend your budget on irrelevant search queries. A dedicated PPC consultant audits search term reports daily, eliminates waste, and optimizes for sales.',
@@ -667,7 +667,7 @@ $services = [
         'meta_desc' => 'Looking for the best digital marketing consultant in Delhi? Ritwik Sachdeva delivers data-driven SEO, PPC & social media strategies. Book a free consultation!',
         'subtitle' => 'Senior strategic marketing consulting, commercial roadmaps, and full-funnel execution trusted by ambitious founders, SMEs, and enterprise leaders.',
         'stats' => [
-            ['val' => '₹50 Cr+', 'label' => 'Client Revenue & Pipeline Driven'],
+            ['val' => ',50 Cr+', 'label' => 'Client Revenue & Pipeline Driven'],
             ['val' => '8+ Yrs', 'label' => 'Marketing Consulting Leadership'],
             ['val' => '94%', 'label' => 'Long-Term Client Retention Rate'],
             ['val' => '1-on-1', 'label' => 'Direct Access to Ritwik Sachdeva']
@@ -709,7 +709,7 @@ $services = [
         ],
         'faqs' => [
             [
-                'q' => 'What makes Ritwik Sachdeva Delhi’s best digital marketing consultant?',
+                'q' => 'What makes Ritwik Sachdeva Delhi—Ts best digital marketing consultant?',
                 'a' => 'Ritwik combines hands-on technical execution (SEO, PPC, Web Architecture) with executive-level commercial strategy. You work directly with an experienced growth leader, not junior agency interns.'
             ],
             [
@@ -1231,7 +1231,7 @@ foreach ($services as $key => $s) {
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">01</span>
-              <span class="process-phase">Week 1–2</span>
+              <span class="process-phase">Week 1—2</span>
             </div>
             <h3 class="process-step-title">Forensic Audit &amp; Baseline</h3>
             <p class="process-step-text">Comprehensive diagnostic of historical performance, account architecture, tracking fidelity, competitor positioning, and customer unit economics.</p>
@@ -1240,7 +1240,7 @@ foreach ($services as $key => $s) {
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">02</span>
-              <span class="process-phase">Week 2–3</span>
+              <span class="process-phase">Week 2—3</span>
             </div>
             <h3 class="process-step-title">Architecture &amp; Foundation</h3>
             <p class="process-step-text">Rebuilding technical infrastructure, configuring first-party tracking, cleaning catalog feeds, eliminating ad waste, and establishing operational benchmarks.</p>
@@ -1249,7 +1249,7 @@ foreach ($services as $key => $s) {
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">03</span>
-              <span class="process-phase">Week 4–8</span>
+              <span class="process-phase">Week 4—8</span>
             </div>
             <h3 class="process-step-title">Execution &amp; Sprints</h3>
             <p class="process-step-text">Aggressive deployment of new campaigns, creative testing frameworks, CRO iterations, and high-tempo optimizations to achieve initial target CPA/ROAS.</p>
@@ -1401,4 +1401,6 @@ HTML;
 }
 
 echo "All 11 service pages generated successfully!\n";
+
+
 

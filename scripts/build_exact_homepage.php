@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * BUILD EXACT HOMEPAGE (HEADER & FOOTER PRESERVED)
  * Content & Structure 100% identical to live site https://www.ritwiksachdeva.in/
@@ -31,3 +31,4 @@ if (preg_match($mainPattern, $indexContent)) {
 
 file_put_contents(__DIR__ . '/../index.html', $indexContent);
 echo "index.html updated successfully! (" . strlen($indexContent) . " bytes)\n";
+

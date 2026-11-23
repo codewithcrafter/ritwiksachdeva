@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Media Library
  * Secure file upload, dimension inspection, gallery management & URL copying
@@ -194,4 +194,5 @@ $mediaFiles = $pdo->query("SELECT * FROM media_library ORDER BY created_at DESC"
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * CLEAN AND FIX ALL NAVBAR DROPDOWNS AND MOBILE MENUS ACROSS ALL PAGES
  */
@@ -55,4 +55,5 @@ foreach ($allFiles as $filePath) {
 }
 
 echo "Navbar cleanup complete!\n";
+
 

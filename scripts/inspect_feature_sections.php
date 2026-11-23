@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 
 function printSnippet($title, $startStr, $len = 1000)
@@ -14,7 +14,8 @@ function printSnippet($title, $startStr, $len = 1000)
 }
 
 printSnippet("BRANDS SECTION", "Trusted by Leading Brands");
-printSnippet("RESULTS SECTION", "🚀 Our Results");
+printSnippet("RESULTS SECTION", "ðŸš€ Our Results");
 printSnippet("ABOUT RITWIK CARDS", "About Ritwik Sachdeva");
 printSnippet("SCHEDULE STRATEGY CALL", "Schedule Your Free Strategy Call");
+
 

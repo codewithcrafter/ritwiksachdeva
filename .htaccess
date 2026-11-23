@@ -64,6 +64,7 @@ RewriteRule ^service-b2b-lead-generation\.html$ /services/performance-marketing/
 RewriteRule ^service-content-marketing\.html$ /services/smo-services/ [R=301,L]
 RewriteRule ^service-marketing-analytics\.html$ /services/performance-marketing/ [R=301,L]
 RewriteRule ^service-best-marketing-consultant\.html$ /services/ [R=301,L]
+RewriteRule ^services/marketing-consultant/?$ /services/ [R=301,L]
 
 # Blog article pages
 RewriteCond %{THE_REQUEST} \s/+blog-business-growth-strategy\.html(?:[?\s]) [NC]
@@ -85,7 +86,7 @@ RewriteRule ^blog-marketing-strategies\.html$ /blog/marketing-strategies/ [R=301
 RewriteRule ^about/?$ about.html [END,QSA]
 RewriteRule ^services/?$ services.html [END,QSA]
 RewriteRule ^contact/?$ contact.html [END,QSA]
-RewriteRule ^blog/?$ blog.php [END,QSA]
+RewriteRule ^blog/?$ blog.html [END,QSA]
 
 RewriteRule ^services/ecommerce-management/?$ service-ecommerce-management.html [END,QSA]
 RewriteRule ^services/graphic-designer/?$ service-graphic-designer.html [END,QSA]

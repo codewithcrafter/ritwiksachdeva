@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $html = file_get_contents(__DIR__ . '/raw_best_consultant_body.html');
 $pos = strpos($html, 'WHO WE ARE');
 if ($pos !== false) {
@@ -6,4 +6,5 @@ if ($pos !== false) {
 } else {
     echo "WHO WE ARE not found";
 }
+
 
