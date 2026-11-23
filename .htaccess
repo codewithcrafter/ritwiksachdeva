@@ -5,7 +5,114 @@
 RewriteEngine On
 RewriteBase /
 
-# 1. Protect Sensitive Files & Directories
+# 1. Canonical 301 Redirects from physical .html / .php files to clean URLs
+# Uses %{THE_REQUEST} to prevent redirect loops when internal rewrites occur.
+
+# Homepage
+RewriteCond %{THE_REQUEST} \s/+index\.(?:html|php)(?:[?\s]) [NC]
+RewriteRule ^index\.(?:html|php)$ / [R=301,L]
+
+# Main pages
+RewriteCond %{THE_REQUEST} \s/+about\.html(?:[?\s]) [NC]
+RewriteRule ^about\.html$ /about/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+services\.html(?:[?\s]) [NC]
+RewriteRule ^services\.html$ /services/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+contact\.html(?:[?\s]) [NC]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+blog\.(?:html|php)(?:[?\s]) [NC]
+RewriteRule ^blog\.(?:html|php)$ /blog/ [R=301,L]
+
+# Service pages
+RewriteCond %{THE_REQUEST} \s/+service-ecommerce-management\.html(?:[?\s]) [NC]
+RewriteRule ^service-ecommerce-management\.html$ /services/ecommerce-management/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-graphic-designer\.html(?:[?\s]) [NC]
+RewriteRule ^service-graphic-designer\.html$ /services/graphic-designer/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-performance-marketing\.html(?:[?\s]) [NC]
+RewriteRule ^service-performance-marketing\.html$ /services/performance-marketing/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-ppc-expert\.html(?:[?\s]) [NC]
+RewriteRule ^service-ppc-expert\.html$ /services/ppc-expert/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-product-shoot\.html(?:[?\s]) [NC]
+RewriteRule ^service-product-shoot\.html$ /services/product-shoot/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-seo-expert\.html(?:[?\s]) [NC]
+RewriteRule ^service-seo-expert\.html$ /services/seo-expert/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-smo-services\.html(?:[?\s]) [NC]
+RewriteRule ^service-smo-services\.html$ /services/smo-services/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-social-media-marketing\.html(?:[?\s]) [NC]
+RewriteRule ^service-social-media-marketing\.html$ /services/social-media-marketing/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-video-editing\.html(?:[?\s]) [NC]
+RewriteRule ^service-video-editing\.html$ /services/video-editing/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+service-website-designer\.html(?:[?\s]) [NC]
+RewriteRule ^service-website-designer\.html$ /services/website-designer/ [R=301,L]
+
+# Legacy Service Aliases
+RewriteRule ^service-fractional-cmo\.html$ /services/ [R=301,L]
+RewriteRule ^service-brand-strategy\.html$ /services/graphic-designer/ [R=301,L]
+RewriteRule ^service-seo-consulting\.html$ /services/seo-expert/ [R=301,L]
+RewriteRule ^service-b2b-lead-generation\.html$ /services/performance-marketing/ [R=301,L]
+RewriteRule ^service-content-marketing\.html$ /services/smo-services/ [R=301,L]
+RewriteRule ^service-marketing-analytics\.html$ /services/performance-marketing/ [R=301,L]
+RewriteRule ^service-best-marketing-consultant\.html$ /services/ [R=301,L]
+
+# Blog article pages
+RewriteCond %{THE_REQUEST} \s/+blog-business-growth-strategy\.html(?:[?\s]) [NC]
+RewriteRule ^blog-business-growth-strategy\.html$ /blog/business-growth-strategy/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+blog-ai-in-business\.html(?:[?\s]) [NC]
+RewriteRule ^blog-ai-in-business\.html$ /blog/ai-in-business/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+blog-digital-transformation-strategies\.html(?:[?\s]) [NC]
+RewriteRule ^blog-digital-transformation-strategies\.html$ /blog/digital-transformation-strategies/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+blog-leadership-skills\.html(?:[?\s]) [NC]
+RewriteRule ^blog-leadership-skills\.html$ /blog/leadership-skills/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+blog-marketing-strategies\.html(?:[?\s]) [NC]
+RewriteRule ^blog-marketing-strategies\.html$ /blog/marketing-strategies/ [R=301,L]
+
+# 2. Internal Rewrites from clean URLs to physical files
+RewriteRule ^about/?$ about.html [END,QSA]
+RewriteRule ^services/?$ services.html [END,QSA]
+RewriteRule ^contact/?$ contact.html [END,QSA]
+RewriteRule ^blog/?$ blog.php [END,QSA]
+
+RewriteRule ^services/ecommerce-management/?$ service-ecommerce-management.html [END,QSA]
+RewriteRule ^services/graphic-designer/?$ service-graphic-designer.html [END,QSA]
+RewriteRule ^services/performance-marketing/?$ service-performance-marketing.html [END,QSA]
+RewriteRule ^services/ppc-expert/?$ service-ppc-expert.html [END,QSA]
+RewriteRule ^services/product-shoot/?$ service-product-shoot.html [END,QSA]
+RewriteRule ^services/seo-expert/?$ service-seo-expert.html [END,QSA]
+RewriteRule ^services/smo-services/?$ service-smo-services.html [END,QSA]
+RewriteRule ^services/social-media-marketing/?$ service-social-media-marketing.html [END,QSA]
+RewriteRule ^services/video-editing/?$ service-video-editing.html [END,QSA]
+RewriteRule ^services/website-designer/?$ service-website-designer.html [END,QSA]
+
+RewriteRule ^blog/business-growth-strategy/?$ blog-business-growth-strategy.html [END,QSA]
+RewriteRule ^blog/ai-in-business/?$ blog-ai-in-business.html [END,QSA]
+RewriteRule ^blog/digital-transformation-strategies/?$ blog-digital-transformation-strategies.html [END,QSA]
+RewriteRule ^blog/leadership-skills/?$ blog-leadership-skills.html [END,QSA]
+RewriteRule ^blog/marketing-strategies/?$ blog-marketing-strategies.html [END,QSA]
+
+# Dynamic Blog detail routes (/blog/:slug -> blog-detail.php?slug=:slug)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog-detail.php?slug=$1 [L,QSA]
+
+# Admin route (/admin -> admin/index.php)
+RewriteRule ^admin/?$ admin/index.php [L,QSA]
+
+# 3. Protect Sensitive Files & Directories
 <FilesMatch "(\.sql|\.log|\.env|composer\.(json|lock)|package(-lock)?\.json)$">
     <IfModule mod_authz_core.c>
         Require all denied
@@ -19,28 +126,7 @@ RewriteBase /
 # Protect database directory
 RewriteRule ^database/ - [F,L]
 
-# 2. 301 Redirects for Legacy Service URLs
-RewriteRule ^service-fractional-cmo\.html$ service-best-marketing-consultant.html [R=301,L]
-RewriteRule ^service-brand-strategy\.html$ service-graphic-designer.html [R=301,L]
-RewriteRule ^service-seo-consulting\.html$ service-seo-expert.html [R=301,L]
-RewriteRule ^service-b2b-lead-generation\.html$ service-performance-marketing.html [R=301,L]
-RewriteRule ^service-content-marketing\.html$ service-smo-services.html [R=301,L]
-RewriteRule ^service-marketing-analytics\.html$ service-performance-marketing.html [R=301,L]
-
-# 3. Clean URLs for Blog CMS
-# /blog -> blog.php
-RewriteRule ^blog/?$ blog.php [L,QSA]
-
-# /blog/:slug -> blog-detail.php?slug=:slug
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog-detail.php?slug=$1 [L,QSA]
-
-# 4. Clean URLs for Admin Portal
-# /admin -> admin/index.php
-RewriteRule ^admin/?$ admin/index.php [L,QSA]
-
-# 5. Security Headers (where supported)
+# 4. Security Headers (where supported)
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
@@ -48,5 +134,5 @@ RewriteRule ^admin/?$ admin/index.php [L,QSA]
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# 6. UTF-8 Encoding
+# 5. UTF-8 Encoding
 AddDefaultCharset UTF-8

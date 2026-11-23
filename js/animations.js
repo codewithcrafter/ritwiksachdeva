@@ -7,7 +7,79 @@
 document.addEventListener('DOMContentLoaded', () => {
   initScrollReveals();
   initAnimatedCounters();
+  initPracticeCardHighlights();
+  initAboutPageEffects();
 });
+
+function initAboutPageEffects() {
+  const page = document.querySelector('.about-page');
+  if (!page) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cards = [...page.querySelectorAll('.about-source-copy, .about-source-portrait, .about-source-step, .about-source-video, .about-source-cta')];
+
+  cards.forEach(card => card.classList.add('about-cascade'));
+  if (reduceMotion) {
+    cards.forEach(card => card.classList.add('is-about-visible'));
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const index = cards.indexOf(entry.target);
+        window.setTimeout(() => entry.target.classList.add('is-about-visible'), Math.max(0, index) * 80);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -40px' });
+    cards.forEach(card => observer.observe(card));
+  }
+
+  if (!reduceMotion && !window.matchMedia('(pointer: coarse)').matches) {
+    page.querySelectorAll('.about-source-copy, .about-source-portrait, .about-source-step, .about-source-video').forEach(card => {
+      card.addEventListener('mousemove', event => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        card.style.setProperty('--about-x', `${x * 100}%`);
+        card.style.setProperty('--about-y', `${y * 100}%`);
+        card.style.transform = `perspective(900px) rotateX(${(y - .5) * -7}deg) rotateY(${(x - .5) * 7}deg)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+
+    const badge = page.querySelector('.about-scramble-badge');
+    if (badge) {
+      const original = badge.textContent.trim();
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      badge.addEventListener('mouseenter', () => {
+        let frame = 0;
+        const timer = window.setInterval(() => {
+          badge.textContent = original.split('').map((char, index) => index < frame / 2 ? char : (char === ' ' ? ' ' : characters[Math.floor(Math.random() * characters.length)])).join('');
+          if (++frame > original.length * 2) { window.clearInterval(timer); badge.textContent = original; }
+        }, 28);
+      });
+    }
+  }
+}
+
+function initPracticeCardHighlights() {
+  const cards = document.querySelectorAll('#services .arch-ledger-card');
+  if (!cards.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    cards.forEach(card => card.classList.add('is-highlighted'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const index = [...cards].indexOf(entry.target);
+      window.setTimeout(() => entry.target.classList.add('is-highlighted'), index * 90);
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -45px' });
+
+  cards.forEach(card => observer.observe(card));
+}
 
 /**
  * Initializes IntersectionObserver for elements with reveal classes

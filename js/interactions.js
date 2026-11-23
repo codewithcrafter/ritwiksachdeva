@@ -13,9 +13,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initMagneticButtons();
-  init3DCardTilt();
+  // 3D card tilt disabled across the site in favor of restrained CSS hover feedback
   initStatsCounters();
-  initFaqAccordion();
+  // FAQs are initialized centrally in main.js to prevent duplicate click handlers.
   initScrollProgress();
   initContactForm();
   prefillServiceFromUrl();
@@ -98,15 +98,19 @@ function initCustomCursor() {
  * 2. Magnetic Buttons with Spring Physics
  */
 function initMagneticButtons() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
   const magneticElements = document.querySelectorAll('.btn-primary, .hp-btn-primary, .rs-ecom-btn, .arch-cta-btn, .brand-monogram, .back-to-top-btn');
 
   magneticElements.forEach(el => {
+    if (el.dataset.magneticBound) return;
+    el.dataset.magneticBound = 'true';
+
     el.addEventListener('mousemove', (e) => {
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
-      el.style.transform = `translate(${x * 0.28}px, ${y * 0.28}px)`;
+      el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
     });
 
     el.addEventListener('mouseleave', () => {
@@ -121,36 +125,9 @@ function initMagneticButtons() {
 }
 
 /**
- * 3. 3D Perspective Card Tilt
+ * 3. Card Hover (3D Perspective Card Tilt disabled)
+ * Cards retain restrained, elegant CSS hover feedback (translateY, border-color, shadow).
  */
-function init3DCardTilt() {
-  const cards = document.querySelectorAll('.card, .arch-ledger-card, .arch-kpi-card, .service-premium-card, .hp-stat-ledger-item, .metric-strip-item, .hp-visual-composition-frame');
-
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(-2px, -2px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translate(0px, 0px)';
-      card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
-    });
-
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'none';
-    });
-  });
-}
 
 /**
  * 4. Animated Statistics Counters

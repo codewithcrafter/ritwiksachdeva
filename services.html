@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,11 +12,11 @@
   <meta name="description"
     content="Explore all 11 core consulting and execution services by Ritwik Sachdeva: E-Commerce Management, Graphic Design, Performance Marketing, PPC, Product Shoots, SEO, SMO, SMM, Video Editing, Consulting &amp; Web Design.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="http://localhost:8000/services.html">
+  <link rel="canonical" href="/services/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://localhost:8000/services.html">
+  <meta property="og:url" content="/services/">
   <meta property="og:title" content="Marketing Consulting &amp; Growth Services | Ritwik Sachdeva">
   <meta property="og:description"
     content="11 specialized services built to engineer predictable revenue, technical SEO moats, and high-converting creative assets.">
@@ -39,7 +40,7 @@
         "@type": "Person",
         "name": "Ritwik Sachdeva",
         "jobTitle": "Strategic Digital Marketing Consultant & Fractional CMO",
-        "url": "http://localhost:8000/about.html"
+        "url": "/about/"
       },
       {
         "@type": "Service",
@@ -69,9 +70,33 @@
   </div>
 
   <!-- HEADER / NAVBAR -->
+  <!-- SITE HEADER / NAVBAR -->
+  <!-- SITE HEADER / NAVBAR -->
+  <!-- SITE HEADER / NAVBAR -->
   <header class="site-header" id="navbar">
+    <!-- Top Contact Links Bar -->
+    <div class="header-top-bar">
+      <div class="container header-top-inner">
+        <div class="header-top-left">
+          <span class="top-status-indicator"></span>
+          <span class="top-status-text">Available for Q1 Consulting &amp; Growth Audits</span>
+        </div>
+        <div class="header-top-right">
+          <a href="mailto:Info@ritwiksachdeva.in" class="top-contact-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>Info@ritwiksachdeva.in</span>
+          </a>
+          <span class="top-bar-divider" aria-hidden="true">&bull;</span>
+          <a href="tel:+919289626986" class="top-contact-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>+91 92896 26986</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="container nav-container">
-      <a href="index.html" class="brand-logo" aria-label="Ritwik Sachdeva - Digital Marketing Consultant">
+      <a href="/" class="brand-logo" aria-label="Ritwik Sachdeva - Digital Marketing Consultant">
         <div class="brand-monogram">RS</div>
         <div class="brand-info">
           <span class="brand-name">Ritwik Sachdeva</span>
@@ -79,97 +104,90 @@
         </div>
       </a>
 
-      <!-- Desktop Navigation -->
+      <!-- Desktop Navigation with Dropdown -->
       <nav class="desktop-nav" aria-label="Primary Navigation">
         <ul class="nav-links">
-          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="/about/" class="nav-link">About</a></li>
           <li class="nav-item nav-item-has-dropdown">
-            <a href="services.html" class="nav-link dropdown-toggle active" aria-expanded="false" aria-haspopup="true">
-              Services
+            <a href="/services/" class="nav-link dropdown-toggle active" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span>
               <svg class="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5">
+                stroke-width="2.5" aria-hidden="true" focusable="false">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </a>
             <div class="nav-dropdown-menu" role="menu">
   <div class="nav-dropdown-header">
     <span class="dropdown-header-title">All Services &amp; Practices</span>
-    <span class="dropdown-header-tag">11 Services</span>
+    <span class="dropdown-header-tag">10 Services</span>
   </div>
   <div class="nav-dropdown-list">
-    <a href="service-ecommerce-management.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/ecommerce-management/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">01</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">E-Commerce Management</div>
         <div class="dropdown-item-desc">Amazon, Flipkart &amp; Shopify Growth</div>
       </div>
     </a>
-    <a href="service-graphic-designer.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/graphic-designer/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">02</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Graphic Designer</div>
         <div class="dropdown-item-desc">Brand Identity, Logos &amp; Visual Assets</div>
       </div>
     </a>
-    <a href="service-performance-marketing.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/performance-marketing/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">03</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Performance Marketing Consultant in Delhi</div>
         <div class="dropdown-item-desc">Meta &amp; Google Paid Media Scaling</div>
       </div>
     </a>
-    <a href="service-ppc-expert.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/ppc-expert/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">04</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">PPC Expert in Delhi</div>
         <div class="dropdown-item-desc">Google Ads, PMax &amp; Shopping Campaigns</div>
       </div>
     </a>
-    <a href="service-product-shoot.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/product-shoot/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">05</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Product Shoot Services in Delhi</div>
         <div class="dropdown-item-desc">E-Commerce &amp; High-Conversion Photography</div>
       </div>
     </a>
-    <a href="service-seo-expert.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/seo-expert/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">06</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">SEO Expert in Delhi</div>
         <div class="dropdown-item-desc">Technical, Local &amp; Organic Search Growth</div>
       </div>
     </a>
-    <a href="service-smo-services.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/smo-services/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">07</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">SMO Services in Delhi</div>
         <div class="dropdown-item-desc">Social Media Optimization &amp; Reach</div>
       </div>
     </a>
-    <a href="service-social-media-marketing.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/social-media-marketing/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">08</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Social Media Marketing Agency in Delhi</div>
         <div class="dropdown-item-desc">Organic Engagement &amp; Viral Campaigns</div>
       </div>
     </a>
-    <a href="service-video-editing.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/video-editing/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">09</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Video Editing Services in Delhi</div>
         <div class="dropdown-item-desc">Reels, Shorts, Video Ads &amp; Longform</div>
       </div>
     </a>
-    <a href="service-best-marketing-consultant.html" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/website-designer/" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">10</span>
-      <div class="dropdown-item-body">
-        <div class="dropdown-item-title">best marketing consultant</div>
-        <div class="dropdown-item-desc">Strategic Full-Funnel Business Consulting</div>
-      </div>
-    </a>
-    <a href="service-website-designer.html" class="nav-dropdown-item" role="menuitem">
-      <span class="dropdown-item-num">11</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Website Designer in Delhi</div>
         <div class="dropdown-item-desc">Custom Web Development &amp; Shopify Stores</div>
@@ -177,22 +195,22 @@
     </a>
   </div>
   <div class="nav-dropdown-footer">
-    <a href="services.html" class="dropdown-view-all">
+    <a href="/services/" class="dropdown-view-all">
       <span>View Comprehensive Services Catalog</span>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
   </div>
 </div>
           </li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="/blog/" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="/contact/" class="nav-link">Contact</a></li>
         </ul>
         <div class="nav-actions">
-          <a href="contact.html" class="btn btn-primary btn-sm btn-magnetic">
-            Let's Talk
-            <span class="btn-icon-right">
+          <a href="/contact/" class="btn btn-primary btn-sm btn-magnetic">
+            <span>Let's Talk</span>
+            <span class="btn-icon-right" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
@@ -211,53 +229,55 @@
   </header>
 
   <!-- Mobile Drawer -->
+  <!-- Mobile Drawer Navigation -->
   <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
     <div class="mobile-links">
-      <a href="index.html" class="mobile-link">Home</a>
-      <a href="about.html" class="mobile-link">About</a>
+      <a href="/" class="mobile-link">Home</a>
+      <a href="/about/" class="mobile-link">About</a>
       <div class="mobile-nav-item-dropdown">
         <div class="mobile-dropdown-header-row">
-          <a href="services.html" class="mobile-link active">Services</a>
+          <a href="/services/" class="mobile-link active">Services</a>
           <button class="mobile-submenu-btn" aria-label="Toggle Services submenu" aria-expanded="false">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </button>
         </div>
         <div class="mobile-submenu">
-  <a href="service-ecommerce-management.html" class="mobile-sublink">01. E-Commerce Management</a>
-  <a href="service-graphic-designer.html" class="mobile-sublink">02. Graphic Designer</a>
-  <a href="service-performance-marketing.html" class="mobile-sublink">03. Performance Marketing Consultant in Delhi</a>
-  <a href="service-ppc-expert.html" class="mobile-sublink">04. PPC Expert in Delhi</a>
-  <a href="service-product-shoot.html" class="mobile-sublink">05. Product Shoot Services in Delhi</a>
-  <a href="service-seo-expert.html" class="mobile-sublink">06. SEO Expert in Delhi</a>
-  <a href="service-smo-services.html" class="mobile-sublink">07. SMO Services in Delhi</a>
-  <a href="service-social-media-marketing.html" class="mobile-sublink">08. Social Media Marketing Agency in Delhi</a>
-  <a href="service-video-editing.html" class="mobile-sublink">09. Video Editing Services in Delhi</a>
-  <a href="service-best-marketing-consultant.html" class="mobile-sublink">10. best marketing consultant</a>
-  <a href="service-website-designer.html" class="mobile-sublink">11. Website Designer in Delhi</a>
+  <a href="/services/ecommerce-management/" class="mobile-sublink">01. E-Commerce Management</a>
+  <a href="/services/graphic-designer/" class="mobile-sublink">02. Graphic Designer</a>
+  <a href="/services/performance-marketing/" class="mobile-sublink">03. Performance Marketing Consultant in Delhi</a>
+  <a href="/services/ppc-expert/" class="mobile-sublink">04. PPC Expert in Delhi</a>
+  <a href="/services/product-shoot/" class="mobile-sublink">05. Product Shoot Services in Delhi</a>
+  <a href="/services/seo-expert/" class="mobile-sublink">06. SEO Expert in Delhi</a>
+  <a href="/services/smo-services/" class="mobile-sublink">07. SMO Services in Delhi</a>
+  <a href="/services/social-media-marketing/" class="mobile-sublink">08. Social Media Marketing Agency in Delhi</a>
+  <a href="/services/video-editing/" class="mobile-sublink">09. Video Editing Services in Delhi</a>
+  <a href="/services/website-designer/" class="mobile-sublink">10. Website Designer in Delhi</a>
 </div>
       </div>
-      <a href="blog.html" class="mobile-link">Blog</a>
-      <a href="contact.html" class="mobile-link">Contact</a>
+      <a href="/blog/" class="mobile-link">Blog</a>
+      <a href="/contact/" class="mobile-link">Contact</a>
     </div>
-    <div class="mobile-drawer-footer">
-      <a href="contact.html" class="btn btn-primary btn-lg" style="width: 100%;">
-        Request Strategy Consultation
-        <span class="btn-icon-right">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </span>
-      </a>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-top: 10px;">Direct:
-        consult@ritwiksachdeva.com</p>
+    <div class="mobile-actions">
+      <a href="/contact/" class="btn btn-primary btn-block"><span>Let's Talk</span></a>
     </div>
   </div>
-
-  <main id="main-content">
+      <a href="/blog/" class="mobile-link">Blog</a>
+      <a href="/contact/" class="mobile-link">Contact</a>
+    </div>
+    <div class="mobile-actions">
+      <a href="/contact/" class="btn btn-primary btn-block"><span>Let's Talk</span></a>
+    </div>
+  </div>
+      <a href="/blog/" class="mobile-link">Blog</a>
+      <a href="/contact/" class="mobile-link">Contact</a>
+    </div>
+    <div class="mobile-actions">
+      <a href="/contact/" class="btn btn-primary btn-block">Let's Talk</a>
+    </div>
+  </div>
+<main id="main-content">
 
     <!-- SERVICES HERO -->
     <section class="services-hero">
@@ -266,18 +286,18 @@
           <span class="badge badge-accent">Strategic Marketing Capabilities</span>
           <h1 class="services-title">Services Built for Scalable, Profitable Growth</h1>
           <p class="services-lead">
-            Explore 11 specialized services engineered around commercial truth, unit economics, technical search moats, and high-impact visual creative direction.
+            Explore 10 specialized services engineered around commercial truth, unit economics, technical search moats, and high-impact visual creative direction.
           </p>
         </div>
 
         <!-- Metrics Strip -->
         <div class="services-metrics-strip">
           <div class="metric-strip-item">
-            <div class="metric-strip-val">11</div>
+            <div class="metric-strip-val">10</div>
             <div class="metric-strip-label">Specialized Services</div>
           </div>
           <div class="metric-strip-item">
-            <div class="metric-strip-val">₹50 Cr+</div>
+            <div class="metric-strip-val">â‚¹50 Cr+</div>
             <div class="metric-strip-label">Pipeline Generated</div>
           </div>
           <div class="metric-strip-item">
@@ -301,11 +321,10 @@
 <a href="#performance-marketing" class="subnav-pill">Performance Marketing Consultant in Delhi</a>
 <a href="#ppc-expert" class="subnav-pill">PPC Expert in Delhi | Google Ads Consultant</a>
 <a href="#product-shoot" class="subnav-pill">Product Photography &amp; Shoot Services in Delhi</a>
-<a href="#seo-expert" class="subnav-pill">SEO Expert in Delhi — Technical, On-Page &amp; Local</a>
-<a href="#smo-services" class="subnav-pill">SMO Services in Delhi — Social Media Optimization</a>
+<a href="#seo-expert" class="subnav-pill">SEO Expert in Delhi â€” Technical, On-Page &amp; Local</a>
+<a href="#smo-services" class="subnav-pill">SMO Services in Delhi â€” Social Media Optimization</a>
 <a href="#social-media-marketing" class="subnav-pill">Social Media Marketing Agency in Delhi</a>
 <a href="#video-editing" class="subnav-pill">Video Editing Services in Delhi | Reels &amp; Ads</a>
-<a href="#best-marketing-consultant" class="subnav-pill">Delhi’s Best Digital Marketing Consultant</a>
 <a href="#website-designer" class="subnav-pill">Website Designer in Delhi | Custom Web Development</a>
 
           <a href="#growth-process" class="subnav-pill">Methodology</a>
@@ -341,11 +360,10 @@
 <option value="service-performance-marketing.html">03. Performance Marketing Consultant in Delhi &rarr;</option>
 <option value="service-ppc-expert.html">04. PPC Expert in Delhi | Google Ads Consultant &rarr;</option>
 <option value="service-product-shoot.html">05. Product Photography &amp; Shoot Services in Delhi &rarr;</option>
-<option value="service-seo-expert.html">06. SEO Expert in Delhi — Technical, On-Page &amp; Local &rarr;</option>
-<option value="service-smo-services.html">07. SMO Services in Delhi — Social Media Optimization &rarr;</option>
+<option value="service-seo-expert.html">06. SEO Expert in Delhi â€” Technical, On-Page &amp; Local &rarr;</option>
+<option value="service-smo-services.html">07. SMO Services in Delhi â€” Social Media Optimization &rarr;</option>
 <option value="service-social-media-marketing.html">08. Social Media Marketing Agency in Delhi &rarr;</option>
 <option value="service-video-editing.html">09. Video Editing Services in Delhi | Reels &amp; Ads &rarr;</option>
-<option value="service-best-marketing-consultant.html">10. Delhi’s Best Digital Marketing Consultant &rarr;</option>
 <option value="service-website-designer.html">11. Website Designer in Delhi | Custom Web Development &rarr;</option>
 
             </optgroup>
@@ -355,12 +373,11 @@
 <option value="#performance-marketing">Overview 03: Performance Marketing Consultant in Delhi</option>
 <option value="#ppc-expert">Overview 04: PPC Expert in Delhi | Google Ads Consultant</option>
 <option value="#product-shoot">Overview 05: Product Photography &amp; Shoot Services in Delhi</option>
-<option value="#seo-expert">Overview 06: SEO Expert in Delhi — Technical, On-Page &amp; Local</option>
-<option value="#smo-services">Overview 07: SMO Services in Delhi — Social Media Optimization</option>
+<option value="#seo-expert">Overview 06: SEO Expert in Delhi â€” Technical, On-Page &amp; Local</option>
+<option value="#smo-services">Overview 07: SMO Services in Delhi â€” Social Media Optimization</option>
 <option value="#social-media-marketing">Overview 08: Social Media Marketing Agency in Delhi</option>
 <option value="#video-editing">Overview 09: Video Editing Services in Delhi | Reels &amp; Ads</option>
-<option value="#best-marketing-consultant">Overview 10: Delhi’s Best Digital Marketing Consultant</option>
-<option value="#website-designer">Overview 11: Website Designer in Delhi | Custom Web Development</option>
+<option value="#website-designer">Overview 10: Website Designer in Delhi | Custom Web Development</option>
 
               <option value="#growth-process">4-Phase Consulting Methodology</option>
               <option value="#engagement-models">Engagement Models &amp; Retainers</option>
@@ -461,10 +478,10 @@
               <span class="tool-tag">Amazon Seller Central</span><span class="tool-tag">Flipkart Seller Hub</span><span class="tool-tag">Shopify</span><span class="tool-tag">Helium 10</span><span class="tool-tag">Blinkit / Zepto</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-ecommerce-management.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/ecommerce-management/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -554,10 +571,10 @@
               <span class="tool-tag">Adobe Illustrator</span><span class="tool-tag">Figma</span><span class="tool-tag">Adobe Photoshop</span><span class="tool-tag">InDesign</span><span class="tool-tag">Print CMYK Pre-flight</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-graphic-designer.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/graphic-designer/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -637,7 +654,7 @@
                 <span class="roi-number">5.8x</span>
                 <span class="roi-label">Peak Blended ROAS</span>
               </div>
-              <p class="breakdown-text">₹12 Cr+ in profitably managed ad spend with verified attribution and 38% lower customer acquisition cost.</p>
+              <p class="breakdown-text">â‚¹12 Cr+ in profitably managed ad spend with verified attribution and 38% lower customer acquisition cost.</p>
             </div>
           </div>
 
@@ -647,10 +664,10 @@
               <span class="tool-tag">Meta Ads Manager</span><span class="tool-tag">Google Ads</span><span class="tool-tag">LinkedIn Ads</span><span class="tool-tag">sGTM / CAPI</span><span class="tool-tag">Triple Whale / GA4</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-performance-marketing.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/performance-marketing/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -740,10 +757,10 @@
               <span class="tool-tag">Google Ads</span><span class="tool-tag">Google Merchant Center</span><span class="tool-tag">HubSpot / Zoho CRM</span><span class="tool-tag">Google Tag Manager</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-ppc-expert.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/ppc-expert/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -833,21 +850,21 @@
               <span class="tool-tag">Profoto Strobes</span><span class="tool-tag">Sony Alpha 4K / Medium Format</span><span class="tool-tag">Capture One Pro</span><span class="tool-tag">Adobe Photoshop</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-product-shoot.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/product-shoot/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
           </div>
         </article>
-        <!-- SERVICE CARD 06: SEO Expert in Delhi — Technical, On-Page & Local -->
+        <!-- SERVICE CARD 06: SEO Expert in Delhi â€” Technical, On-Page & Local -->
         <article class="service-premium-card reveal-on-scroll" id="seo-expert">
           <div class="service-card-top">
             <div>
               <span class="service-number-tag">SERVICE 06 / ORGANIC AUTHORITY</span>
-              <h3 class="service-heading">SEO Expert in Delhi — Technical, On-Page & Local</h3>
+              <h3 class="service-heading">SEO Expert in Delhi â€” Technical, On-Page & Local</h3>
               <p style="font-size: 0.95rem; color: var(--accent-primary); font-weight: 600; margin-top: 4px;">Topical Clusters, Core Web Vitals & Google Map Pack Domination</p>
             </div>
             <span class="badge-status">Compounding Retainer</span>
@@ -926,21 +943,21 @@
               <span class="tool-tag">Ahrefs</span><span class="tool-tag">Screaming Frog SEO Spider</span><span class="tool-tag">Google Search Console</span><span class="tool-tag">Semrush</span><span class="tool-tag">Schema Pro</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-seo-expert.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/seo-expert/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
           </div>
         </article>
-        <!-- SERVICE CARD 07: SMO Services in Delhi — Social Media Optimization -->
+        <!-- SERVICE CARD 07: SMO Services in Delhi â€” Social Media Optimization -->
         <article class="service-premium-card reveal-on-scroll" id="smo-services">
           <div class="service-card-top">
             <div>
               <span class="service-number-tag">SERVICE 07 / SOCIAL DISCOVERY</span>
-              <h3 class="service-heading">SMO Services in Delhi — Social Media Optimization</h3>
+              <h3 class="service-heading">SMO Services in Delhi â€” Social Media Optimization</h3>
               <p style="font-size: 0.95rem; color: var(--accent-primary); font-weight: 600; margin-top: 4px;">Bio SEO, Highlights Architecture & Search Engine Discovery</p>
             </div>
             <span class="badge-status">Profile Optimization</span>
@@ -1019,10 +1036,10 @@
               <span class="tool-tag">Instagram Search SEO</span><span class="tool-tag">LinkedIn Creator Studio</span><span class="tool-tag">YouTube Studio</span><span class="tool-tag">Bitly / UTM Builders</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-smo-services.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/smo-services/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -1112,10 +1129,10 @@
               <span class="tool-tag">Meta Business Suite</span><span class="tool-tag">CapCut Pro</span><span class="tool-tag">Metricool</span><span class="tool-tag">Sprout Social</span><span class="tool-tag">Creator Studio</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-social-media-marketing.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/social-media-marketing/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -1132,7 +1149,7 @@
             <span class="badge-status">Creative Retainer</span>
           </div>
 
-          <p class="service-lead-desc">Retention-focused video editing calibrated for the first 3 seconds — using zoom punches, kinetic typography, pacing psychology, and sound effects to stop scrolls.</p>
+          <p class="service-lead-desc">Retention-focused video editing calibrated for the first 3 seconds â€” using zoom punches, kinetic typography, pacing psychology, and sound effects to stop scrolls.</p>
 
           <div class="service-breakdown-grid">
             <div>
@@ -1205,108 +1222,16 @@
               <span class="tool-tag">Adobe Premiere Pro</span><span class="tool-tag">After Effects</span><span class="tool-tag">DaVinci Resolve Studio</span><span class="tool-tag">Frame.io</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-video-editing.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/video-editing/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
           </div>
         </article>
-        <!-- SERVICE CARD 10: Delhi’s Best Digital Marketing Consultant -->
-        <article class="service-premium-card reveal-on-scroll" id="best-marketing-consultant">
-          <div class="service-card-top">
-            <div>
-              <span class="service-number-tag">SERVICE 10 / STRATEGIC ADVISORY</span>
-              <h3 class="service-heading">Delhi’s Best Digital Marketing Consultant</h3>
-              <p style="font-size: 0.95rem; color: var(--accent-primary); font-weight: 600; margin-top: 4px;">Full-Funnel Commercial Roadmaps & Fractional CMO Advisory</p>
-            </div>
-            <span class="badge-status">Executive Advisory</span>
-          </div>
-
-          <p class="service-lead-desc">Senior marketing consulting for ambitious founders and SMEs needing high-level commercial roadmaps, budget allocation, and unified omnichannel growth.</p>
-
-          <div class="service-breakdown-grid">
-            <div>
-              <div class="breakdown-col-header problem">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-                Core Bottleneck Solved
-              </div>
-              <p class="breakdown-text">Working with generic agencies where junior interns manage your account, SEO doesn’t talk to paid media, and nobody takes accountability for profit.</p>
-            </div>
-
-            <div>
-              <div class="breakdown-col-header deliverables">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Signature Deliverables
-              </div>
-              <ul class="breakdown-list">
-                
-        <li class="breakdown-list-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Full-Funnel Omnichannel Commercial Marketing Roadmaps</span>
-        </li>
-        <li class="breakdown-list-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Cross-Channel Performance Marketing &amp; Capital Allocation</span>
-        </li>
-        <li class="breakdown-list-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Conversion Rate Optimization (CRO) &amp; Funnel Engineering</span>
-        </li>
-        <li class="breakdown-list-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Defensible Brand Positioning &amp; Category Storytelling</span>
-        </li>
-        <li class="breakdown-list-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>MarTech Stack Architecture (CRM, GA4, Server Tracking)</span>
-        </li>
-        <li class="breakdown-list-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Fractional CMO Leadership &amp; In-House Team Mentorship</span>
-        </li>
-              </ul>
-            </div>
-
-            <div>
-              <div class="breakdown-col-header roi">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <line x1="12" y1="1" x2="12" y2="23"></line>
-                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                </svg>
-                Commercial Impact
-              </div>
-              <div class="roi-metric-highlight">
-                <span class="roi-number">₹50 Cr+</span>
-                <span class="roi-label">Revenue & Pipeline Driven</span>
-              </div>
-              <p class="breakdown-text">8+ years of battle-tested marketing consulting with a 94% client retention rate.</p>
-            </div>
-          </div>
-
-          <div class="service-card-bottom">
-            <div class="service-tools-row">
-              <span style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-right: 4px;">Platform Stack:</span>
-              <span class="tool-tag">Strategic Planning</span><span class="tool-tag">Financial Unit Economics</span><span class="tool-tag">GA4 / BigQuery</span><span class="tool-tag">Executive Reviews</span>
-            </div>
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-best-marketing-consultant.html" class="btn btn-primary btn-sm btn-magnetic">
-                Explore Service Details &rarr;
-              </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
-                Inquire Now
-              </a>
-            </div>
-          </div>
-        </article>
+        <!-- SERVICE CARD 10: Delhiâ€™s Best Digital Marketing Consultant -->
         <!-- SERVICE CARD 11: Website Designer in Delhi | Custom Web Development -->
         <article class="service-premium-card reveal-on-scroll" id="website-designer">
           <div class="service-card-top">
@@ -1391,10 +1316,10 @@
               <span class="tool-tag">HTML5 / CSS3 / Vanilla JS</span><span class="tool-tag">WordPress Custom Blocks</span><span class="tool-tag">Shopify Liquid</span><span class="tool-tag">PHP / MySQL</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <a href="service-website-designer.html" class="btn btn-primary btn-sm btn-magnetic">
+              <a href="/services/website-designer/" class="btn btn-primary btn-sm btn-magnetic">
                 Explore Service Details &rarr;
               </a>
-              <a href="contact.html" class="btn btn-secondary btn-sm">
+              <a href="/contact/" class="btn btn-secondary btn-sm">
                 Inquire Now
               </a>
             </div>
@@ -1419,7 +1344,7 @@
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">01</span>
-              <span class="process-phase">Weeks 1–2</span>
+              <span class="process-phase">Weeks 1â€“2</span>
             </div>
             <h3 class="process-step-title">Forensic Audit &amp; Unit Economics</h3>
             <p class="process-step-text">
@@ -1430,7 +1355,7 @@
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">02</span>
-              <span class="process-phase">Weeks 2–3</span>
+              <span class="process-phase">Weeks 2â€“3</span>
             </div>
             <h3 class="process-step-title">Architecture &amp; Quick Wins</h3>
             <p class="process-step-text">
@@ -1441,7 +1366,7 @@
           <div class="process-step-card">
             <div class="process-step-header">
               <span class="process-num">03</span>
-              <span class="process-phase">Weeks 4–8</span>
+              <span class="process-phase">Weeks 4â€“8</span>
             </div>
             <h3 class="process-step-title">Execution &amp; Testing Sprints</h3>
             <p class="process-step-text">
@@ -1495,7 +1420,7 @@
                 <span>Direct WhatsApp / Slack access to Ritwik</span>
               </li>
             </ul>
-            <a href="contact.html" class="btn btn-secondary btn-sm" style="margin-top: auto; text-align: center;">Inquire for Retainer</a>
+            <a href="/contact/" class="btn btn-secondary btn-sm" style="margin-top: auto; text-align: center;">Inquire for Retainer</a>
           </div>
 
           <div class="matrix-card" style="border: 2px solid var(--accent-primary); box-shadow: 0 12px 32px rgba(196, 123, 69, 0.1);">
@@ -1519,7 +1444,7 @@
                 <span>Full BI reporting on contribution margins</span>
               </li>
             </ul>
-            <a href="contact.html" class="btn btn-primary btn-sm btn-magnetic" style="margin-top: auto; text-align: center;">Book Strategy Consultation</a>
+            <a href="/contact/" class="btn btn-primary btn-sm btn-magnetic" style="margin-top: auto; text-align: center;">Book Strategy Consultation</a>
           </div>
 
           <div class="matrix-card">
@@ -1531,7 +1456,7 @@
             <ul class="breakdown-list" style="margin-bottom: 24px;">
               <li class="breakdown-list-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Clear deliverable timeline (2–4 weeks)</span>
+                <span>Clear deliverable timeline (2â€“4 weeks)</span>
               </li>
               <li class="breakdown-list-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -1542,7 +1467,7 @@
                 <span>Handoff training &amp; 30-day post-launch warranty</span>
               </li>
             </ul>
-            <a href="contact.html" class="btn btn-secondary btn-sm" style="margin-top: auto; text-align: center;">Request Project Quote</a>
+            <a href="/contact/" class="btn btn-secondary btn-sm" style="margin-top: auto; text-align: center;">Request Project Quote</a>
           </div>
         </div>
       </div>
@@ -1560,7 +1485,7 @@
             Schedule a 30-minute diagnostic session to review your existing numbers, uncover bottlenecks, and map out a customized execution plan.
           </p>
           <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="contact.html" class="btn btn-primary btn-lg btn-magnetic">
+            <a href="/contact/" class="btn btn-primary btn-lg btn-magnetic">
               Book Free Strategy Session
               <span class="btn-icon-right">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1569,12 +1494,12 @@
                 </svg>
               </span>
             </a>
-            <a href="about.html" class="btn btn-secondary btn-lg">
+            <a href="/about/" class="btn btn-secondary btn-lg">
               About Ritwik Sachdeva
             </a>
           </div>
           <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 20px;">
-            Direct Email: <a href="mailto:consult@ritwiksachdeva.com" style="color: var(--accent-primary); font-weight: 600;">consult@ritwiksachdeva.com</a> &bull; Delhi NCR &amp; Global
+            Direct Email: <a href="mailto:Info@ritwiksachdeva.in" style="color: var(--accent-primary); font-weight: 600;">Info@ritwiksachdeva.in</a> &bull; Delhi NCR &amp; Global
           </p>
         </div>
       </div>
@@ -1582,106 +1507,161 @@
 
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
+  <!-- FOOTER -->
+  <footer class="site-footer" id="footer">
+    <div class="container footer-container">
       <div class="footer-grid">
-        <!-- Brand Info -->
-        <div>
-          <a href="index.html" class="brand-logo" style="margin-bottom: 8px;">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col footer-col-brand">
+          <a href="/" class="footer-logo">
             <div class="brand-monogram">RS</div>
             <div class="brand-info">
               <span class="brand-name">Ritwik Sachdeva</span>
               <span class="brand-title">Marketing Consultant</span>
             </div>
           </a>
-          <p class="footer-brand-statement">
-            Digital marketing consulting, performance marketing strategy, and SEO architecture engineered for
-            sustainable business growth.
+          <p class="footer-tagline">
+            Strategic digital marketing consultant helping businesses scale through data-driven campaigns, technical search moats, and high-converting creative systems.
           </p>
-          <div class="footer-social-row">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
-              aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
+          <div class="footer-social-links">
+            <a href="https://linkedin.com" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
-              aria-label="Twitter">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
+            <a href="https://twitter.com" class="social-link" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
             </a>
-            <a href="https://substack.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
-              aria-label="Substack">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-              </svg>
+            <a href="https://instagram.com" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
           </div>
         </div>
 
-        <!-- Quick Links -->
-        <div>
-          <h4 class="footer-heading">Navigation</h4>
+        <!-- Col 2: Navigation -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Navigation</h4>
           <ul class="footer-links">
-            <li><a href="index.html" class="footer-link">Home</a></li>
-            <li><a href="about.html" class="footer-link">About Consultant</a></li>
-            <li><a href="services.html" class="footer-link">Digital Marketing Services</a></li>
-            <li><a href="blog.html" class="footer-link">Insights &amp; Blog</a></li>
-            <li><a href="contact.html" class="footer-link">Contact &amp; Consultation</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About Ritwik</a></li>
+            <li><a href="/services/">Services Catalog</a></li>
+            <li><a href="/blog/">Growth Articles</a></li>
+            <li><a href="/contact/">Contact &amp; Bookings</a></li>
           </ul>
         </div>
 
-        <!-- Services Links -->
-        <div>
-          <h4 class="footer-heading">Services</h4>
+        <!-- Col 3: Services (10 Services) -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Services</h4>
           <ul class="footer-links">
-            <li><a href="service-ecommerce-management.html">E-Commerce Management</a></li>
-            <li><a href="service-graphic-designer.html">Graphic Designer</a></li>
-            <li><a href="service-performance-marketing.html">Performance Marketing Consultant in Delhi</a></li>
-            <li><a href="service-ppc-expert.html">PPC Expert in Delhi</a></li>
-            <li><a href="service-product-shoot.html">Product Shoot Services in Delhi</a></li>
-            <li><a href="service-seo-expert.html">SEO Expert in Delhi</a></li>
-            <li><a href="service-smo-services.html">SMO Services in Delhi</a></li>
-            <li><a href="service-social-media-marketing.html">Social Media Marketing Agency in Delhi</a></li>
-            <li><a href="service-video-editing.html">Video Editing Services in Delhi</a></li>
-            <li><a href="service-best-marketing-consultant.html">best marketing consultant</a></li>
-            <li><a href="service-website-designer.html">Website Designer in Delhi</a></li>
+            <li><a href="/services/ecommerce-management/">E-Commerce Management</a></li>
+            <li><a href="/services/graphic-designer/">Graphic Designer &amp; Branding</a></li>
+            <li><a href="/services/performance-marketing/">Performance Marketing</a></li>
+            <li><a href="/services/ppc-expert/">PPC Expert (Google Ads)</a></li>
+            <li><a href="/services/product-shoot/">Product Shoot Services</a></li>
+            <li><a href="/services/seo-expert/">SEO Expert in Delhi</a></li>
+            <li><a href="/services/smo-services/">SMO Services</a></li>
+            <li><a href="/services/social-media-marketing/">Social Media Marketing</a></li>
+            <li><a href="/services/video-editing/">Video Editing Services</a></li>
+            <li><a href="/services/website-designer/">Website Designer &amp; Dev</a></li>
           </ul>
         </div>
 
-        <!-- Direct Inquiry -->
-        <div>
-          <h4 class="footer-heading">Direct Inquiry</h4>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">
-            Have a project in mind or need a strategic marketing audit?
+        <!-- Col 4: Direct Inquiry -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Direct Inquiry</h4>
+          <p class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:Info@ritwiksachdeva.in"><span>Info@ritwiksachdeva.in</span></a>
           </p>
-          <a href="mailto:consult@ritwiksachdeva.com"
-            style="color: var(--accent-primary); font-weight: 600; font-size: 0.92rem; word-break: break-all;">
-            consult@ritwiksachdeva.com
-          </a>
-          <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-secondary);">
-            Response Time: &lt; 24 Business Hours
+          <p class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:+919289626986"><span>+91 92896 26986</span></a>
+          </p>
+          <p class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Delhi NCR, India (Global Remote)</span>
+          </p>
+          <div class="footer-cta-box">
+            <span class="cta-box-text">Ready to scale your business?</span>
+            <a href="/contact/" class="btn btn-primary btn-sm btn-magnetic"><span>Book Consultation</span></a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
-          &copy; <span id="current-year">2026</span> Ritwik Sachdeva. All Rights Reserved. Digital Marketing Strategy
-          &amp; Consulting.
-        </div>
-        <div>
-          <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
-            Back To Top ↑
-          </button>
+        <p class="copyright-text">&copy; 2026 Ritwik Sachdeva. All rights reserved. Strategic Digital Marketing &amp; Scaling Consultant.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Engagement</a>
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- Back to Top Button with SVG Circular Progress -->
+  <button id="back-to-top" class="back-to-top-progress" aria-label="Back to top" title="Scroll back to top">
+    <svg class="progress-ring" width="46" height="46" viewBox="0 0 46 46" aria-hidden="true" focusable="false">
+      <circle class="progress-ring-bg" cx="23" cy="23" r="20" fill="none" stroke="#CBD5E1" stroke-width="2.5" />
+      <circle class="progress-ring-indicator" cx="23" cy="23" r="20" fill="none" stroke="#1D4ED8" stroke-width="2.5" stroke-dasharray="125.6" stroke-dashoffset="125.6" />
+    </svg>
+    <span class="back-to-top-arrow" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </span>
+  </button>
+
+  <!-- Floating WhatsApp and Call Action Buttons -->
+  <div class="floating-actions-container" id="rs-floating-actions" aria-label="Direct contact options">
+    <a href="https://wa.me/919289626986" class="floating-btn floating-btn-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" title="Chat on WhatsApp with Ritwik Sachdeva">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.12.553 4.11 1.523 5.836l-1.616 5.908 6.06-1.59c1.664.908 3.568 1.42 5.597 1.42 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+      </svg>
+    </a>
+    <a href="tel:+919289626986" class="floating-btn floating-btn-call" aria-label="Direct Phone Call" title="Call Ritwik Sachdeva directly">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Timed Consultation Popup Modal -->
+  <div class="consultation-popup-overlay" id="consultation-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-hidden="true">
+    <div class="consultation-popup-dialog">
+      <button class="popup-close-btn" id="popup-close-btn" aria-label="Close consultation modal">&times;</button>
+      <div class="popup-header">
+        <span class="popup-badge">Free Growth Audit</span>
+        <h3 class="popup-title" id="popup-title">Book a 1-on-1 Growth Consultation</h3>
+        <p class="popup-subtitle">Discuss your marketing, SEO, paid media, or design requirements directly with Ritwik Sachdeva.</p>
+      </div>
+      <form class="popup-form" id="consultation-popup-form" action="api/contact.php" method="POST" novalidate>
+        <div class="form-group">
+          <label for="popup-name" class="form-label">Full Name <span class="required-mark">*</span></label>
+          <input type="text" id="popup-name" name="name" class="form-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+          <div class="form-error-msg" id="popup-name-error">Please enter your full name.</div>
+        </div>
+        <div class="form-group">
+          <label for="popup-email" class="form-label">Email Address <span class="required-mark">*</span></label>
+          <input type="email" id="popup-email" name="email" class="form-input" placeholder="e.g. rahul@company.com" required autocomplete="email">
+          <div class="form-error-msg" id="popup-email-error">Please enter a valid business email address.</div>
+        </div>
+        <div class="form-group">
+          <label for="popup-number" class="form-label">Phone Number <span class="required-mark">*</span></label>
+          <input type="tel" id="popup-number" name="phone" class="form-input" placeholder="e.g. +91 92896 26986" required autocomplete="tel">
+          <div class="form-error-msg" id="popup-phone-error">Please enter a valid phone number.</div>
+        </div>
+        <div class="form-group">
+          <label for="popup-message" class="form-label">Message <span class="optional-mark">(optional)</span></label>
+          <textarea id="popup-message" name="message" class="form-textarea" rows="3" placeholder="Give us a bit about your idea..."></textarea>
+        </div>
+        <div class="popup-form-status" id="popup-form-status" role="status" aria-live="polite"></div>
+        <button type="submit" class="btn btn-primary btn-block popup-submit-btn" id="popup-submit-btn">
+          <span>Submit Request</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="js/main.js"></script>

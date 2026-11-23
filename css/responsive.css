@@ -19,6 +19,7 @@
   :root {
     --header-height: 72px;
     --section-spacing: 76px;
+    --page-gutter: 32px;
   }
 
   .desktop-nav {
@@ -37,7 +38,8 @@
   .hp-hero-editorial-wrap,
   .arch-spread-layout,
   .rs-ecom-grid,
-  .about-preview-grid {
+  .about-preview-grid,
+  .contact-layout-grid {
     grid-template-columns: 1fr !important;
     gap: 44px;
   }
@@ -65,6 +67,7 @@
   :root {
     --header-height: 66px;
     --section-spacing: 60px;
+    --page-gutter: 20px;
   }
 
   .hp-hero-stats-ledger,
@@ -77,6 +80,22 @@
   .expertise-grid {
     grid-template-columns: 1fr !important;
     gap: 18px;
+  }
+
+  .form-row-2col {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .arch-archetype-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .arch-kpi-matrix-grid .arch-kpi-card {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 22px !important;
   }
 
   .hp-floating-meta-chip,

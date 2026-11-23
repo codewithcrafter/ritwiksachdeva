@@ -41,6 +41,8 @@ $company = trim($input['company'] ?? $input['client_company'] ?? '');
 $service = trim($input['service'] ?? $input['client_service'] ?? '');
 $budget = trim($input['budget'] ?? $input['client_budget'] ?? '');
 $message = trim($input['message'] ?? $input['client_message'] ?? '');
+$source = trim($input['source'] ?? $input['lead_source'] ?? 'Website Contact Form');
+$isPopup = (stripos($source, 'popup') !== false) || !empty($input['is_popup']);
 
 $errors = [];
 
@@ -52,8 +54,19 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors['email'] = 'Please enter a valid email address.';
 }
 
-if (mb_strlen($message) < 10) {
-    $errors['message'] = 'Please provide details about your project (at least 10 characters).';
+if ($isPopup) {
+    // For consultation popup: Number is required, Message is optional
+    if (mb_strlen(preg_replace('/[^0-9]/', '', $phone)) < 7) {
+        $errors['phone'] = 'Please enter a valid contact number (at least 7 digits).';
+    }
+    if (empty($message)) {
+        $message = 'Inquiry submitted via Website Consultation Popup.';
+    }
+} else {
+    // For standard contact form
+    if (mb_strlen($message) < 10) {
+        $errors['message'] = 'Please provide details about your project (at least 10 characters).';
+    }
 }
 
 if (!empty($errors)) {
@@ -74,7 +87,7 @@ try {
             `monthly_budget`, `message`, `status`, `lead_source`, `ip_address`, `user_agent`
         ) VALUES (
             :name, :email, :phone, :company, :service,
-            :budget, :message, 'NEW', 'Website Contact Form', :ip, :ua
+            :budget, :message, 'NEW', :lead_source, :ip, :ua
         )
     ");
 
@@ -84,9 +97,10 @@ try {
         ':phone'   => $phone ?: null,
         ':company' => $company ?: null,
         ':service' => $service ?: null,
-        ':budget'  => $budget ?: null,
-        ':message' => $message,
-        ':ip'      => $ip,
+        ':budget'      => $budget ?: null,
+        ':message'     => $message,
+        ':lead_source' => $source,
+        ':ip'          => $ip,
         ':ua'      => $userAgent
     ]);
 
