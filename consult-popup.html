@@ -1,0 +1,143 @@
+<!-- ==========================================================================
+     BOOK A GROWTH CONSULTATION POPUP MODAL
+     Include this markup block right before </body> in your page template.
+     ========================================================================== -->
+<div class="rs-popup-overlay" id="consult-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="consult-headline" aria-hidden="true">
+  <div class="rs-popup-backdrop" id="consult-popup-backdrop" tabindex="-1"></div>
+  <div class="rs-popup-modal-container">
+    <div class="rs-popup-card" id="consult-popup-modal">
+
+      <!-- LEFT PANEL: Dark Brand Panel -->
+      <div class="rs-popup-left">
+        <!-- Glow Orb & Corner Bracket -->
+        <div class="rs-popup-blue-glow" aria-hidden="true"></div>
+        <div class="rs-popup-bracket-tl" aria-hidden="true"></div>
+
+        <!-- Top Content -->
+        <div class="rs-popup-left-top">
+          <!-- Icon Box 48x48 -->
+          <div class="rs-popup-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4F542" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+
+          <!-- Pill Badge -->
+          <div class="rs-popup-badge">FREE GROWTH CONSULTATION</div>
+
+          <!-- Headline in 3 lines -->
+          <h2 class="rs-popup-title" id="consult-headline">
+            Let's Build<br>
+            Predictable<br>
+            <span class="rs-popup-highlight">Growth.</span>
+          </h2>
+
+          <!-- Subtitle -->
+          <p class="rs-popup-subtitle">
+            Share your goals and challenges with Ritwik Sachdeva. We'll connect with you within 24 business hours.
+          </p>
+        </div>
+
+        <!-- Bottom Pill -->
+        <div class="rs-popup-left-bottom">
+          <div class="rs-popup-online">
+            <span class="rs-popup-pulse" aria-hidden="true"></span>
+            <span>Advisory team online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL: Form & Success Views -->
+      <div class="rs-popup-right">
+        <!-- Bottom-Right Corner Bracket -->
+        <div class="rs-popup-bracket-br" aria-hidden="true"></div>
+
+        <!-- Close Button -->
+        <button type="button" class="rs-popup-close" id="consult-close-btn" aria-label="Close consultation modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- FORM VIEW -->
+        <div class="rs-popup-form-view" id="consult-form-view">
+          <form class="rs-popup-form" id="consult-form" action="/consult-submit.php" method="POST" novalidate>
+            <!-- Hidden anti-spam honeypot -->
+            <input type="text" name="website_url" class="rs-popup-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <!-- Inline error banner -->
+            <div class="rs-popup-error" id="consult-error-box" role="alert" aria-live="polite"></div>
+
+            <!-- Row 1: Full Name & Email -->
+            <div class="rs-popup-form-row">
+              <div class="rs-popup-field">
+                <label for="consult-name" class="rs-popup-label">Full Name</label>
+                <input type="text" id="consult-name" name="name" class="rs-popup-input" placeholder="Alex" required minlength="2" autocomplete="name">
+              </div>
+              <div class="rs-popup-field">
+                <label for="consult-email" class="rs-popup-label">Email Address</label>
+                <input type="email" id="consult-email" name="email" class="rs-popup-input" placeholder="alex@company.com" required autocomplete="email">
+              </div>
+            </div>
+
+            <!-- Row 2: Contact Number -->
+            <div class="rs-popup-field">
+              <label for="consult-phone" class="rs-popup-label">Contact Number / Mobile</label>
+              <input type="tel" id="consult-phone" name="phone" class="rs-popup-input" placeholder="00000-00000" required autocomplete="tel">
+            </div>
+
+            <!-- Row 3: Message -->
+            <div class="rs-popup-field">
+              <label for="consult-message" class="rs-popup-label">Message (Optional)</label>
+              <textarea id="consult-message" name="message" class="rs-popup-textarea" rows="3" placeholder="Tell us about your business goals, current challenges, or timeline..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="rs-popup-submit" id="consult-submit-btn">
+              <span class="rs-popup-btn-text">Submit Inquiry</span>
+              <svg class="rs-popup-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              <span class="rs-popup-btn-loading" style="display:none;" aria-hidden="true">
+                <span class="rs-popup-spinner"></span> Sending...
+              </span>
+            </button>
+
+            <!-- Confidentiality Note -->
+            <div class="rs-popup-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+              <span>Strictly confidential. Our advisory team responds within 24 business hours.</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- SUCCESS VIEW -->
+        <div class="rs-popup-success" id="consult-success-view" style="display: none;">
+          <div class="rs-popup-success-box" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="rs-popup-success-title">Inquiry Received!</h3>
+          <p class="rs-popup-success-text">
+            Thank you, <strong class="rs-popup-success-name" id="consult-success-name"></strong>. Our advisory team will contact you within 24 business hours.
+          </p>
+          <a href="https://wa.me/919289626986" target="_blank" rel="noopener noreferrer" class="rs-popup-whatsapp" id="consult-whatsapp-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.04-1.926-.475-1.574-.658-2.58-2.261-2.659-2.366-.079-.105-.638-.849-.638-1.621 0-.771.405-1.15.549-1.306.144-.156.313-.195.417-.195l.301.006c.095.004.225-.036.352.269.131.313.443 1.084.482 1.163.039.078.065.17.013.274-.052.104-.078.169-.156.26l-.234.274c-.078.078-.16.162-.069.319.091.157.405.669.87 1.084.598.533 1.103.698 1.258.776.157.078.248.065.339-.039.091-.104.391-.456.495-.613.104-.156.208-.13.351-.078s.912.43 1.069.508c.156.078.26.117.299.182.041.065.041.378-.09.743zm-3.392-12.416c-5.514 0-10 4.486-10 10 0 1.928.548 3.731 1.5 5.275l-1.5 5.541 5.679-1.488c1.489.889 3.224 1.397 5.071 1.397 5.514 0 10-4.486 10-10s-4.486-10-10-10z"/>
+            </svg>
+            <span>Also message on WhatsApp</span>
+          </a>
+          <button type="button" class="rs-popup-reset" id="consult-reset-btn">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

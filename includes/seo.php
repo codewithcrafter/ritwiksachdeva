@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * RITWIK SACHDEVA - SEO & SCHEMA AUTOMATION MODULE
  * Dynamic JSON-LD structured data, Open Graph generator, and sitemap automation.
@@ -18,12 +18,13 @@ class SeoManager {
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
         // Static Core Pages
+        $domain = 'https://www.ritwiksachdeva.in';
         $staticPages = [
-            ['loc' => BASE_URL . '/', 'changefreq' => 'weekly', 'priority' => '1.0'],
-            ['loc' => BASE_URL . '/about.html', 'changefreq' => 'monthly', 'priority' => '0.8'],
-            ['loc' => BASE_URL . '/services.html', 'changefreq' => 'weekly', 'priority' => '0.9'],
-            ['loc' => BASE_URL . '/blog/', 'changefreq' => 'daily', 'priority' => '0.9'],
-            ['loc' => BASE_URL . '/contact.html', 'changefreq' => 'monthly', 'priority' => '0.8']
+            ['loc' => $domain . '/', 'changefreq' => 'weekly', 'priority' => '1.0'],
+            ['loc' => $domain . '/about/', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['loc' => $domain . '/services/', 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['loc' => $domain . '/blog/', 'changefreq' => 'daily', 'priority' => '0.9'],
+            ['loc' => $domain . '/contact/', 'changefreq' => 'monthly', 'priority' => '0.8']
         ];
 
         foreach ($staticPages as $page) {
@@ -39,7 +40,7 @@ class SeoManager {
         $stmt = $db->query("
             SELECT slug, updated_at, published_at
             FROM blogs
-            WHERE status = 'published' AND deleted_at IS NULL
+            WHERE status = 'published'
             ORDER BY published_at DESC
         ");
         $blogs = $stmt->fetchAll();
@@ -64,34 +65,47 @@ class SeoManager {
         return $xml;
     }
 
+    /** Refresh the concise AI-readable article index after editorial changes. */
+    public static function generateLlmsIndex(): string {
+        $db = get_db();
+        $articles = $db->query("SELECT title, slug, excerpt FROM blogs WHERE status = 'published' ORDER BY published_at DESC")->fetchAll();
+        $text = "# Ritwik Sachdeva\n\nBusiness, digital growth and marketing strategy resources.\n\n## Articles\n\n";
+        foreach ($articles as $article) {
+            $text .= '- [' . $article['title'] . '](https://www.ritwiksachdeva.in/blog/' . $article['slug'] . '/): ' . preg_replace('/\s+/', ' ', trim($article['excerpt'])) . "\n";
+        }
+        file_put_contents(ROOT_PATH . '/llms.txt', $text);
+        return $text;
+    }
+
     /**
      * Build JSON-LD Article Schema
      */
     public static function getBlogSchema(array $blog, array $author): string {
+        $domain = 'https://www.ritwiksachdeva.in';
         $schema = [
             '@context'         => 'https://schema.org',
-            '@type'            => $blog['schema_type'] ?: 'BlogPosting',
+            '@type'            => ($blog['schema_type'] ?? '') ?: 'BlogPosting',
             'headline'         => $blog['title'],
             'description'      => $blog['excerpt'],
-            'image'            => $blog['featured_image'] ? (BASE_URL . '/' . ltrim($blog['featured_image'], '/')) : (BASE_URL . '/assets/images/hero-consultant.svg'),
+            'image'            => $blog['featured_image'] ? ($domain . '/' . ltrim($blog['featured_image'], '/')) : ($domain . '/assets/images/hero-consultant.svg'),
             'datePublished'    => date('c', strtotime($blog['published_at'] ?: 'now')),
             'dateModified'     => date('c', strtotime($blog['updated_at'] ?: $blog['published_at'] ?: 'now')),
             'author'           => [
                 '@type' => 'Person',
-                'name'  => $author['name'] ?: 'Ritwik Sachdeva',
-                'url'   => BASE_URL . '/about.html'
+                'name'  => ($author['name'] ?? $author['author_name'] ?? '') ?: 'Ritwik Sachdeva',
+                'url'   => $domain . '/about/'
             ],
             'publisher'        => [
                 '@type' => 'Organization',
                 'name'  => 'Ritwik Sachdeva - Business & Marketing Consulting',
                 'logo'  => [
                     '@type' => 'ImageObject',
-                    'url'   => BASE_URL . '/assets/images/about-consultant.svg'
+                    'url'   => $domain . '/assets/images/about-consultant.svg'
                 ]
             ],
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',
-                '@id'   => BASE_URL . '/blog/' . $blog['slug'] . '/'
+                '@id'   => $domain . '/blog/' . $blog['slug'] . '/'
             ]
         ];
 

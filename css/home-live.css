@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    HOMEPAGE CREATIVE GROWTH LAB ARCHITECTURE (home-live.css)
    Predominantly White Canvas (#FFFFFF), Cobalt Blue (#244BFF), Acid Lime (#D5FF45)
    Coral (#FF765C) & Ink (#0F172A)
@@ -162,11 +162,13 @@
 
 .hp-visual-composition-frame img {
   width: 100%;
+  max-width: 480px;
   height: auto;
-  aspect-ratio: 1/1;
-  object-fit: cover;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
   border-radius: var(--radius-md);
   display: block;
+  margin: 0 auto;
 }
 
 /* Floating Marketing Analytics Widgets (Creative Studio Style) */
@@ -1081,5 +1083,25 @@
   max-width: 680px;
   margin: 0 auto 38px auto;
 }
+
+/* Keep the expanded rails after all older home-page rules have cascaded. */
+@media (min-width: 1200px) {
+  #who-for > .hp-container,
+  #choosing-consultant > .hp-container,
+  #results-focused-marketing > .hp-container,
+  #trusted-businesses-searching > .hp-container,
+  #dm-faq > .hp-container,
+  #cta-consultant-delhi > .hp-container {
+    width: calc(100% - 8cm);
+    max-width: 1560px;
+    padding-inline: 0;
+  }
+}
+
+#who-for .arch-archetype-grid,
+#results-focused-marketing .arch-kpi-matrix-grid { max-width: none; }
+#choosing-consultant .arch-advisory-framework-card { max-width: none; width: 100%; }
+#trusted-businesses-searching .arch-authority-ledger { max-width: none; width: 100%; }
+#cta-consultant-delhi .arch-cta-monolith { max-width: none; width: 100%; }
 
 

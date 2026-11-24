@@ -124,7 +124,7 @@ function auth_login(string $email, string $password): array {
     ];
 
     // Update last login timestamp in DB
-    $updateStmt = $db->prepare("UPDATE admins SET last_login_at = NOW() WHERE id = :id");
+    $updateStmt = $db->prepare("UPDATE admins SET last_login_at = CURRENT_TIMESTAMP WHERE id = :id");
     $updateStmt->execute(['id' => $admin['id']]);
 
     return ['success' => true, 'admin' => $_SESSION['admin_user']];

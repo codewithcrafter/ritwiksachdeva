@@ -135,6 +135,7 @@ CREATE TABLE `blogs` (
     `status` ENUM('draft', 'published', 'scheduled') NOT NULL DEFAULT 'draft',
     `is_featured` TINYINT(1) NOT NULL DEFAULT 0,
     `reading_time` INT UNSIGNED NOT NULL DEFAULT 5,
+    `faqs_json` JSON DEFAULT NULL,
     `published_at` DATETIME DEFAULT NULL,
     `scheduled_for` DATETIME DEFAULT NULL,
     `markdown_file_path` VARCHAR(255) DEFAULT NULL,

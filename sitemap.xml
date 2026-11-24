@@ -1,127 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ritwiksachdeva.com/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/about/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/about/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/services/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/services/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/blog/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/blog/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/contact/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/contact/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/blog/marketing-strategies/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/blog/marketing-strategies/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/blog/ai-in-business/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/blog/ai-in-business/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/blog/leadership-skills/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/blog/leadership-skills/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/blog/business-growth-strategy/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/blog/business-growth-strategy/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ritwiksachdeva.com/blog/digital-transformation-strategies/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://www.ritwiksachdeva.in/blog/digital-transformation-strategies/</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-
-  <!-- 11 Specialized Service Pages -->
-  <url>
-    <loc>https://ritwiksachdeva.com/services/ecommerce-management/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/graphic-designer/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/performance-marketing/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/ppc-expert/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/product-shoot/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/seo-expert/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/smo-services/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/social-media-marketing/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/video-editing/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ritwiksachdeva.com/services/website-designer/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
   </url>
 </urlset>
-
-

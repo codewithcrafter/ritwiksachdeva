@@ -156,7 +156,7 @@ Digital transformation is not a finite project with a fixed conclusion—it is a
 428,
 'Digital Transformation Strategies for Modern Businesses | Ritwik Sachdeva',
 'Discover actionable methodologies to modernize legacy operations, foster organizational agility, and unlock sustainable competitive advantages.',
-'https://ritwiksachdeva.com/blog/digital-transformation-strategies/',
+'https://www.ritwiksachdeva.in/blog/digital-transformation-strategies/',
 'assets/images/insight-1.svg',
 'BlogPosting', 1, 1);
 
@@ -222,7 +222,7 @@ Sustainable business expansion is engineered through disciplined customer qualif
 365,
 'How to Build a Successful Business Growth Strategy | Ritwik Sachdeva',
 'A rigorous framework for executive leaders to clarify category positioning, establish scalable customer acquisition funnels, and protect margins.',
-'https://ritwiksachdeva.com/blog/business-growth-strategy/',
+'https://www.ritwiksachdeva.in/blog/business-growth-strategy/',
 'assets/images/insight-2.svg',
 'BlogPosting', 1, 1);
 
@@ -284,7 +284,7 @@ Great entrepreneurs recognize that their ultimate legacy is not personal indispe
 289,
 'Leadership Skills Every Entrepreneur Needs | Ritwik Sachdeva',
 'Essential executive capabilities required to transition from a hands-on operator to a high-leverage strategic leader who scales teams.',
-'https://ritwiksachdeva.com/blog/leadership-skills/',
+'https://www.ritwiksachdeva.in/blog/leadership-skills/',
 'assets/images/about-consultant.svg',
 'BlogPosting', 1, 1);
 
@@ -353,7 +353,7 @@ The winners are hybrid strategists who leverage AI to eliminate operational fric
 512,
 'The Future of AI in Business Consulting | Ritwik Sachdeva',
 'Examining how generative intelligence, automated data modeling, and predictive analytics are reshaping professional advisory services.',
-'https://ritwiksachdeva.com/blog/ai-in-business/',
+'https://www.ritwiksachdeva.in/blog/ai-in-business/',
 'assets/images/insight-3.svg',
 'BlogPosting', 1, 1);
 
@@ -420,7 +420,7 @@ True marketing excellence is achieved when paid media feeds owned audience growt
 390,
 'Effective Marketing Strategies for Sustainable Growth | Ritwik Sachdeva',
 'How to build an omnichannel marketing ecosystem that balances performance paid media with compounding organic search authority.',
-'https://ritwiksachdeva.com/blog/marketing-strategies/',
+'https://www.ritwiksachdeva.in/blog/marketing-strategies/',
 'assets/images/insight-1.svg',
 'BlogPosting', 1, 1);
 
@@ -476,11 +476,11 @@ INSERT INTO `lead_activities` (`lead_id`, `admin_id`, `activity_type`, `descript
 -- 13. INSERT SEO METADATA FOR MAIN PAGES
 -- ----------------------------------------------------------------------------
 INSERT INTO `seo_metadata` (`page_route`, `page_title`, `meta_description`, `canonical_url`, `og_title`, `og_description`, `og_image`) VALUES
-('home', 'Digital Marketing Consultant | Strategy, SEO & Business Growth', 'Explore professional digital marketing strategies, SEO, performance marketing and lead generation solutions designed to help businesses grow.', 'https://ritwiksachdeva.com/', 'Digital Marketing Consultant | Strategy, SEO & Business Growth', 'Explore professional digital marketing strategies, SEO, performance marketing and lead generation solutions.', 'assets/images/hero-consultant.svg'),
-('about', 'About | Digital Marketing Consultant', 'Learn about my digital marketing expertise, strategic approach and commitment to helping businesses achieve sustainable online growth.', 'https://ritwiksachdeva.com/about.html', 'About | Digital Marketing Consultant', 'Learn about my digital marketing expertise and strategic approach.', 'assets/images/about-consultant.svg'),
-('services', 'Digital Marketing Services | SEO, Marketing & Lead Generation', 'Explore digital marketing consulting, SEO, social media marketing, paid advertising and lead generation services.', 'https://ritwiksachdeva.com/services.html', 'Digital Marketing Services | SEO, Marketing & Lead Generation', 'Explore digital marketing consulting, SEO, paid advertising and lead generation services.', 'assets/images/hero-consultant.svg'),
-('blog', 'Strategic Marketing & Business Consulting Blog | Ritwik Sachdeva', 'Actionable essays and strategic frameworks on digital transformation, performance marketing, B2B lead generation, and executive leadership.', 'https://ritwiksachdeva.com/blog/', 'Strategic Marketing & Business Consulting Blog | Ritwik Sachdeva', 'Actionable essays and strategic frameworks on digital transformation, performance marketing, and leadership.', 'assets/images/hero-consultant.svg'),
-('contact', 'Contact | Digital Marketing Consultation', 'Get in touch to discuss your marketing goals, business challenges and opportunities for digital growth.', 'https://ritwiksachdeva.com/contact.html', 'Contact | Digital Marketing Consultation', 'Get in touch to discuss your marketing goals, business challenges and opportunities for digital growth.', 'assets/images/hero-consultant.svg');
+('home', 'Digital Marketing Consultant | Strategy, SEO & Business Growth', 'Explore professional digital marketing strategies, SEO, performance marketing and lead generation solutions designed to help businesses grow.', 'https://www.ritwiksachdeva.in/', 'Digital Marketing Consultant | Strategy, SEO & Business Growth', 'Explore professional digital marketing strategies, SEO, performance marketing and lead generation solutions.', 'assets/images/hero-consultant.svg'),
+('about', 'About | Digital Marketing Consultant', 'Learn about my digital marketing expertise, strategic approach and commitment to helping businesses achieve sustainable online growth.', 'https://www.ritwiksachdeva.in/about.html', 'About | Digital Marketing Consultant', 'Learn about my digital marketing expertise and strategic approach.', 'assets/images/about-consultant.svg'),
+('services', 'Digital Marketing Services | SEO, Marketing & Lead Generation', 'Explore digital marketing consulting, SEO, social media marketing, paid advertising and lead generation services.', 'https://www.ritwiksachdeva.in/services.html', 'Digital Marketing Services | SEO, Marketing & Lead Generation', 'Explore digital marketing consulting, SEO, paid advertising and lead generation services.', 'assets/images/hero-consultant.svg'),
+('blog', 'Strategic Marketing & Business Consulting Blog | Ritwik Sachdeva', 'Actionable essays and strategic frameworks on digital transformation, performance marketing, B2B lead generation, and executive leadership.', 'https://www.ritwiksachdeva.in/blog/', 'Strategic Marketing & Business Consulting Blog | Ritwik Sachdeva', 'Actionable essays and strategic frameworks on digital transformation, performance marketing, and leadership.', 'assets/images/hero-consultant.svg'),
+('contact', 'Contact | Digital Marketing Consultation', 'Get in touch to discuss your marketing goals, business challenges and opportunities for digital growth.', 'https://www.ritwiksachdeva.in/contact.html', 'Contact | Digital Marketing Consultation', 'Get in touch to discuss your marketing goals, business challenges and opportunities for digital growth.', 'assets/images/hero-consultant.svg');
 
 -- ----------------------------------------------------------------------------
 -- 14. INSERT DEFAULT WEBSITE SETTINGS

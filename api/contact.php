@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Public Contact Form API Endpoint
  * Handles consultation inquiries, validates input, and records CRM leads.
@@ -41,8 +41,12 @@ $company = trim($input['company'] ?? $input['client_company'] ?? '');
 $service = trim($input['service'] ?? $input['client_service'] ?? '');
 $budget = trim($input['budget'] ?? $input['client_budget'] ?? '');
 $message = trim($input['message'] ?? $input['client_message'] ?? '');
-$source = trim($input['source'] ?? $input['lead_source'] ?? 'Website Contact Form');
-$isPopup = (stripos($source, 'popup') !== false) || !empty($input['is_popup']);
+$sourcePage = trim($input['source_page'] ?? $_SERVER['HTTP_REFERER'] ?? '/contact/');
+$sourceTrigger = trim($input['source_trigger'] ?? 'Contact Page Inquiry Form');
+$formType = trim($input['form_type'] ?? 'inline');
+
+$source = trim($input['source'] ?? $input['lead_source'] ?? "Inline Form: {$sourceTrigger} ({$sourcePage})");
+$isPopup = (stripos($source, 'popup') !== false) || !empty($input['is_popup']) || ($formType === 'popup');
 
 $errors = [];
 
@@ -81,30 +85,88 @@ try {
     $ip = $_SERVER['REMOTE_ADDR'] ?? '';
     $userAgent = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250);
 
-    $stmt = $pdo->prepare("
-        INSERT INTO `contact_leads` (
-            `full_name`, `email`, `phone`, `company`, `service_interested`,
-            `monthly_budget`, `message`, `status`, `lead_source`, `ip_address`, `user_agent`
-        ) VALUES (
-            :name, :email, :phone, :company, :service,
-            :budget, :message, 'NEW', :lead_source, :ip, :ua
-        )
-    ");
-
-    $stmt->execute([
-        ':name'    => $fullName,
-        ':email'   => $email,
-        ':phone'   => $phone ?: null,
-        ':company' => $company ?: null,
-        ':service' => $service ?: null,
-        ':budget'      => $budget ?: null,
-        ':message'     => $message,
-        ':lead_source' => $source,
-        ':ip'          => $ip,
-        ':ua'      => $userAgent
-    ]);
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO `contact_leads` (
+                `full_name`, `email`, `phone`, `company`, `service_interested`,
+                `monthly_budget`, `message`, `status`, `lead_source`,
+                `source_page`, `source_trigger`, `form_type`, `ip_address`, `user_agent`
+            ) VALUES (
+                :name, :email, :phone, :company, :service,
+                :budget, :message, 'NEW', :lead_source,
+                :src_page, :src_trigger, :form_type, :ip, :ua
+            )
+        ");
+        $stmt->execute([
+            ':name'        => $fullName,
+            ':email'       => $email,
+            ':phone'       => $phone ?: null,
+            ':company'     => $company ?: null,
+            ':service'     => $service ?: null,
+            ':budget'      => $budget ?: null,
+            ':message'     => $message,
+            ':lead_source' => $source,
+            ':src_page'    => $sourcePage,
+            ':src_trigger' => $sourceTrigger,
+            ':form_type'   => $formType,
+            ':ip'          => $ip,
+            ':ua'          => $userAgent
+        ]);
+    } catch (Exception $colEx) {
+        $stmt = $pdo->prepare("
+            INSERT INTO `contact_leads` (
+                `full_name`, `email`, `phone`, `company`, `service_interested`,
+                `monthly_budget`, `message`, `status`, `lead_source`, `ip_address`, `user_agent`
+            ) VALUES (
+                :name, :email, :phone, :company, :service,
+                :budget, :message, 'NEW', :lead_source, :ip, :ua
+            )
+        ");
+        $stmt->execute([
+            ':name'        => $fullName,
+            ':email'       => $email,
+            ':phone'       => $phone ?: null,
+            ':company'     => $company ?: null,
+            ':service'     => $service ?: null,
+            ':budget'      => $budget ?: null,
+            ':message'     => $message,
+            ':lead_source' => $source,
+            ':ip'          => $ip,
+            ':ua'          => $userAgent
+        ]);
+    }
 
     $leadId = (int)$pdo->lastInsertId();
+
+    // Also write to content/leads.json as persistent file backup
+    try {
+        $leadsJsonPath = __DIR__ . '/../content/leads.json';
+        if (!is_dir(dirname($leadsJsonPath))) {
+            mkdir(dirname($leadsJsonPath), 0755, true);
+        }
+        $existingLeads = [];
+        if (is_file($leadsJsonPath)) {
+            $existingLeads = json_decode(file_get_contents($leadsJsonPath), true) ?: [];
+        }
+        $existingLeads[] = [
+            'id'             => $leadId ?: (count($existingLeads) + 1),
+            'full_name'      => $fullName,
+            'email'          => $email,
+            'phone'          => $phone,
+            'company'        => $company,
+            'service'        => $service,
+            'budget'         => $budget,
+            'message'        => $message,
+            'status'         => 'NEW',
+            'lead_source'    => $source,
+            'source_page'    => $sourcePage,
+            'source_trigger' => $sourceTrigger,
+            'form_type'      => $formType,
+            'ip_address'     => $ip,
+            'created_at'     => date('Y-m-d H:i:s')
+        ];
+        file_put_contents($leadsJsonPath, json_encode($existingLeads, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    } catch (Exception $jEx) {}
 
     // Log initial activity
     $actStmt = $pdo->prepare("

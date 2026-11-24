@@ -1,4 +1,4 @@
-﻿/**
+/**
  * PREMIUM DIGITAL MARKETING CONSULTANT PORTFOLIO - MAIN SCRIPT
  * Handles header transitions, mobile navigation drawer, scroll progress bar, active link state,
  * consultation popup with session management, and floating contact actions (WhatsApp & Call).
@@ -24,6 +24,8 @@ const SITE_CONTACT_CONFIG = {
 };
 
 function initAllAppFeatures() {
+  initSharedHostingNavigation();
+  initCustomCursor();
   document.querySelectorAll('.mobile-drawer:not(#mobile-drawer)').forEach((drawer) => drawer.remove());
   document.querySelectorAll('body > a.mobile-link, body > .mobile-actions').forEach((node) => node.remove());
   applySharedContactDetails();
@@ -42,26 +44,100 @@ function initAllAppFeatures() {
   initServiceHeroLeadForm();
   initServiceCardDetails();
   initArticleTagsPosition();
+  initArticleHeroConsultation();
   initArticleConsultationPlacement();
   initFloatingContactActions();
-  initConstellationCanvas();
-  initGentleTiltAndSpotlight();
+  normalizeFloatingWhatsAppIcons();
   initStaggeredScrollReveals();
-  initHeroBadgeScramble();
   initHomeServiceEffects();
-  initMagneticButtons();
-  initClickRipples();
+}
+
+/* The experimental blue cursor created duplicate listeners and flicker on
+   pages with repeated shared scripts. Preserve the reliable native cursor. */
+function initCustomCursor() {
+  document.documentElement.classList.remove('has-custom-cursor');
+  document.body?.classList.remove('cursor-active');
+  document.getElementById('custom-cursor')?.remove();
+}
+
+/*
+ * Shared hosting fallback: some hosts route unknown clean URLs (for example
+ * /about/) back to the homepage. Menu clicks therefore use the matching
+ * physical page beside this site's current directory instead of assuming the
+ * domain root or a working rewrite module.
+ */
+function initSharedHostingNavigation() {
+  const routes = {
+    '/': 'index.html',
+    '/about/': 'about.html',
+    '/services/': 'services.html',
+    '/contact/': 'contact.html',
+    '/blog/': 'blog.html',
+    '/services/ecommerce-management/': 'service-ecommerce-management.html',
+    '/services/graphic-designer/': 'service-graphic-designer.html',
+    '/services/performance-marketing/': 'service-performance-marketing.html',
+    '/services/ppc-expert/': 'service-ppc-expert.html',
+    '/services/product-shoot/': 'service-product-shoot.html',
+    '/services/seo-expert/': 'service-seo-expert.html',
+    '/services/smo-services/': 'service-smo-services.html',
+    '/services/social-media-marketing/': 'service-social-media-marketing.html',
+    '/services/video-editing/': 'service-video-editing.html',
+    '/services/website-designer/': 'service-website-designer.html',
+    '/blog/business-growth-strategy/': 'blog-business-growth-strategy.html',
+    '/blog/ai-in-business/': 'blog-ai-in-business.html',
+    '/blog/digital-transformation-strategies/': 'blog-digital-transformation-strategies.html',
+    '/blog/leadership-skills/': 'blog-leadership-skills.html',
+    '/blog/marketing-strategies/': 'blog-marketing-strategies.html'
+  };
+  document.querySelectorAll('.nav-link, .mobile-link, .nav-dropdown-item, .mobile-sublink, .dropdown-view-all, .nav-actions a').forEach(link => {
+    const destination = new URL(link.href, window.location.origin);
+    const route = destination.pathname.replace(/\/?$/, '/') || '/';
+    const file = routes[route];
+    if (file) {
+      link.setAttribute('href', '/' + file + destination.search + destination.hash);
+    }
+  });
 }
 
 function initArticleConsultationPlacement() {
-  document.querySelectorAll('.toc-consultation, .toc-sidebar > div').forEach((form) => {
-    if (!form.classList.contains('toc-consultation') && !/Need Custom Implementation/i.test(form.textContent)) return;
-    form.classList.add('toc-consultation');
-    const header = document.querySelector('.article-header > .container');
-    if (!header || form.classList.contains('article-header-consultation')) return;
-    form.classList.add('article-header-consultation');
-    header.appendChild(form);
+  // The article sidebar is reserved for the table of contents. Consultation
+  // requests open the shared modal, so no inline form/card is moved into it.
+  document.querySelectorAll('.toc-sidebar > div').forEach((item) => {
+    if (/Need Custom Implementation/i.test(item.textContent)) item.hidden = true;
   });
+}
+
+/* Place one normal inquiry form in the article hero. It is deliberately not
+   part of the sticky TOC and does not affect the separate timed popup. */
+function initArticleHeroConsultation() {
+  const articleHeader = document.querySelector('.article-header');
+  const heroContainer = articleHeader?.querySelector(':scope > .article-container');
+  if (!heroContainer || heroContainer.querySelector('.blog-hero-form')) return;
+
+  const copy = document.createElement('div');
+  copy.className = 'article-hero-copy';
+  while (heroContainer.firstChild) copy.appendChild(heroContainer.firstChild);
+
+  const formCard = document.createElement('aside');
+  formCard.className = 'blog-hero-form';
+  formCard.setAttribute('aria-label', 'Consultation inquiry form');
+  formCard.innerHTML = `
+    <span class="blog-hero-form-badge">Free Growth Consultation</span>
+    <h2>Build your next growth move.</h2>
+    <p>Tell us where you want stronger, more predictable results.</p>
+    <form action="/consult-submit.php" method="POST">
+      <input type="text" name="website_url" class="blog-hero-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="blog-hero-form-row">
+      <label>Full Name<input type="text" name="name" autocomplete="name" placeholder="Alex" required></label>
+        <label>Email Address<input type="email" name="email" autocomplete="email" placeholder="alex@company.com" required></label>
+      </div>
+      <label>Contact Number / Mobile<input type="tel" name="phone" autocomplete="tel" placeholder="00000-00000" required></label>
+      <label>Message (Optional)<textarea name="message" rows="3" placeholder="Tell us about your goals, challenges, or timeline..."></textarea></label>
+      <button type="submit">Submit Inquiry <span aria-hidden="true">→</span></button>
+    </form>
+    <small>Strictly confidential. Our advisory team responds within 24 business hours.</small>`;
+
+  heroContainer.append(copy, formCard);
 }
 
 function initServiceCardDetails() {
@@ -152,27 +228,12 @@ function initHomeServiceEffects() {
   const section = document.getElementById('services');
   if (!section) return;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const heading = section.querySelector('.hp-h2');
-  const eyebrow = section.querySelector('.arch-spread-index');
-  [heading, eyebrow].filter(Boolean).forEach((element) => {
-    if (element.dataset.waveReady) return;
-    const text = element.textContent.trim();
-    element.dataset.waveReady = 'true';
-    element.setAttribute('aria-label', text);
-    let letterIndex = 0;
-    element.innerHTML = text.split(' ').map((word) => {
-      const letters = [...word].map((letter) => `<span aria-hidden="true" style="--letter-index:${letterIndex++}">${letter}</span>`).join('');
-      return `<span class="letter-wave-word" aria-hidden="true">${letters}</span>`;
-    }).join(' ');
-    element.classList.add('staggered-letter-wave');
-  });
   const cards = [...section.querySelectorAll('.arch-ledger-card')];
   cards.forEach((card, index) => { card.classList.add('conic-border-trace', 'sliding-drawer-curtain'); card.style.setProperty('--drawer-delay', `${index * 80}ms`); });
-  if (reduceMotion) { section.querySelectorAll('.staggered-letter-wave').forEach((item) => item.classList.add('is-wave-visible')); cards.forEach((card) => card.classList.add('is-drawer-open')); return; }
+  if (reduceMotion) { cards.forEach((card) => card.classList.add('is-drawer-open')); return; }
   const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => { if (!entry.isIntersecting) return; entry.target.classList.add(entry.target.classList.contains('staggered-letter-wave') ? 'is-wave-visible' : 'is-drawer-open'); obs.unobserve(entry.target); });
+    entries.forEach((entry) => { if (!entry.isIntersecting) return; entry.target.classList.add('is-drawer-open'); obs.unobserve(entry.target); });
   }, { threshold: .14 });
-  section.querySelectorAll('.staggered-letter-wave').forEach((item) => observer.observe(item));
   cards.forEach((card) => observer.observe(card));
 }
 
@@ -268,6 +329,7 @@ function initMobileDrawer() {
   const openDrawer = () => {
     toggleBtn.classList.add('is-active');
     drawer.classList.add('is-open');
+    drawerBackdrop.classList.add('is-open');
     toggleBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   };
@@ -275,9 +337,47 @@ function initMobileDrawer() {
   const closeDrawer = () => {
     toggleBtn.classList.remove('is-active');
     drawer.classList.remove('is-open');
+    drawerBackdrop.classList.remove('is-open');
     toggleBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   };
+
+  let drawerBackdrop = document.getElementById('mobile-drawer-backdrop');
+  if (!drawerBackdrop) {
+    drawerBackdrop = document.createElement('button');
+    drawerBackdrop.type = 'button';
+    drawerBackdrop.id = 'mobile-drawer-backdrop';
+    drawerBackdrop.className = 'mobile-drawer-backdrop';
+    drawerBackdrop.setAttribute('aria-label', 'Close navigation menu');
+    document.body.appendChild(drawerBackdrop);
+  }
+  drawerBackdrop.addEventListener('click', closeDrawer);
+
+  // A visible close control inside the compact drawer is clearer than asking
+  // mobile visitors to find the hamburger again behind the panel.
+  let drawerClose = drawer.querySelector('.mobile-drawer-close');
+  if (!drawerClose) {
+    drawerClose = document.createElement('button');
+    drawerClose.type = 'button';
+    drawerClose.className = 'mobile-drawer-close';
+    drawerClose.setAttribute('aria-label', 'Close navigation menu');
+    drawerClose.innerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>`;
+    drawer.prepend(drawerClose);
+  }
+  drawerClose.addEventListener('click', closeDrawer);
+
+  if (!drawer.querySelector('.mobile-drawer-brand')) {
+    const headerBrand = document.querySelector('.site-header .brand-logo');
+    if (headerBrand) {
+      const drawerBrand = headerBrand.cloneNode(true);
+      drawerBrand.classList.add('mobile-drawer-brand');
+      drawerBrand.setAttribute('aria-label', 'Ritwik Sachdeva home');
+      drawerClose.insertAdjacentElement('afterend', drawerBrand);
+    }
+  }
 
   toggleBtn.addEventListener('click', () => {
     const isOpen = drawer.classList.contains('is-open');
@@ -643,6 +743,21 @@ function initFloatingContactActions() {
   document.body.appendChild(container);
 }
 
+/* Legacy pages carry their own floating buttons. Keep their WhatsApp mark
+   consistent with the globally injected version without changing their links. */
+function normalizeFloatingWhatsAppIcons() {
+  const whatsappIcon = `
+    <svg class="floating-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M20.5 11.8a8.5 8.5 0 0 1-12.55 7.5L3.5 20.5l1.2-4.15A8.5 8.5 0 1 1 20.5 11.8Z" />
+      <path d="M8.3 7.9c.16-.38.33-.4.61-.4h.52c.16 0 .38.06.48.31l.67 1.62c.08.21.07.37-.04.55l-.42.68c-.09.14-.18.29-.07.48.1.18.46.75.99 1.22.69.62 1.28.81 1.46.9.18.09.29.08.39-.05l.62-.73c.13-.16.27-.13.46-.06l1.56.74c.23.11.38.16.44.25.06.09.06.52-.12 1.02-.17.5-1.01.96-1.38 1.01-.35.05-.79.17-2.68-.57-2.27-.89-3.72-3.08-3.83-3.23-.11-.15-.92-1.22-.92-2.33 0-1.11.58-1.66.79-1.89Z" />
+    </svg>`;
+
+  document.querySelectorAll('.floating-btn-whatsapp, .floating-action-wa').forEach((button) => {
+    const existingIcon = button.querySelector('svg');
+    if (existingIcon) existingIcon.outerHTML = whatsappIcon;
+  });
+}
+
 /**
  * ==========================================================================
  * CONSULTATION POPUP MODAL
@@ -656,6 +771,9 @@ function initFloatingContactActions() {
  * ==========================================================================
  */
 function initConsultationPopup() {
+  // Pages carrying the shared two-column popup use consult-popup.js as the
+  // single controller. Do not create the older alternate modal as well.
+  if (document.getElementById('consult-popup-overlay')) return;
   const cleanPath = window.location.pathname.toLowerCase().replace(/\/index\.(html|php)$/, '/').replace(/\/$/, '') + '/';
   const isExcludedPage = cleanPath === '/contact/' || (cleanPath.startsWith('/services/') && cleanPath !== '/services/') || (cleanPath.startsWith('/blog/') && cleanPath !== '/blog/');
   if (isExcludedPage) return;

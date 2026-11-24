@@ -8,6 +8,35 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 
 class MarkdownManager {
+    /** Import the checked-in editorial Markdown only when a fresh DB has no articles. */
+    public static function importExistingBlogs(): int {
+        $db = get_db();
+        if ((int)$db->query('SELECT COUNT(*) FROM blogs')->fetchColumn() > 0 || !is_dir(CONTENT_BLOGS_PATH)) {
+            return 0;
+        }
+        $authorId = (int)$db->query("SELECT id FROM blog_authors ORDER BY id LIMIT 1")->fetchColumn();
+        if (!$authorId) return 0;
+        $insert = $db->prepare('INSERT INTO blogs (title, slug, excerpt, content, featured_image, category_id, author_id, status, is_featured, reading_time, published_at) VALUES (:title, :slug, :excerpt, :content, :image, :category_id, :author_id, :status, :featured, :reading_time, :published_at)');
+        $imported = 0;
+        foreach (glob(CONTENT_BLOGS_PATH . '/*.md') ?: [] as $file) {
+            $raw = (string)file_get_contents($file);
+            if (!preg_match('/^---\R([\s\S]*?)\R---\R?([\s\S]*)$/', $raw, $matches)) continue;
+            $front = $matches[1]; $content = trim($matches[2]);
+            $value = static function (string $key) use ($front): string {
+                return preg_match('/^' . preg_quote($key, '/') . ':\s*"?(.*?)"?\s*$/m', $front, $m) ? trim($m[1], " \t\"") : '';
+            };
+            $title = $value('title'); $slug = generate_slug($value('slug') ?: $title);
+            if (!$title || !$slug) continue;
+            $categoryName = $value('category');
+            $catStmt = $db->prepare('SELECT id FROM blog_categories WHERE name = :name LIMIT 1');
+            $catStmt->execute([':name' => $categoryName]); $categoryId = $catStmt->fetchColumn() ?: null;
+            $excerpt = $value('metaDescription');
+            if (!$excerpt && preg_match('/^>\s*(.+)$/m', $content, $quote)) $excerpt = trim($quote[1]);
+            $insert->execute([':title'=>$title, ':slug'=>$slug, ':excerpt'=>$excerpt ?: $title, ':content'=>$content, ':image'=>$value('featuredImage') ?: null, ':category_id'=>$categoryId, ':author_id'=>$authorId, ':status'=>$value('status') ?: 'draft', ':featured'=>strtolower($value('isFeatured')) === 'true' ? 1 : 0, ':reading_time'=>max(1, (int)($value('readingTime') ?: 5)), ':published_at'=>$value('publishedAt') ?: null]);
+            $imported++;
+        }
+        return $imported;
+    }
     /**
      * Generate or update a Markdown file from a blog database record
      */

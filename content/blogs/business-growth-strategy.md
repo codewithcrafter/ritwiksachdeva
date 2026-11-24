@@ -11,7 +11,7 @@ readingTime: 6
 publishedAt: "2026-11-03 10:30:00"
 metaTitle: "How to Build a Successful Business Growth Strategy | Ritwik Sachdeva"
 metaDescription: "A rigorous framework for executive leaders to clarify category positioning, establish scalable customer acquisition funnels, and protect margins."
-canonicalUrl: "https://ritwiksachdeva.com/blog/business-growth-strategy/"
+canonicalUrl: "https://www.ritwiksachdeva.in/blog/business-growth-strategy/"
 featuredImage: "assets/images/blog-business-growth.jpg"
 schemaType: "BlogPosting"
 ---

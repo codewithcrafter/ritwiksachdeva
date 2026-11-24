@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Admin CRM - Inquiries & Lead Management
  * Status updates, internal notes, activities audit log, and details modal
@@ -178,6 +178,7 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
         <tr>
           <th>Prospect</th>
           <th>Company &amp; Phone</th>
+          <th>Source Page &amp; Trigger</th>
           <th>Practice &amp; Budget</th>
           <th>Status</th>
           <th>Date</th>
@@ -205,6 +206,43 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
                 <div style="font-size: 11.5px; color: var(--admin-text-muted);">
                   <?= e($l['phone'] ?: 'No phone provided') ?>
                 </div>
+              </td>
+              <td>
+                <?php 
+                  $isPop = (!empty($l['form_type']) && $l['form_type'] === 'popup') || (stripos($l['lead_source'] ?? '', 'popup') !== false);
+                  $badgeBg = $isPop ? '#EFF6FF' : '#F1F5F9';
+                  $badgeColor = $isPop ? '#1D4ED8' : '#334155';
+                  $badgeBorder = $isPop ? '#BFDBFE' : '#CBD5E1';
+                  $badgeText = $isPop ? 'Popup Modal' : 'Contact Page';
+
+                  $srcPage = $l['source_page'] ?? '';
+                  $srcTrigger = $l['source_trigger'] ?? '';
+                  if (empty($srcPage) && !empty($l['lead_source'])) {
+                    if (preg_match('/\((\/[^\)]*)\)/', $l['lead_source'], $mPage)) {
+                      $srcPage = $mPage[1];
+                    }
+                  }
+                  if (empty($srcTrigger) && !empty($l['lead_source'])) {
+                    if (preg_match('/(?:Popup Modal|Inline Form):\s*([^(]+)/i', $l['lead_source'], $mTrig)) {
+                      $srcTrigger = trim($mTrig[1]);
+                    } else {
+                      $srcTrigger = $l['lead_source'];
+                    }
+                  }
+                ?>
+                <div style="margin-bottom: 4px;">
+                  <span style="display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: <?= $badgeBg ?>; color: <?= $badgeColor ?>; border: 1px solid <?= $badgeBorder ?>;">
+                    <?= $badgeText ?>
+                  </span>
+                </div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--admin-text-main); max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="<?= e($srcPage ?: '/') ?>">
+                  <code style="background: #F8FAFC; padding: 1px 4px; border-radius: 4px; font-size: 11px;"><?= e($srcPage ?: '/') ?></code>
+                </div>
+                <?php if (!empty($srcTrigger)): ?>
+                  <div style="font-size: 11px; color: var(--admin-text-muted); margin-top: 2px;" title="<?= e($srcTrigger) ?>">
+                    CTA: <strong><?= e($srcTrigger) ?></strong>
+                  </div>
+                <?php endif; ?>
               </td>
               <td>
                 <div style="font-size: 12.5px; font-weight: 500;">
@@ -285,6 +323,25 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
     <div class="admin-modal-body" style="padding: 24px;">
       <!-- Prospect Info Grid -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: #FAF8F5; padding: 18px; border-radius: var(--admin-radius); border: 1px solid var(--admin-border-light); margin-bottom: 20px;">
+        <div style="grid-column: span 2; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 8px; padding: 12px 14px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #3730A3; font-weight: 700; margin-bottom: 6px;">
+            Conversion Attribution &amp; Source Tracking
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 12.5px;">
+            <div>
+              <span style="color: #64748B; font-size: 11px; display: block;">ORIGIN PAGE</span>
+              <code id="m_source_page" style="background: #FFFFFF; padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #0F172A; display: inline-block;"></code>
+            </div>
+            <div>
+              <span style="color: #64748B; font-size: 11px; display: block;">CLICKED CTA / TRIGGER</span>
+              <strong id="m_source_trigger" style="color: #1D4ED8;"></strong>
+            </div>
+            <div>
+              <span style="color: #64748B; font-size: 11px; display: block;">CONVERSION MECHANISM</span>
+              <span id="m_form_type" style="font-weight: 700;"></span>
+            </div>
+          </div>
+        </div>
         <div>
           <div style="font-size: 11px; text-transform: uppercase; color: var(--admin-text-muted); font-weight: 700;">Prospect Name</div>
           <div id="m_name" style="font-size: 15px; font-weight: 700; color: var(--admin-text-main);"></div>
@@ -344,7 +401,7 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
 <script>
   function openLeadModal(lead) {
     document.getElementById('m_note_lead_id').value = lead.id;
-    document.getElementById('leadModalTitle').textContent = 'Inquiry Brief #' + lead.id + ' â€” ' + lead.full_name;
+    document.getElementById('leadModalTitle').textContent = 'Inquiry Brief #' + lead.id + ' — ' + lead.full_name;
     document.getElementById('m_name').textContent = lead.full_name;
     document.getElementById('m_company').textContent = lead.company || 'Not specified';
     document.getElementById('m_email').textContent = lead.email;
@@ -352,6 +409,27 @@ $allTotal = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn(
     document.getElementById('m_service').textContent = lead.service_interested || 'General Consulting';
     document.getElementById('m_budget').textContent = lead.monthly_budget || 'Unspecified';
     document.getElementById('m_message').textContent = lead.message;
+
+    // Attribution fields
+    let srcPage = lead.source_page || '';
+    let srcTrigger = lead.source_trigger || '';
+    if (!srcPage && lead.lead_source) {
+      const matchPage = lead.lead_source.match(/\((\/[^\)]*)\)/);
+      if (matchPage) srcPage = matchPage[1];
+    }
+    if (!srcTrigger && lead.lead_source) {
+      const matchTrig = lead.lead_source.match(/(?:Popup Modal|Inline Form):\s*([^(]+)/i);
+      if (matchTrig) srcTrigger = matchTrig[1].trim();
+      else srcTrigger = lead.lead_source;
+    }
+    const isPop = (lead.form_type === 'popup') || (lead.lead_source && lead.lead_source.toLowerCase().includes('popup'));
+
+    document.getElementById('m_source_page').textContent = srcPage || '/';
+    document.getElementById('m_source_trigger').textContent = srcTrigger || 'Direct Navigation';
+    document.getElementById('m_form_type').innerHTML = isPop
+      ? '<span style="color:#1D4ED8; background:#EFF6FF; padding:2px 8px; border-radius:999px; border:1px solid #BFDBFE;">Popup Modal</span>'
+      : '<span style="color:#334155; background:#F1F5F9; padding:2px 8px; border-radius:999px; border:1px solid #CBD5E1;">Contact Page Form</span>';
+
     document.getElementById('leadModal').classList.add('is-open');
   }
 

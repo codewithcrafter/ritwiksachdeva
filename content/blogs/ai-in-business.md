@@ -11,7 +11,7 @@ readingTime: 8
 publishedAt: "2026-11-07 11:00:00"
 metaTitle: "The Future of AI in Business Consulting | Ritwik Sachdeva"
 metaDescription: "Examining how generative intelligence, automated data modeling, and predictive analytics are reshaping professional advisory services."
-canonicalUrl: "https://ritwiksachdeva.com/blog/ai-in-business/"
+canonicalUrl: "https://www.ritwiksachdeva.in/blog/ai-in-business/"
 featuredImage: "assets/images/blog-ai-consulting.jpg"
 schemaType: "BlogPosting"
 ---

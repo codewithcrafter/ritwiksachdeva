@@ -10,6 +10,11 @@ require_once __DIR__ . '/includes/markdown.php';
 require_once __DIR__ . '/includes/seo.php';
 require_once __DIR__ . '/includes/auth.php';
 
+// Do not let browsers reuse the old server-rendered article form after an
+// editorial/template update.
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+
 $pdo = get_db();
 $slug = trim($_GET['slug'] ?? '');
 
@@ -26,17 +31,15 @@ $query = "
     SELECT b.*, 
            c.name AS category_name, c.slug AS category_slug,
            a.name AS author_name, a.title AS author_title, a.bio AS author_bio, 
-           a.avatar AS author_avatar, a.email AS author_email,
-           sm.page_title AS meta_title, sm.meta_description, sm.canonical_url, sm.og_image, sm.robots_directive AS robots
+           a.avatar AS author_avatar, a.email AS author_email
     FROM blogs b
     LEFT JOIN blog_categories c ON b.category_id = c.id
-    LEFT JOIN authors a ON b.author_id = a.id
-    LEFT JOIN seo_metadata sm ON sm.page_route = CONCAT('/blog/', b.slug, '/')
+    LEFT JOIN blog_authors a ON b.author_id = a.id
     WHERE b.slug = :slug
 ";
 
 if (!$isAdmin) {
-    $query .= " AND b.status = 'published' AND (b.published_at IS NULL OR b.published_at <= NOW())";
+    $query .= " AND b.status = 'published' AND (b.published_at IS NULL OR b.published_at <= CURRENT_TIMESTAMP)";
 }
 
 $stmt = $pdo->prepare($query);
@@ -45,9 +48,21 @@ $blog = $stmt->fetch();
 
 if (!$blog) {
     http_response_code(404);
-    echo '<!DOCTYPE html><html><head><title>Article Not Found</title><link rel="stylesheet" href="css/style.css"></head><body style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;"><div class="container"><h1>404 - Article Not Found</h1><p>The requested strategy analysis could not be located.</p><p><a href="/blog/" class="btn btn-primary">Return to Blog</a></p></div></body></html>';
+    echo '<!DOCTYPE html><html><head><title>Article Not Found</title><link rel="stylesheet" href="css/style.css">  <link rel="stylesheet" href="consult-popup.css">
+</head><body style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;"><div class="container"><h1>404 - Article Not Found</h1><p>The requested strategy analysis could not be located.</p><p><a href="/blog" class="btn btn-primary">Return to Blog</a></p></div>  <script src="consult-popup.js"></script>
+</body></html>';
     exit;
 }
+
+// The SQLite editorial suite stores its extended SEO values in seo_metadata.
+// On the MySQL schema the equivalent values may already exist on blogs, so
+// this is deliberately a safe optional enrichment.
+$seoMeta = [];
+try {
+    $seoStmt = $pdo->prepare("SELECT * FROM seo_metadata WHERE entity_type = 'blog' AND entity_id = :id LIMIT 1");
+    $seoStmt->execute([':id' => $blog['id']]);
+    $seoMeta = $seoStmt->fetch() ?: [];
+} catch (Exception $e) {}
 
 // Fetch article tags
 $tagsStmt = $pdo->prepare("
@@ -100,7 +115,7 @@ $relStmt = $pdo->prepare("
     SELECT b.*, c.name AS category_name, a.name AS author_name, a.avatar AS author_avatar
     FROM blogs b
     LEFT JOIN blog_categories c ON b.category_id = c.id
-    LEFT JOIN authors a ON b.author_id = a.id
+    LEFT JOIN blog_authors a ON b.author_id = a.id
     WHERE b.status = 'published' AND b.id != :id AND b.category_id = :cat_id
     ORDER BY b.published_at DESC LIMIT 3
 ");
@@ -116,7 +131,7 @@ if (count($relatedBlogs) < 3) {
         SELECT b.*, c.name AS category_name, a.name AS author_name, a.avatar AS author_avatar
         FROM blogs b
         LEFT JOIN blog_categories c ON b.category_id = c.id
-        LEFT JOIN authors a ON b.author_id = a.id
+        LEFT JOIN blog_authors a ON b.author_id = a.id
         WHERE b.status = 'published' AND b.id NOT IN ({$inClause})
         ORDER BY b.published_at DESC LIMIT {$backfillLimit}
     ");
@@ -125,15 +140,18 @@ if (count($relatedBlogs) < 3) {
 }
 
 // Metadata calculation
-$metaTitle = $blog['meta_title'] ?: ($blog['title'] . ' | Ritwik Sachdeva');
-$metaDesc = $blog['meta_description'] ?: $blog['excerpt'];
-$canonical = $blog['canonical_url'] ?: (SITE_URL . '/blog/' . urlencode($blog['slug']) . '/');
-$ogImage = $blog['og_image'] ?: ($blog['featured_image'] ?: (SITE_URL . '/assets/images/hero-consultant.svg'));
+$metaTitle = ($seoMeta['meta_title'] ?? $blog['meta_title'] ?? '') ?: ($blog['title'] . ' | Ritwik Sachdeva');
+$metaDesc = ($seoMeta['meta_description'] ?? $blog['meta_description'] ?? '') ?: $blog['excerpt'];
+$canonical = ($seoMeta['canonical_url'] ?? $blog['canonical_url'] ?? '') ?: (SITE_URL . '/blog/' . urlencode($blog['slug']) . '/');
+$ogImage = ($seoMeta['og_image'] ?? $blog['og_image'] ?? '') ?: ($blog['featured_image'] ?: (SITE_URL . '/assets/images/hero-consultant.svg'));
+$blog['robots'] = $seoMeta['robots'] ?? $blog['robots'] ?? 'index, follow';
 $publishedIso = date('c', strtotime($blog['published_at'] ?: $blog['created_at']));
 $updatedIso = date('c', strtotime($blog['updated_at']));
 
 // Generate Schema
-$schemaJson = SeoManager::getBlogSchema($blog, $tags);
+$schemaJson = SeoManager::getBlogSchema($blog, $blog);
+$faqs = !empty($blog['faqs_json']) ? json_decode($blog['faqs_json'], true) : [];
+$faqSchemaJson = !empty($faqs) ? json_encode(['@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => array_map(static fn($faq) => ['@type' => 'Question', 'name' => $faq['question'] ?? '', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['answer'] ?? '']], $faqs)], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -171,7 +189,7 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/blog.css?v=article-form-2">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
 
@@ -182,6 +200,8 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
   <script type="application/ld+json">
   <?= $schemaJson ?>
   </script>
+  <?php if ($faqSchemaJson): ?><script type="application/ld+json"><?= $faqSchemaJson ?></script><?php endif; ?>
+  <link rel="stylesheet" href="consult-popup.css">
 </head>
 <body>
 
@@ -233,9 +253,9 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
       <nav class="desktop-nav" aria-label="Primary Navigation">
         <ul class="nav-links">
           <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="/about/" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
           <li class="nav-item nav-item-has-dropdown">
-            <a href="/services/" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            <a href="/services" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
               <span>Services</span>
               <svg class="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.5" aria-hidden="true" focusable="false">
@@ -248,70 +268,70 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
     <span class="dropdown-header-tag">10 Services</span>
   </div>
   <div class="nav-dropdown-list">
-    <a href="/services/ecommerce-management/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/ecommerce-management" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">01</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">E-Commerce Management</div>
         <div class="dropdown-item-desc">Amazon, Flipkart &amp; Shopify Growth</div>
       </div>
     </a>
-    <a href="/services/graphic-designer/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/graphic-designer" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">02</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Graphic Designer</div>
         <div class="dropdown-item-desc">Brand Identity, Logos &amp; Visual Assets</div>
       </div>
     </a>
-    <a href="/services/performance-marketing/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/performance-marketing" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">03</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Performance Marketing Consultant in Delhi</div>
         <div class="dropdown-item-desc">Meta &amp; Google Paid Media Scaling</div>
       </div>
     </a>
-    <a href="/services/ppc-expert/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/ppc-expert" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">04</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">PPC Expert in Delhi</div>
         <div class="dropdown-item-desc">Google Ads, PMax &amp; Shopping Campaigns</div>
       </div>
     </a>
-    <a href="/services/product-shoot/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/product-shoot" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">05</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Product Shoot Services in Delhi</div>
         <div class="dropdown-item-desc">E-Commerce &amp; High-Conversion Photography</div>
       </div>
     </a>
-    <a href="/services/seo-expert/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/seo-expert" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">06</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">SEO Expert in Delhi</div>
         <div class="dropdown-item-desc">Technical, Local &amp; Organic Search Growth</div>
       </div>
     </a>
-    <a href="/services/smo-services/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/smo-services" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">07</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">SMO Services in Delhi</div>
         <div class="dropdown-item-desc">Social Media Optimization &amp; Reach</div>
       </div>
     </a>
-    <a href="/services/social-media-marketing/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/social-media-marketing" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">08</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Social Media Marketing Agency in Delhi</div>
         <div class="dropdown-item-desc">Organic Engagement &amp; Viral Campaigns</div>
       </div>
     </a>
-    <a href="/services/video-editing/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/video-editing" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">09</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Video Editing Services in Delhi</div>
         <div class="dropdown-item-desc">Reels, Shorts, Video Ads &amp; Longform</div>
       </div>
     </a>
-    <a href="/services/website-designer/" class="nav-dropdown-item" role="menuitem">
+    <a href="/services/website-designer" class="nav-dropdown-item" role="menuitem">
       <span class="dropdown-item-num">10</span>
       <div class="dropdown-item-body">
         <div class="dropdown-item-title">Website Designer in Delhi</div>
@@ -320,18 +340,18 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
     </a>
   </div>
   <div class="nav-dropdown-footer">
-    <a href="/services/" class="dropdown-view-all">
+    <a href="/services" class="dropdown-view-all">
       <span>View Comprehensive Services Catalog</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
   </div>
 </div>
           </li>
-          <li class="nav-item"><a href="/blog/" class="nav-link active">Blog</a></li>
-          <li class="nav-item"><a href="/contact/" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="/blog" class="nav-link active">Blog</a></li>
+          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
         </ul>
         <div class="nav-actions">
-          <a href="/contact/" class="btn btn-primary btn-sm btn-magnetic">
+          <a href="/contact" class="btn btn-primary btn-sm btn-magnetic">
             <span>Let's Talk</span>
             <span class="btn-icon-right" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -358,10 +378,10 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
   <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
     <div class="mobile-links">
       <a href="/" class="mobile-link">Home</a>
-      <a href="/about/" class="mobile-link">About</a>
+      <a href="/about" class="mobile-link">About</a>
       <div class="mobile-nav-item-dropdown">
         <div class="mobile-dropdown-header-row">
-          <a href="/services/" class="mobile-link">Services</a>
+          <a href="/services" class="mobile-link">Services</a>
           <button class="mobile-submenu-btn" aria-label="Toggle Services submenu" aria-expanded="false">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -369,37 +389,37 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
           </button>
         </div>
         <div class="mobile-submenu">
-  <a href="/services/ecommerce-management/" class="mobile-sublink">01. E-Commerce Management</a>
-  <a href="/services/graphic-designer/" class="mobile-sublink">02. Graphic Designer</a>
-  <a href="/services/performance-marketing/" class="mobile-sublink">03. Performance Marketing Consultant in Delhi</a>
-  <a href="/services/ppc-expert/" class="mobile-sublink">04. PPC Expert in Delhi</a>
-  <a href="/services/product-shoot/" class="mobile-sublink">05. Product Shoot Services in Delhi</a>
-  <a href="/services/seo-expert/" class="mobile-sublink">06. SEO Expert in Delhi</a>
-  <a href="/services/smo-services/" class="mobile-sublink">07. SMO Services in Delhi</a>
-  <a href="/services/social-media-marketing/" class="mobile-sublink">08. Social Media Marketing Agency in Delhi</a>
-  <a href="/services/video-editing/" class="mobile-sublink">09. Video Editing Services in Delhi</a>
-  <a href="/services/website-designer/" class="mobile-sublink">10. Website Designer in Delhi</a>
+  <a href="/services/ecommerce-management" class="mobile-sublink">01. E-Commerce Management</a>
+  <a href="/services/graphic-designer" class="mobile-sublink">02. Graphic Designer</a>
+  <a href="/services/performance-marketing" class="mobile-sublink">03. Performance Marketing Consultant in Delhi</a>
+  <a href="/services/ppc-expert" class="mobile-sublink">04. PPC Expert in Delhi</a>
+  <a href="/services/product-shoot" class="mobile-sublink">05. Product Shoot Services in Delhi</a>
+  <a href="/services/seo-expert" class="mobile-sublink">06. SEO Expert in Delhi</a>
+  <a href="/services/smo-services" class="mobile-sublink">07. SMO Services in Delhi</a>
+  <a href="/services/social-media-marketing" class="mobile-sublink">08. Social Media Marketing Agency in Delhi</a>
+  <a href="/services/video-editing" class="mobile-sublink">09. Video Editing Services in Delhi</a>
+  <a href="/services/website-designer" class="mobile-sublink">10. Website Designer in Delhi</a>
 </div>
       </div>
-      <a href="/blog/" class="mobile-link active">Blog</a>
-      <a href="/contact/" class="mobile-link">Contact</a>
+      <a href="/blog" class="mobile-link active">Blog</a>
+      <a href="/contact" class="mobile-link">Contact</a>
     </div>
     <div class="mobile-actions">
-      <a href="/contact/" class="btn btn-primary btn-block"><span>Let's Talk</span></a>
+      <a href="/contact" class="btn btn-primary btn-block"><span>Let's Talk</span></a>
     </div>
   </div>
-      <a href="/blog/" class="mobile-link active">Blog</a>
-      <a href="/contact/" class="mobile-link">Contact</a>
+      <a href="/blog" class="mobile-link active">Blog</a>
+      <a href="/contact" class="mobile-link">Contact</a>
     </div>
     <div class="mobile-actions">
-      <a href="/contact/" class="btn btn-primary btn-block"><span>Let's Talk</span></a>
+      <a href="/contact" class="btn btn-primary btn-block"><span>Let's Talk</span></a>
     </div>
   </div>
-      <a href="/blog/" class="mobile-link active">Blog</a>
-      <a href="/contact/" class="mobile-link">Contact</a>
+      <a href="/blog" class="mobile-link active">Blog</a>
+      <a href="/contact" class="mobile-link">Contact</a>
     </div>
     <div class="mobile-drawer-footer">
-      <a href="/contact/" class="btn btn-primary btn-lg" style="width: 100%;">
+      <a href="/contact" class="btn btn-primary btn-lg" style="width: 100%;">
         Request Strategy Consultation
         <span class="btn-icon-right">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -418,7 +438,7 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
           <nav class="article-breadcrumbs" aria-label="Breadcrumbs">
             <a href="/">Home</a>
             <span class="breadcrumb-sep">/</span>
-            <a href="/blog/">Blog</a>
+            <a href="/blog">Blog</a>
             <?php if (!empty($blog['category_name'])): ?>
               <span class="breadcrumb-sep">/</span>
               <a href="/blog/?category=<?= urlencode($blog['category_slug']) ?>"><?= e($blog['category_name']) ?></a>
@@ -465,7 +485,7 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
             <div class="article-share-buttons">
               <span style="font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; margin-right: 4px;">Share:</span>
               <?php
-                $shareUrl = urlencode(SITE_URL . '/blog/' . $blog['slug'] . '/');
+                $shareUrl = urlencode(SITE_URL . '/blog' . $blog['slug'] . '/');
                 $shareTitle = urlencode($blog['title']);
               ?>
               <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= $shareUrl ?>" 
@@ -507,6 +527,15 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
               <?= $htmlWithIds ?>
             </div>
 
+            <?php if (!empty($faqs)): ?>
+              <section class="article-faqs" style="margin:42px 0;">
+                <h2>Frequently Asked Questions</h2>
+                <?php foreach ($faqs as $faq): ?>
+                  <details style="padding:14px 0;border-bottom:1px solid var(--border-color);"><summary style="cursor:pointer;font-weight:700;"><?= e($faq['question'] ?? '') ?></summary><p><?= nl2br(e($faq['answer'] ?? '')) ?></p></details>
+                <?php endforeach; ?>
+              </section>
+            <?php endif; ?>
+
             <!-- Tags Section -->
             <?php if (!empty($tags)): ?>
               <div class="article-tags-wrap">
@@ -531,7 +560,7 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
                 <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 12px;">
                   <?= e($blog['author_bio'] ?: 'Senior Digital Marketing Consultant & Strategy Advisor helping modern enterprises scale customer acquisition.') ?>
                 </p>
-                <a href="/contact/" class="read-more-link">
+                <a href="/contact" class="read-more-link">
                   Consult with <?= e($blog['author_name']) ?> &rarr;
                 </a>
               </div>
@@ -593,7 +622,7 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
               <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
                 I work directly with founders and leadership teams to execute these frameworks.
               </p>
-              <a href="/contact/" class="btn btn-primary btn-sm" style="width: 100%;">
+              <a href="/contact" class="js-open-consult btn btn-primary btn-sm" style="width: 100%;">
                 Request Consultation
               </a>
             </div>
@@ -693,10 +722,10 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
           <h4 class="footer-col-title">Navigation</h4>
           <ul class="footer-links">
             <li><a href="/">Home</a></li>
-            <li><a href="/about/">About Ritwik</a></li>
-            <li><a href="/services/">Services Catalog</a></li>
-            <li><a href="/blog/">Growth Articles</a></li>
-            <li><a href="/contact/">Contact &amp; Bookings</a></li>
+            <li><a href="/about">About Ritwik</a></li>
+            <li><a href="/services">Services Catalog</a></li>
+            <li><a href="/blog">Growth Articles</a></li>
+            <li><a href="/contact">Contact &amp; Bookings</a></li>
           </ul>
         </div>
 
@@ -704,16 +733,16 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
         <div class="footer-col">
           <h4 class="footer-col-title">Services</h4>
           <ul class="footer-links">
-            <li><a href="/services/ecommerce-management/">E-Commerce Management</a></li>
-            <li><a href="/services/graphic-designer/">Graphic Designer &amp; Branding</a></li>
-            <li><a href="/services/performance-marketing/">Performance Marketing</a></li>
-            <li><a href="/services/ppc-expert/">PPC Expert (Google Ads)</a></li>
-            <li><a href="/services/product-shoot/">Product Shoot Services</a></li>
-            <li><a href="/services/seo-expert/">SEO Expert in Delhi</a></li>
-            <li><a href="/services/smo-services/">SMO Services</a></li>
-            <li><a href="/services/social-media-marketing/">Social Media Marketing</a></li>
-            <li><a href="/services/video-editing/">Video Editing Services</a></li>
-            <li><a href="/services/website-designer/">Website Designer &amp; Dev</a></li>
+            <li><a href="/services/ecommerce-management">E-Commerce Management</a></li>
+            <li><a href="/services/graphic-designer">Graphic Designer &amp; Branding</a></li>
+            <li><a href="/services/performance-marketing">Performance Marketing</a></li>
+            <li><a href="/services/ppc-expert">PPC Expert (Google Ads)</a></li>
+            <li><a href="/services/product-shoot">Product Shoot Services</a></li>
+            <li><a href="/services/seo-expert">SEO Expert in Delhi</a></li>
+            <li><a href="/services/smo-services">SMO Services</a></li>
+            <li><a href="/services/social-media-marketing">Social Media Marketing</a></li>
+            <li><a href="/services/video-editing">Video Editing Services</a></li>
+            <li><a href="/services/website-designer">Website Designer &amp; Dev</a></li>
           </ul>
         </div>
 
@@ -734,17 +763,25 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
           </p>
           <div class="footer-cta-box">
             <span class="cta-box-text">Ready to scale your business?</span>
-            <a href="/contact/" class="btn btn-primary btn-sm btn-magnetic"><span>Book Consultation</span></a>
+            <a href="/contact" class="btn btn-primary btn-sm btn-magnetic"><span>Book Consultation</span></a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="copyright-text">&copy; 2026 Ritwik Sachdeva. All rights reserved. Strategic Digital Marketing &amp; Scaling Consultant.</p>
-        <div class="footer-bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Engagement</a>
-          <a href="/sitemap.xml">Sitemap</a>
+        <div class="footer-bottom-left">
+          Strategic Digital Marketing &amp; Scaling Consultant.
+        </div>
+        <div class="footer-bottom-center">
+          <div>
+            <a href="/privacy-policy">Privacy Policy</a> &bull; <a href="/terms">Terms of Engagement</a>
+          </div>
+          <div class="footer-credit-link">
+            Designed by <a href="https://www.buzzspiremedia.com/" target="_blank" rel="noopener noreferrer">Buzzspire Media Pvt Ltd</a>
+          </div>
+        </div>
+        <div class="footer-bottom-right">
+          &copy; 2026 Ritwik Sachdeva. All rights reserved.
         </div>
       </div>
     </div>
@@ -777,48 +814,153 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
     </a>
   </div>
 
-  <!-- Timed Consultation Popup Modal -->
-  <div class="consultation-popup-overlay" id="consultation-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-hidden="true">
-    <div class="consultation-popup-dialog">
-      <button class="popup-close-btn" id="popup-close-btn" aria-label="Close consultation modal">&times;</button>
-      <div class="popup-header">
-        <span class="popup-badge">Free Growth Audit</span>
-        <h3 class="popup-title" id="popup-title">Book a 1-on-1 Growth Consultation</h3>
-        <p class="popup-subtitle">Discuss your marketing, SEO, paid media, or design requirements directly with Ritwik Sachdeva.</p>
+  <!-- ==========================================================================
+     BOOK A GROWTH CONSULTATION POPUP MODAL
+     Include this markup block right before   <script src="consult-popup.js"></script>
+</body> in your page template.
+     ========================================================================== -->
+<div class="consult-overlay" id="consult-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="consult-headline" aria-hidden="true">
+  <div class="consult-backdrop" id="consult-popup-backdrop" tabindex="-1"></div>
+  <div class="consult-modal-container">
+    <div class="consult-modal" id="consult-popup-modal">
+
+      <!-- LEFT PANEL: Dark Brand Panel -->
+      <div class="consult-panel-left">
+        <!-- Glow Orb & Corner Bracket -->
+        <div class="consult-blue-glow" aria-hidden="true"></div>
+        <div class="consult-corner-bracket-tl" aria-hidden="true"></div>
+
+        <!-- Top Content -->
+        <div class="consult-left-top">
+          <!-- Icon Box 48x48 -->
+          <div class="consult-icon-box" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4F542" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+
+          <!-- Pill Badge -->
+          <div class="consult-pill-badge">FREE GROWTH CONSULTATION</div>
+
+          <!-- Headline in 3 lines -->
+          <h2 class="consult-headline" id="consult-headline">
+            Let's Build<br>
+            Predictable<br>
+            <span class="consult-gradient-text">Growth.</span>
+          </h2>
+
+          <!-- Subtitle -->
+          <p class="consult-subtitle">
+            Share your goals and challenges with Ritwik Sachdeva. We'll connect with you within 24 business hours.
+          </p>
+        </div>
+
+        <!-- Bottom Pill -->
+        <div class="consult-left-bottom">
+          <div class="consult-online-pill">
+            <span class="consult-pulse-dot" aria-hidden="true"></span>
+            <span>Advisory team online</span>
+          </div>
+        </div>
       </div>
-      <form class="popup-form" id="consultation-popup-form" action="api/contact.php" method="POST" novalidate>
-        <div class="form-group">
-          <label for="popup-name" class="form-label">Full Name <span class="required-mark">*</span></label>
-          <input type="text" id="popup-name" name="name" class="form-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
-          <div class="form-error-msg" id="popup-name-error">Please enter your full name.</div>
-        </div>
-        <div class="form-group">
-          <label for="popup-email" class="form-label">Email Address <span class="required-mark">*</span></label>
-          <input type="email" id="popup-email" name="email" class="form-input" placeholder="e.g. rahul@company.com" required autocomplete="email">
-          <div class="form-error-msg" id="popup-email-error">Please enter a valid business email address.</div>
-        </div>
-        <div class="form-group">
-          <label for="popup-number" class="form-label">Phone Number <span class="required-mark">*</span></label>
-          <input type="tel" id="popup-number" name="phone" class="form-input" placeholder="e.g. +91 92896 26986" required autocomplete="tel">
-          <div class="form-error-msg" id="popup-phone-error">Please enter a valid phone number.</div>
-        </div>
-        <div class="form-group">
-          <label for="popup-message" class="form-label">Message <span class="optional-mark">(optional)</span></label>
-          <textarea id="popup-message" name="message" class="form-textarea" rows="3" placeholder="Give us a bit about your idea..."></textarea>
-        </div>
-        <div class="popup-form-status" id="popup-form-status" role="status" aria-live="polite"></div>
-        <button type="submit" class="btn btn-primary btn-block popup-submit-btn" id="popup-submit-btn">
-          <span>Submit Request</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+
+      <!-- RIGHT PANEL: Form & Success Views -->
+      <div class="consult-panel-right">
+        <!-- Bottom-Right Corner Bracket -->
+        <div class="consult-corner-bracket-br" aria-hidden="true"></div>
+
+        <!-- Close Button -->
+        <button type="button" class="consult-close-btn" id="consult-close-btn" aria-label="Close consultation modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
-      </form>
+
+        <!-- FORM VIEW -->
+        <div class="consult-form-view" id="consult-form-view">
+          <form class="consult-form" id="consult-form" action="/consult-submit.php" method="POST" novalidate>
+            <!-- Hidden anti-spam honeypot -->
+            <input type="text" name="website_url" class="consult-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <!-- Inline error banner -->
+            <div class="consult-error-box" id="consult-error-box" role="alert" aria-live="polite"></div>
+
+            <!-- Row 1: Full Name & Email -->
+            <div class="consult-form-row">
+              <div class="consult-form-group">
+                <label for="consult-name" class="consult-label">Full Name</label>
+                <input type="text" id="consult-name" name="name" class="consult-input" placeholder="Alex" required minlength="2" autocomplete="name">
+              </div>
+              <div class="consult-form-group">
+                <label for="consult-email" class="consult-label">Email Address</label>
+                <input type="email" id="consult-email" name="email" class="consult-input" placeholder="alex@company.com" required autocomplete="email">
+              </div>
+            </div>
+
+            <!-- Row 2: Contact Number -->
+            <div class="consult-form-group">
+              <label for="consult-phone" class="consult-label">Contact Number / Mobile</label>
+              <input type="tel" id="consult-phone" name="phone" class="consult-input" placeholder="00000-00000" required autocomplete="tel">
+            </div>
+
+            <!-- Row 3: Message -->
+            <div class="consult-form-group">
+              <label for="consult-message" class="consult-label">Message (Optional)</label>
+              <textarea id="consult-message" name="message" class="consult-textarea" rows="3" placeholder="Tell us about your business goals, current challenges, or timeline..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="consult-submit-btn" id="consult-submit-btn">
+              <span class="consult-btn-text">Submit Inquiry</span>
+              <svg class="consult-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              <span class="consult-btn-loading" style="display:none;" aria-hidden="true">
+                <span class="consult-spinner"></span> Sending...
+              </span>
+            </button>
+
+            <!-- Confidentiality Note -->
+            <div class="consult-confidential-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+              <span>Strictly confidential. Our advisory team responds within 24 business hours.</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- SUCCESS VIEW -->
+        <div class="consult-success-view" id="consult-success-view" style="display: none;">
+          <div class="consult-success-box" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="consult-success-heading">Inquiry Received!</h3>
+          <p class="consult-success-text">
+            Thank you, <strong class="consult-success-name" id="consult-success-name"></strong>. Our advisory team will contact you within 24 business hours.
+          </p>
+          <a href="https://wa.me/919289626986" target="_blank" rel="noopener noreferrer" class="consult-whatsapp-btn" id="consult-whatsapp-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.04-1.926-.475-1.574-.658-2.58-2.261-2.659-2.366-.079-.105-.638-.849-.638-1.621 0-.771.405-1.15.549-1.306.144-.156.313-.195.417-.195l.301.006c.095.004.225-.036.352.269.131.313.443 1.084.482 1.163.039.078.065.17.013.274-.052.104-.078.169-.156.26l-.234.274c-.078.078-.16.162-.069.319.091.157.405.669.87 1.084.598.533 1.103.698 1.258.776.157.078.248.065.339-.039.091-.104.391-.456.495-.613.104-.156.208-.13.351-.078s.912.43 1.069.508c.156.078.26.117.299.182.041.065.041.378-.09.743zm-3.392-12.416c-5.514 0-10 4.486-10 10 0 1.928.548 3.731 1.5 5.275l-1.5 5.541 5.679-1.488c1.489.889 3.224 1.397 5.071 1.397 5.514 0 10-4.486 10-10s-4.486-10-10-10z"/>
+            </svg>
+            <span>Also message on WhatsApp</span>
+          </a>
+          <button type="button" class="consult-reset-btn" id="consult-reset-btn">Close</button>
+        </div>
+
+      </div>
     </div>
   </div>
-
+</div>
 <!-- Scripts -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=article-form-2"></script>
   <script src="js/animations.js"></script>
-  <script src="js/interactions.js"></script>
   <script src="js/blog-enhancements.js"></script>
   <script>
     // Smooth scroll and active highlight for Table of Contents
@@ -848,6 +990,7 @@ $schemaJson = SeoManager::getBlogSchema($blog, $tags);
       }, { passive: true });
     });
   </script>
+  <script src="consult-popup.js"></script>
 </body>
 </html>
 

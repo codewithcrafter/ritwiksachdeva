@@ -1,0 +1,259 @@
+/* Self-contained consultation modal. New components use .rs-popup-*; the ID
+   selectors keep existing duplicated page markup working without collisions. */
+#consult-popup-overlay,.rs-popup-overlay{--rs-navy:#0F172A;--rs-lime:#D4F542;--rs-blue:#1D4ED8;position:fixed;inset:0;width:100vw;height:100vh;z-index:9998;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;background:rgba(15,23,42,.58);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
+#consult-popup-overlay.is-active,.rs-popup-overlay.is-active{opacity:1;visibility:visible;pointer-events:auto}#consult-popup-overlay *,.rs-popup-overlay *{box-sizing:border-box}
+#consult-popup-overlay .consult-backdrop,.rs-popup-backdrop{position:absolute;inset:0;width:100%;height:100%;background:transparent}#consult-popup-overlay .consult-modal-container,.rs-popup-container{position:relative;z-index:9999;width:100%;max-width:880px;max-height:calc(100vh - 32px);overflow:auto}
+#consult-popup-overlay .consult-modal,.rs-popup-card{width:100%;display:grid;grid-template-columns:5fr 7fr;overflow:hidden;position:relative;background:#fff;border:2px solid var(--rs-navy);border-radius:28px;box-shadow:8px 8px 0 var(--rs-navy);transform:translateY(16px) scale(0.97);opacity:0;transition:transform .35s cubic-bezier(0.16, 1, 0.3, 1),opacity .28s ease}#consult-popup-overlay.is-active .consult-modal,.rs-popup-overlay.is-active .rs-popup-card{transform:translateY(0) scale(1);opacity:1}
+#consult-popup-overlay .consult-panel-left,.rs-popup-left{position:relative;min-height:462px;padding:36px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;color:#fff;background-color:var(--rs-navy);background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px}#consult-popup-overlay .consult-blue-glow{display:none}
+#consult-popup-overlay .consult-corner-bracket-tl,.rs-popup-bracket-tl{position:absolute;top:16px;left:16px;width:20px;height:20px;border-top:2px solid var(--rs-lime);border-left:2px solid var(--rs-lime)}#consult-popup-overlay .consult-left-top,.rs-popup-left-top,#consult-popup-overlay .consult-left-bottom,.rs-popup-left-bottom{position:relative;z-index:1}
+#consult-popup-overlay .consult-icon-box,.rs-popup-icon{width:48px;height:48px;display:grid;place-items:center;margin-bottom:20px;border:1px solid rgba(212,245,66,.55);border-radius:15px;background:rgba(15,23,42,.35)}#consult-popup-overlay .consult-pill-badge,.rs-popup-badge{display:inline-flex;padding:6px 13px;border:1px solid rgba(212,245,66,.5);border-radius:999px;color:var(--rs-lime);font:800 11px/1 Inter,sans-serif;letter-spacing:.04em}
+#consult-popup-overlay .consult-headline,.rs-popup-title{margin:22px 0 18px;color:#fff;font:800 clamp(31px,3.3vw,39px)/.98 Inter,Arial,sans-serif;letter-spacing:-.055em}#consult-popup-overlay .consult-gradient-text,.rs-popup-highlight{color:var(--rs-lime)}#consult-popup-overlay .consult-subtitle,.rs-popup-subtitle{max-width:285px;margin:0;color:#d7dfeb;font:400 14px/1.45 Inter,Arial,sans-serif}
+#consult-popup-overlay .consult-left-bottom,.rs-popup-left-bottom{margin-top:28px}#consult-popup-overlay .consult-online-pill,.rs-popup-online{width:max-content;display:flex;align-items:center;gap:10px;padding:9px 15px;border:1px solid rgba(203,213,225,.35);border-radius:999px;color:#e2e8f0;font:700 12px/1 Inter,sans-serif}#consult-popup-overlay .consult-pulse-dot,.rs-popup-pulse{width:10px;height:10px;border-radius:50%;background:var(--rs-lime);animation:rs-popup-pulse 1.8s infinite}@keyframes rs-popup-pulse{50%{box-shadow:0 0 0 5px rgba(212,245,66,0)}}
+#consult-popup-overlay .consult-panel-right,.rs-popup-right{position:relative;padding:43px 34px 27px;background:#fff}#consult-popup-overlay .consult-corner-bracket-br,.rs-popup-bracket-br{position:absolute;right:16px;bottom:16px;width:20px;height:20px;border-right:2px solid var(--rs-blue);border-bottom:2px solid var(--rs-blue)}
+#consult-popup-overlay .consult-close-btn,.rs-popup-close{position:absolute;z-index:2;top:20px;right:20px;width:36px;height:36px;padding:0;display:grid;place-items:center;border:2px solid var(--rs-navy);border-radius:50%;background:#F1F5F9;cursor:pointer;transition:background .2s}#consult-popup-overlay .consult-close-btn svg,.rs-popup-close svg{transition:transform .2s}#consult-popup-overlay .consult-close-btn:hover,.rs-popup-close:hover{background:var(--rs-lime)}#consult-popup-overlay .consult-close-btn:hover svg,.rs-popup-close:hover svg{transform:rotate(90deg)}
+#consult-popup-overlay .consult-form,.rs-popup-form{display:grid;gap:14px}#consult-popup-overlay .consult-form-row,.rs-popup-form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}#consult-popup-overlay .consult-form-group,.rs-popup-field{display:grid;gap:7px}#consult-popup-overlay .consult-label,.rs-popup-label{color:var(--rs-navy);font:800 12px/1.2 Inter,Arial,sans-serif}#consult-popup-overlay .consult-required,.rs-popup-required{color:#ef4444}
+#consult-popup-overlay .consult-input,#consult-popup-overlay .consult-textarea,.rs-popup-input,.rs-popup-textarea{width:100%;padding:12px 15px;border:2px solid #cbd5e1;border-radius:12px;outline:0;resize:vertical;color:var(--rs-navy);background:#fafafa;font:600 14px/1.25 Inter,Arial,sans-serif;transition:border-color .18s,box-shadow .18s,transform .18s}#consult-popup-overlay .consult-input::placeholder,#consult-popup-overlay .consult-textarea::placeholder,.rs-popup-input::placeholder,.rs-popup-textarea::placeholder{color:#94a3b8}#consult-popup-overlay .consult-textarea,.rs-popup-textarea{min-height:83px}#consult-popup-overlay .consult-input:focus,#consult-popup-overlay .consult-textarea:focus,.rs-popup-input:focus,.rs-popup-textarea:focus{border-color:var(--rs-blue);box-shadow:3px 3px 0 var(--rs-blue);transform:translate(-1px,-1px)}
+#consult-popup-overlay .consult-submit-btn,.rs-popup-submit{min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:2px solid var(--rs-navy);border-radius:12px;box-shadow:4px 4px 0 var(--rs-navy);color:#fff;background:var(--rs-blue);cursor:pointer;font:800 16px/1 Inter,Arial,sans-serif;transition:transform .18s,box-shadow .18s,background .18s}#consult-popup-overlay .consult-submit-btn:hover,.rs-popup-submit:hover{background:#1e40af;transform:translate(2px,2px);box-shadow:2px 2px 0 var(--rs-navy)}#consult-popup-overlay .consult-submit-btn:disabled,.rs-popup-submit:disabled{opacity:.7;cursor:wait}
+#consult-popup-overlay .consult-confidential-note,.rs-popup-note{display:flex;align-items:flex-start;justify-content:center;gap:8px;padding:0 5px;color:#64748b;font:500 11px/1.35 Inter,Arial,sans-serif;text-align:center}#consult-popup-overlay .consult-error-box,.rs-popup-error{display:none;padding:10px 12px;border:1px solid #fecaca;border-radius:8px;color:#b91c1c;background:#fef2f2;font:600 13px/1.35 Inter,sans-serif}#consult-popup-overlay .consult-honeypot,.rs-popup-honeypot{position:absolute;left:-9999px}
+#consult-popup-overlay .consult-success-view,.rs-popup-success{min-height:390px;align-items:center;justify-content:center;flex-direction:column;text-align:center}#consult-popup-overlay .consult-success-box,.rs-popup-success-box{width:58px;height:58px;display:grid;place-items:center;border:2px solid var(--rs-navy);border-radius:50%;background:var(--rs-lime)}#consult-popup-overlay .consult-success-heading,.rs-popup-success-title{margin:18px 0 9px;color:var(--rs-navy);font:800 25px/1 Inter,sans-serif}#consult-popup-overlay .consult-success-text,.rs-popup-success-text{max-width:340px;margin:0;color:#475569;font:400 14px/1.5 Inter,sans-serif}#consult-popup-overlay .consult-whatsapp-btn,#consult-popup-overlay .consult-reset-btn,.rs-popup-whatsapp,.rs-popup-reset{margin-top:16px;padding:11px 15px;border:2px solid var(--rs-navy);border-radius:9px;color:var(--rs-navy);background:#fff;font:700 13px/1 Inter,sans-serif;text-decoration:none;cursor:pointer}
+#consult-popup-overlay .consult-btn-loading,.rs-popup-btn-loading{align-items:center;gap:8px}#consult-popup-overlay .consult-spinner,.rs-popup-spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:rs-popup-spin .7s linear infinite}@keyframes rs-popup-spin{to{transform:rotate(360deg)}}
+@media(max-width:767px){#consult-popup-overlay,.rs-popup-overlay{align-items:flex-start;padding:12px;overflow-y:auto}#consult-popup-overlay .consult-modal,.rs-popup-card{grid-template-columns:1fr;border-radius:20px}#consult-popup-overlay .consult-panel-left,.rs-popup-left{min-height:auto;padding:30px 28px}#consult-popup-overlay .consult-left-bottom,.rs-popup-left-bottom{display:none}#consult-popup-overlay .consult-panel-right,.rs-popup-right{padding:60px 24px 27px}}@media(max-width:480px){#consult-popup-overlay .consult-form-row,.rs-popup-form-row{grid-template-columns:1fr;gap:14px}#consult-popup-overlay .consult-headline,.rs-popup-title{font-size:32px}}
+@media(prefers-reduced-motion:reduce){#consult-popup-overlay,.rs-popup-overlay,#consult-popup-overlay .consult-modal,.rs-popup-card{transition:none !important;animation:none !important}}
+
+/* Preview-matched consultation details. All selectors stay inside the shared
+   popup namespace so existing page CSS cannot affect the component. */
+#consult-popup-overlay { z-index: 100000; }
+#consult-popup-overlay .rs-popup-modal-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 880px;
+  max-height: calc(100vh - 32px);
+}
+body:has(#consult-popup-overlay.is-active) #custom-cursor { display: none; }
+
+#consult-popup-overlay .rs-popup-card,
+#consult-popup-overlay .consult-modal {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 6px 6px 0 var(--rs-navy);
+}
+
+#consult-popup-overlay input,
+#consult-popup-overlay textarea {
+  caret-color: var(--rs-blue);
+  cursor: text !important;
+}
+
+#consult-popup-overlay button,
+#consult-popup-overlay [role="button"] { cursor: pointer !important; }
+
+#consult-popup-overlay .rs-popup-left,
+#consult-popup-overlay .consult-panel-left {
+  min-height: 404px;
+  padding: 28px 26px;
+}
+
+#consult-popup-overlay .rs-popup-right,
+#consult-popup-overlay .consult-panel-right {
+  padding: 27px 26px 22px;
+}
+
+#consult-popup-overlay .rs-popup-focus {
+  margin: 0 36px 2px 0;
+}
+
+#consult-popup-overlay .rs-popup-focus-label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--rs-navy);
+  font: 800 11px/1.2 Inter, Arial, sans-serif;
+}
+
+#consult-popup-overlay .rs-popup-focus-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#consult-popup-overlay .rs-popup-chip {
+  padding: 4px 10px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 999px;
+  background: #FAFAFA;
+  color: #475569;
+  font: 700 10px/1 Inter, Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+#consult-popup-overlay .rs-popup-chip:hover {
+  border-color: var(--rs-navy);
+  color: var(--rs-navy);
+}
+
+#consult-popup-overlay .rs-popup-chip.is-active {
+  border-color: var(--rs-navy);
+  background: var(--rs-lime);
+  color: var(--rs-navy);
+  box-shadow: 2px 2px 0 var(--rs-navy);
+  transform: translate(-1px, -1px);
+}
+
+#consult-popup-overlay .rs-popup-proof {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  margin-bottom: 14px;
+  padding: 12px 13px;
+  border: 1.5px solid rgba(212, 245, 66, .38);
+  border-radius: 14px;
+  background: rgba(30, 41, 59, .9);
+}
+
+#consult-popup-overlay .rs-popup-proof-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#consult-popup-overlay .rs-popup-proof strong {
+  color: var(--rs-lime);
+  font: 900 18px/1.05 Inter, Arial, sans-serif;
+  letter-spacing: -.04em;
+}
+
+#consult-popup-overlay .rs-popup-proof-row span {
+  padding: 3px 6px;
+  border: 1px solid rgba(147, 197, 253, .4);
+  border-radius: 5px;
+  background: rgba(29, 78, 216, .45);
+  color: #BFDBFE;
+  font: 800 8px/1 Inter, Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+#consult-popup-overlay .rs-popup-proof small {
+  display: block;
+  margin-top: 4px;
+  color: #94A3B8;
+  font: 600 10px/1.3 Inter, Arial, sans-serif;
+}
+
+@media (max-width: 767px) {
+  #consult-popup-overlay,
+  .rs-popup-overlay {
+    align-items: center;
+    padding: 8px;
+    overflow-y: auto;
+  }
+
+  #consult-popup-overlay .rs-popup-modal-container,
+  #consult-popup-overlay .rs-popup-container,
+  #consult-popup-overlay .consult-modal-container,
+  .rs-popup-container {
+    width: calc(100vw - 24px);
+    max-width: 420px;
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #consult-popup-overlay .rs-popup-card,
+  #consult-popup-overlay .consult-modal,
+  .rs-popup-card {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  #consult-popup-overlay .rs-popup-left,
+  #consult-popup-overlay .consult-panel-left {
+    min-height: 112px;
+    padding: 18px 22px;
+  }
+
+  #consult-popup-overlay .rs-popup-icon,
+  #consult-popup-overlay .consult-icon-box,
+  #consult-popup-overlay .rs-popup-subtitle,
+  #consult-popup-overlay .consult-subtitle,
+  #consult-popup-overlay .rs-popup-proof,
+  #consult-popup-overlay .rs-popup-left-bottom,
+  #consult-popup-overlay .consult-left-bottom {
+    display: none;
+  }
+
+  #consult-popup-overlay .rs-popup-badge,
+  #consult-popup-overlay .consult-pill-badge {
+    padding: 4px 9px;
+    font-size: 9px;
+  }
+
+  #consult-popup-overlay .rs-popup-title,
+  #consult-popup-overlay .consult-headline {
+    margin: 10px 0 0;
+    font-size: clamp(24px, 8vw, 30px);
+    line-height: .95;
+  }
+
+  #consult-popup-overlay .rs-popup-right,
+  #consult-popup-overlay .consult-panel-right {
+    padding: 48px 18px 14px;
+  }
+
+  #consult-popup-overlay .rs-popup-focus {
+    margin: 0 34px 0 0;
+  }
+
+  #consult-popup-overlay .rs-popup-focus-label { margin-bottom: 4px; }
+  #consult-popup-overlay .rs-popup-focus-chips { gap: 4px; }
+  #consult-popup-overlay .rs-popup-chip { padding: 3px 7px; font-size: 9px; }
+  #consult-popup-overlay .rs-popup-form,
+  #consult-popup-overlay .consult-form { gap: 8px; }
+  #consult-popup-overlay .rs-popup-form-row,
+  #consult-popup-overlay .consult-form-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  #consult-popup-overlay .rs-popup-field,
+  #consult-popup-overlay .consult-form-group { gap: 4px; }
+  #consult-popup-overlay .rs-popup-label,
+  #consult-popup-overlay .consult-label { font-size: 10px; }
+  #consult-popup-overlay .rs-popup-input,
+  #consult-popup-overlay .rs-popup-textarea,
+  #consult-popup-overlay .consult-input,
+  #consult-popup-overlay .consult-textarea { padding: 8px 10px; font-size: 12px; }
+  #consult-popup-overlay .rs-popup-textarea,
+  #consult-popup-overlay .consult-textarea { min-height: 54px; }
+  #consult-popup-overlay .rs-popup-submit,
+  #consult-popup-overlay .consult-submit-btn { min-height: 42px; font-size: 14px; }
+  #consult-popup-overlay .rs-popup-note,
+  #consult-popup-overlay .consult-confidential-note { font-size: 9px; }
+  #consult-popup-overlay .rs-popup-close,
+  #consult-popup-overlay .consult-close-btn { top: 11px; right: 11px; width: 32px; height: 32px; }
+}
+
+@media (max-width: 420px), (max-height: 620px) {
+  #consult-popup-overlay .rs-popup-left,
+  #consult-popup-overlay .consult-panel-left { min-height: 88px; padding: 13px 18px; }
+  #consult-popup-overlay .rs-popup-badge,
+  #consult-popup-overlay .consult-pill-badge { display: none; }
+  #consult-popup-overlay .rs-popup-title,
+  #consult-popup-overlay .consult-headline { margin: 0; font-size: 24px; }
+  #consult-popup-overlay .rs-popup-right,
+  #consult-popup-overlay .consult-panel-right { padding: 43px 14px 11px; }
+  #consult-popup-overlay .rs-popup-chip { padding: 3px 6px; font-size: 8px; }
+  #consult-popup-overlay .rs-popup-form,
+  #consult-popup-overlay .consult-form { gap: 6px; }
+  #consult-popup-overlay .rs-popup-input,
+  #consult-popup-overlay .rs-popup-textarea,
+  #consult-popup-overlay .consult-input,
+  #consult-popup-overlay .consult-textarea { padding: 7px 9px; }
+  #consult-popup-overlay .rs-popup-textarea,
+  #consult-popup-overlay .consult-textarea { min-height: 46px; }
+}

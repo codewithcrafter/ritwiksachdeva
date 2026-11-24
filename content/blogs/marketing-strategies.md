@@ -11,7 +11,7 @@ readingTime: 6
 publishedAt: "2026-11-09 16:45:00"
 metaTitle: "Effective Marketing Strategies for Sustainable Growth | Ritwik Sachdeva"
 metaDescription: "How to build an omnichannel marketing ecosystem that balances performance paid media with compounding organic search authority."
-canonicalUrl: "https://ritwiksachdeva.com/blog/marketing-strategies/"
+canonicalUrl: "https://www.ritwiksachdeva.in/blog/marketing-strategies/"
 featuredImage: "assets/images/blog-marketing-strategy.jpg"
 schemaType: "BlogPosting"
 ---

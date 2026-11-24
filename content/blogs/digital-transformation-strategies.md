@@ -11,7 +11,7 @@ readingTime: 7
 publishedAt: "2026-11-01 09:00:00"
 metaTitle: "Digital Transformation Strategies for Modern Businesses | Ritwik Sachdeva"
 metaDescription: "Discover actionable methodologies to modernize legacy operations, foster organizational agility, and unlock sustainable competitive advantages."
-canonicalUrl: "https://ritwiksachdeva.com/blog/digital-transformation-strategies/"
+canonicalUrl: "https://www.ritwiksachdeva.in/blog/digital-transformation-strategies/"
 featuredImage: "assets/images/blog-digital-transformation.jpg"
 schemaType: "BlogPosting"
 ---

@@ -18,7 +18,13 @@ $newLeads = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads WHERE status = 
 $qualifiedLeads = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads WHERE status = 'QUALIFIED'")->fetchColumn();
 $convertedLeads = (int)$pdo->query("SELECT COUNT(*) FROM contact_leads WHERE status = 'CONVERTED'")->fetchColumn();
 
-$totalMedia = (int)$pdo->query("SELECT COUNT(*) FROM media_library")->fetchColumn();
+// Media is optional in the lightweight SQLite installation; it must not make
+// the entire dashboard disappear when that table has not been created yet.
+try {
+    $totalMedia = (int)$pdo->query("SELECT COUNT(*) FROM media_library")->fetchColumn();
+} catch (PDOException $e) {
+    $totalMedia = 0;
+}
 
 // Recent Inquiries (Latest 5)
 $recentLeadsStmt = $pdo->query("
@@ -35,7 +41,7 @@ $recentBlogsStmt = $pdo->query("
            c.name AS category_name, a.name AS author_name
     FROM blogs b
     LEFT JOIN blog_categories c ON b.category_id = c.id
-    LEFT JOIN authors a ON b.author_id = a.id
+    LEFT JOIN blog_authors a ON b.author_id = a.id
     ORDER BY b.created_at DESC
     LIMIT 5
 ");

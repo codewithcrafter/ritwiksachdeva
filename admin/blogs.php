@@ -6,8 +6,14 @@
 
 $pageTitle = 'Blog Posts';
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/../../includes/markdown.php';
-require_once __DIR__ . '/../../includes/seo.php';
+// This file lives directly inside /admin.  The old ../../ paths pointed one
+// directory above the project and caused a fatal error after the sidebar had
+// rendered (which looked like an empty white content panel).
+require_once __DIR__ . '/../includes/markdown.php';
+require_once __DIR__ . '/../includes/seo.php';
+
+// A local install starts with the checked-in Markdown articles, not an empty list.
+MarkdownManager::importExistingBlogs();
 
 // Handle Actions: Delete, Duplicate
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -99,7 +105,7 @@ if ($statusFilter !== '') {
 }
 
 if ($search !== '') {
-    $where[] = "(b.title LIKE :search OR b.slug LIKE :search)";
+    $where[] = "(b.title LIKE :search OR b.slug LIKE :search OR EXISTS (SELECT 1 FROM blog_tag_relations btr JOIN blog_tags t ON t.id = btr.tag_id WHERE btr.blog_id = b.id AND t.name LIKE :search))";
     $params[':search'] = '%' . $search . '%';
 }
 
@@ -116,7 +122,7 @@ $sql = "
     SELECT b.*, c.name AS category_name, a.name AS author_name
     FROM blogs b
     LEFT JOIN blog_categories c ON b.category_id = c.id
-    LEFT JOIN authors a ON b.author_id = a.id
+    LEFT JOIN blog_authors a ON b.author_id = a.id
     WHERE {$whereClause}
     ORDER BY b.created_at DESC
     LIMIT :limit OFFSET :offset
@@ -132,21 +138,22 @@ $blogs = $stmt->fetchAll();
 
 // Categories for filter
 $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")->fetchAll();
+$statusCounts = $pdo->query("SELECT status, COUNT(*) AS total FROM blogs GROUP BY status")->fetchAll(PDO::FETCH_KEY_PAIR);
 ?>
 
 <div class="admin-page-header">
   <div>
-    <h1 class="admin-page-title">Blog Articles (<?= $totalBlogs ?>)</h1>
-    <p class="admin-page-subtitle">Publish, manage, and edit strategic analyses with auto-synced Markdown files.</p>
+    <h1 class="admin-page-title">Blog Articles &amp; Editorial Manager <span class="admin-nav-badge"><?= $totalBlogs ?></span></h1>
+    <p class="admin-page-subtitle">Published: <?= (int)($statusCounts['published'] ?? 0) ?> &middot; Drafts: <?= (int)($statusCounts['draft'] ?? 0) ?></p>
   </div>
   <div class="admin-page-actions">
     <a href="markdown.php" class="btn-admin btn-admin-secondary">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
       Markdown Center
     </a>
-    <a href="blog-edit.php" class="btn-admin btn-admin-primary">
+    <a href="blog-edit.php?action=new" class="btn-admin btn-admin-primary">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-      Create New Article
+      Write New Article
     </a>
   </div>
 </div>
@@ -156,7 +163,7 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
   <div class="admin-card-body" style="padding: 14px 20px;">
     <form method="GET" action="blogs.php" style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
       <div style="flex: 1; min-width: 220px;">
-        <input type="text" name="q" value="<?= e($search) ?>" class="form-control-admin" placeholder="Search title or slug...">
+        <input type="text" name="q" value="<?= e($search) ?>" class="form-control-admin" placeholder="Search article title or tag...">
       </div>
 
       <div style="min-width: 160px;">
@@ -172,7 +179,7 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
 
       <div style="min-width: 140px;">
         <select name="status" class="form-control-admin">
-          <option value="">All Statuses</option>
+          <option value="">All</option>
           <option value="published" <?= ($statusFilter === 'published') ? 'selected' : '' ?>>Published</option>
           <option value="draft" <?= ($statusFilter === 'draft') ? 'selected' : '' ?>>Draft</option>
           <option value="scheduled" <?= ($statusFilter === 'scheduled') ? 'selected' : '' ?>>Scheduled</option>
@@ -195,7 +202,7 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
         <tr>
           <th>Article</th>
           <th>Category</th>
-          <th>Author</th>
+          <th>Category &amp; Tags</th>
           <th>Status</th>
           <th>Date</th>
           <th style="text-align: right;">Actions</th>
@@ -224,9 +231,12 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
                 <span style="font-size: 12.5px; background: #FAF8F5; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--admin-border-light);">
                   <?= e($b['category_name'] ?: 'Uncategorized') ?>
                 </span>
-              </td>
-              <td style="font-size: 13px; color: var(--admin-text-muted);">
-                <?= e($b['author_name'] ?: 'Admin') ?>
+                <?php
+                  $tagStmt = $pdo->prepare("SELECT t.name FROM blog_tags t JOIN blog_tag_relations r ON r.tag_id = t.id WHERE r.blog_id = :id ORDER BY t.name");
+                  $tagStmt->execute([':id' => $b['id']]);
+                  $tagNames = $tagStmt->fetchAll(PDO::FETCH_COLUMN);
+                ?>
+                <?php if ($tagNames): ?><div style="font-size: 11.5px; color: var(--admin-text-muted); margin-top: 5px;"><?= e(implode(', ', $tagNames)) ?></div><?php endif; ?>
               </td>
               <td>
                 <span class="admin-badge status-<?= $b['status'] ?>">
@@ -241,8 +251,8 @@ $allCats = $pdo->query("SELECT id, name FROM blog_categories ORDER BY name ASC")
                   <a href="blog-edit.php?id=<?= $b['id'] ?>" class="btn-admin btn-admin-secondary btn-admin-sm" title="Edit">
                     Edit
                   </a>
-                  <a href="../blog-detail.php?slug=<?= urlencode($b['slug']) ?>" target="_blank" class="btn-admin btn-admin-secondary btn-admin-sm" title="Preview Live">
-                    Preview
+                  <a href="../blog/<?= rawurlencode($b['slug']) ?>/" target="_blank" rel="noopener" class="btn-admin btn-admin-secondary btn-admin-sm" title="View live article">
+                    View Live
                   </a>
                   <form method="POST" action="blogs.php" style="display: inline;" onsubmit="return confirm('Duplicate this article?');">
                     <input type="hidden" name="csrf_token" value="<?= auth_csrf_token() ?>">

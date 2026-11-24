@@ -11,7 +11,7 @@ readingTime: 5
 publishedAt: "2026-11-05 14:15:00"
 metaTitle: "Leadership Skills Every Entrepreneur Needs | Ritwik Sachdeva"
 metaDescription: "Essential executive capabilities required to transition from a hands-on operator to a high-leverage strategic leader who scales teams."
-canonicalUrl: "https://ritwiksachdeva.com/blog/leadership-skills/"
+canonicalUrl: "https://www.ritwiksachdeva.in/blog/leadership-skills/"
 featuredImage: "assets/images/blog-leadership.jpg"
 schemaType: "BlogPosting"
 ---

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Export Contact Leads to CSV
  */
@@ -13,8 +13,7 @@ $pdo = get_db();
 $status = trim($_GET['status'] ?? '');
 
 $query = "
-    SELECT id, full_name, email, phone, company, service_interested, 
-           monthly_budget, message, status, lead_source, ip_address, created_at
+    SELECT *
     FROM contact_leads
 ";
 $params = [];
@@ -47,14 +46,33 @@ fputcsv($output, [
     'Company',
     'Service Interested',
     'Monthly Budget',
+    'Source Page URL',
+    'Clicked Trigger / CTA',
+    'Form Mechanism',
+    'Full Lead Source',
     'Inquiry Message',
     'Pipeline Status',
-    'Lead Source',
     'IP Address',
     'Submission Date'
 ]);
 
 foreach ($leads as $l) {
+    $srcPage = $l['source_page'] ?? '';
+    $srcTrigger = $l['source_trigger'] ?? '';
+    if (empty($srcPage) && !empty($l['lead_source'])) {
+        if (preg_match('/\((\/[^\)]*)\)/', $l['lead_source'], $mPage)) {
+            $srcPage = $mPage[1];
+        }
+    }
+    if (empty($srcTrigger) && !empty($l['lead_source'])) {
+        if (preg_match('/(?:Popup Modal|Inline Form):\s*([^(]+)/i', $l['lead_source'], $mTrig)) {
+            $srcTrigger = trim($mTrig[1]);
+        } else {
+            $srcTrigger = $l['lead_source'];
+        }
+    }
+    $formType = $l['form_type'] ?? ((stripos($l['lead_source'] ?? '', 'popup') !== false) ? 'popup' : 'inline');
+
     fputcsv($output, [
         $l['id'],
         $l['full_name'],
@@ -63,9 +81,12 @@ foreach ($leads as $l) {
         $l['company'],
         $l['service_interested'],
         $l['monthly_budget'],
+        $srcPage ?: '/',
+        $srcTrigger ?: 'Direct',
+        ($formType === 'popup') ? 'Popup Modal' : 'Contact Page Form',
+        $l['lead_source'],
         $l['message'],
         $l['status'],
-        $l['lead_source'],
         $l['ip_address'],
         $l['created_at']
     ]);

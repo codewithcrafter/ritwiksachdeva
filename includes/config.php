@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * RITWIK SACHDEVA - APPLICATION CONFIGURATION
  * Environment-aware configuration, session security, and constants.
@@ -35,7 +35,7 @@ define('UPLOADS_PATH', ROOT_PATH . '/assets/uploads');
 
 // Automatically detect base URL
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
-$host = isset($_SERVER['HTTP_HOST']) ? rtrim($_SERVER['HTTP_HOST'], '.') : 'ritwiksachdeva.com';
+$host = isset($_SERVER['HTTP_HOST']) ? rtrim($_SERVER['HTTP_HOST'], '.') : 'www.ritwiksachdeva.in';
 $scriptDir = isset($_SERVER['SCRIPT_NAME']) ? dirname($_SERVER['SCRIPT_NAME']) : '';
 $scriptDir = str_replace('\\', '/', $scriptDir);
 
@@ -44,10 +44,11 @@ $baseDir = preg_replace('#/(admin|blog|api|includes).*$#', '', $scriptDir);
 $baseDir = rtrim($baseDir, '/');
 
 if (php_sapi_name() === 'cli' && empty($_SERVER['HTTP_HOST'])) {
-    define('BASE_URL', 'https://ritwiksachdeva.com');
+    define('BASE_URL', 'https://www.ritwiksachdeva.in');
 } else {
     define('BASE_URL', rtrim($protocol . $host . $baseDir, '/'));
 }
+define('CANONICAL_DOMAIN', 'https://www.ritwiksachdeva.in');
 define('ADMIN_URL', BASE_URL . '/admin');
 define('SITE_URL', BASE_URL);
 

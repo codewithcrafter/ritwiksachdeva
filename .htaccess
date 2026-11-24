@@ -5,6 +5,11 @@
 RewriteEngine On
 RewriteBase /
 
+# Keep physical public pages directly accessible. This lets the menu work on
+# shared hosts that do not enable clean-URL rewriting or install this site in
+# a subfolder; clean routes below still work when mod_rewrite is available.
+RewriteRule ^(?:index|about|services|contact|blog|service-[a-z0-9-]+|blog-[a-z0-9-]+)\.(?:html|php)$ - [L,NC]
+
 # 1. Canonical 301 Redirects from physical .html / .php files to clean URLs
 # Uses %{THE_REQUEST} to prevent redirect loops when internal rewrites occur.
 
@@ -99,12 +104,6 @@ RewriteRule ^services/social-media-marketing/?$ service-social-media-marketing.h
 RewriteRule ^services/video-editing/?$ service-video-editing.html [END,QSA]
 RewriteRule ^services/website-designer/?$ service-website-designer.html [END,QSA]
 
-RewriteRule ^blog/business-growth-strategy/?$ blog-business-growth-strategy.html [END,QSA]
-RewriteRule ^blog/ai-in-business/?$ blog-ai-in-business.html [END,QSA]
-RewriteRule ^blog/digital-transformation-strategies/?$ blog-digital-transformation-strategies.html [END,QSA]
-RewriteRule ^blog/leadership-skills/?$ blog-leadership-skills.html [END,QSA]
-RewriteRule ^blog/marketing-strategies/?$ blog-marketing-strategies.html [END,QSA]
-
 # Dynamic Blog detail routes (/blog/:slug -> blog-detail.php?slug=:slug)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -135,5 +134,30 @@ RewriteRule ^database/ - [F,L]
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# 5. UTF-8 Encoding
+# 5. Shared-hosting performance: compress text assets and cache versioned/static files.
+# HTML/PHP is deliberately not cached here, so content and form changes stay immediate.
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType text/javascript "access plus 7 days"
+    ExpiresByType image/svg+xml "access plus 7 days"
+    ExpiresByType image/webp "access plus 7 days"
+    ExpiresByType image/jpeg "access plus 7 days"
+    ExpiresByType image/png "access plus 7 days"
+    ExpiresByType image/gif "access plus 7 days"
+    ExpiresByType video/mp4 "access plus 7 days"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(?:css|js|svg|webp|jpe?g|png|gif|mp4)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+</IfModule>
+
+# 6. UTF-8 Encoding
 AddDefaultCharset UTF-8
